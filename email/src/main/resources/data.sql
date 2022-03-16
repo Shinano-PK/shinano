@@ -1,3 +1,3 @@
-INSERT INTO EMAIL (SOURCE_ADDRESS, DESTINATION_ADDRESS, MESSAGE, SENT_AT) values ('pkwieikproject@gmail.com', 't@t.t', 'Test message 1', '2022-10-11');
-INSERT INTO EMAIL (SOURCE_ADDRESS, DESTINATION_ADDRESS, MESSAGE, SENT_AT) values ('pkwieikproject@gmail.com', 't2@t.t', 'Test message 2', '2022-10-12');
-INSERT INTO EMAIL (SOURCE_ADDRESS, DESTINATION_ADDRESS, MESSAGE, SENT_AT) values ('pkwieikproject@gmail.com', 't3@t.t', 'Test message 3', '2022-10-13');
+INSERT INTO EMAIL (SOURCE_ADDRESS, DESTINATION_ADDRESS, MESSAGE, SUBJECT, SENT_AT, MESSAGE_TYPE) values ('pkwieikproject@gmail.com', 't1@t.t', 'Test message 1', 'Test subject 1', '2022-10-11', 'newAcc');
+INSERT INTO EMAIL (SOURCE_ADDRESS, DESTINATION_ADDRESS, MESSAGE, SUBJECT, SENT_AT, MESSAGE_TYPE) values ('pkwieikproject@gmail.com', 't2@t.t', 'Test message 2', 'Test subject 2', '2022-10-12', 'accConfirmed');
+INSERT INTO EMAIL (SOURCE_ADDRESS, DESTINATION_ADDRESS, MESSAGE, SUBJECT, SENT_AT, MESSAGE_TYPE) values ('pkwieikproject@gmail.com', 't3@t.t', 'Test message 3', 'Test subject 3', '2022-10-13', 'resetPassword');
