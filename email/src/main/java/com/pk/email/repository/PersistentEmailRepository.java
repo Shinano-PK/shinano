@@ -126,8 +126,9 @@ public class PersistentEmailRepository implements EmailRepository {
             ps.setString(1, email.getSrcAddress());
             ps.setString(2, email.getDstAddress());
             ps.setString(3, email.getMessage());
-            ps.setDate(4, email.getSentAt());
-            ps.setString(5, email.getMessageType());
+            ps.setString(4, email.getSubject());
+            ps.setDate(5, email.getSentAt());
+            ps.setString(6, email.getMessageType());
             return ps;
           },
           keyHolder);
