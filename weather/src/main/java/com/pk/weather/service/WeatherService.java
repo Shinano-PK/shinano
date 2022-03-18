@@ -24,7 +24,7 @@ public class WeatherService {
 
   @NonNull private RestTemplate restTemplate;
 
-  public Weather getOneDay(String lat, String lon, String apiKey) throws Exception {
+  public Weather getOneDay(String lat, String lon) throws Exception {
     String apiUrlOneDayWeather = API_URL_ONE_DAY_WEATHER;
     apiUrlOneDayWeather = apiUrlOneDayWeather.replace("{lat}", lat);
     apiUrlOneDayWeather = apiUrlOneDayWeather.replace("{lon}", lon);

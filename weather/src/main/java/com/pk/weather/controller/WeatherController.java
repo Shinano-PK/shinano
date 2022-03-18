@@ -17,10 +17,10 @@ public class WeatherController {
 
   @GetMapping("/oneDay")
   // TODO add validation
-  public Weather getOneDayWeatherInfo(@RequestParam String lat, @RequestParam String lon, @RequestParam String apiKey) {
+  public Weather getOneDayWeatherInfo(@RequestParam String lat, @RequestParam String lon) {
     // TODO use advice insted
     try {
-      return weatherService.getOneDay(lat, lon, apiKey);
+      return weatherService.getOneDay(lat, lon);
     } catch (Exception e) {
       return null;
     }
