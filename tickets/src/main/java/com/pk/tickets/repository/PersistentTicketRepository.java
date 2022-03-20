@@ -24,7 +24,7 @@ public class PersistentTicketRepository implements TicketRepository {
     try {
       List<Ticket> tickets =
           jdbcTemplate.query(
-              "select * from \"Email\" where ticket_id = ?",
+              "select * from \"Ticket\" where ticket_id = ?",
               (rs, rowNum) ->
                   new Ticket(
                       rs.getInt("ticket_id"),
