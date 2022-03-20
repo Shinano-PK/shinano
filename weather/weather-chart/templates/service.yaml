@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ include "weather-chart.name" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "weather-chart.name" . }}
+    app: {{ include "weather-chart.name" . }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.http.port }}
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ include "weather-chart.name" . }}
