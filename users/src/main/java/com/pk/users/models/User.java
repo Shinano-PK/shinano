@@ -14,7 +14,7 @@ public class User {
   Integer enabled;
   Date created;
   @NotNull String email;
-  @NotNull String login;
+  @NotNull String username;
   @NotNull String password;
   String authority;
   String token;

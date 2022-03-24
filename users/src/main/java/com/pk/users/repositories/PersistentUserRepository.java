@@ -30,18 +30,20 @@ public class PersistentUserRepository implements UsersRepository {
                       rs.getString("surname"),
                       rs.getDate("birth_date"),
                       rs.getInt("enabled"),
-                      rs.getDate("created"),
+                      rs.getDate("creation_date"),
                       rs.getString("email"),
-                      rs.getString("login"),
+                      rs.getString("username"),
                       rs.getString("password"),
-                      rs.getString("authority"),
+                      rs.getString("role"),
                       rs.getString("token")),
               username);
       if (users.size() > 1) {
         log.error("Find by username failed, more than 1 user with same id (???)");
         throw new Exception("Database tolerates duplicate id");
+      } else if (!users.isEmpty()) {
+        return users.get(0);
       }
-      return users.get(0);
+      return null;
     } catch (Exception e) {
       log.warn("Exception: " + e.getMessage());
       return null;
@@ -60,11 +62,11 @@ public class PersistentUserRepository implements UsersRepository {
                       rs.getString("surname"),
                       rs.getDate("birth_date"),
                       rs.getInt("enabled"),
-                      rs.getDate("created"),
+                      rs.getDate("creation_date"),
                       rs.getString("email"),
-                      rs.getString("login"),
+                      rs.getString("username"),
                       rs.getString("password"),
-                      rs.getString("authority"),
+                      rs.getString("role"),
                       rs.getString("token")),
               email);
       if (users.size() > 1) {
@@ -87,7 +89,7 @@ public class PersistentUserRepository implements UsersRepository {
             PreparedStatement ps =
                 connection.prepareStatement(
                     "insert into \"user\" (name, surname, birth_date, enabled, creation_date, email,"
-                        + " login, password, role) values(?, ?, ?, ?, ?, ?, ?, ?,"
+                        + " username, password, role) values(?, ?, ?, ?, ?, ?, ?, ?,"
                         + " ?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getName());
@@ -96,7 +98,7 @@ public class PersistentUserRepository implements UsersRepository {
             ps.setInt(4, user.getEnabled());
             ps.setDate(5, user.getCreated());
             ps.setString(6, user.getEmail());
-            ps.setString(7, user.getLogin());
+            ps.setString(7, user.getUsername());
             ps.setString(8, user.getPassword());
             ps.setString(9, user.getAuthority());
             return ps;
@@ -117,14 +119,14 @@ public class PersistentUserRepository implements UsersRepository {
   public Boolean update(User user) {
     try {
       return (jdbcTemplate.update(
-              "update \"user\" set (name = ?, surname = ?, birth_date = ?, enabled = ?, created ="
-                  + " ?, login = ?, password = ?, authority = ?, token = ?) where email = ?",
+              "update \"user\" set (name = ?, surname = ?, birth_date = ?, enabled = ?, creation_date ="
+                  + " ?, username = ?, password = ?, role = ?, token = ?) where email = ?",
               user.getName(),
               user.getSurname(),
               user.getBirthDate(),
               user.getEnabled(),
               user.getCreated(),
-              user.getLogin(),
+              user.getUsername(),
               user.getPassword(),
               user.getAuthority(),
               user.getToken())
