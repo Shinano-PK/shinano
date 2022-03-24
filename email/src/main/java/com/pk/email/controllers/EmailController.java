@@ -22,13 +22,12 @@ public class EmailController {
   private EmailService emailService;
 
   // TODO Post,Put,Delete ???
-
   @PostMapping("/email")
   public ErrMsg sendEmail(@RequestBody @Valid Email email, BindingResult bindingResult) {
     validateInput(bindingResult);
     try {
       emailService.sendEmail(email);
-      return new ErrMsg("Ok");
+      return new ErrMsg("ok");
       // TODO make it specific
     } catch (Exception e) {
       log.warn("Cannot send email, error: {}", e);
