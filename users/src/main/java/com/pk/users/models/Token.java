@@ -1,12 +1,15 @@
 package com.pk.users.models;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ErrMsg {
-  String message;
+public class Token {
+  String token;
+  // TODO Enum ?
+  String type;
+  Date validUntil;
 }

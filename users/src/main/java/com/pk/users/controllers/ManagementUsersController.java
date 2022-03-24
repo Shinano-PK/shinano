@@ -2,12 +2,13 @@ package com.pk.users.controllers;
 
 import com.pk.users.models.ErrMsg;
 import com.pk.users.models.User;
-import com.pk.users.services.UsersService;
+import com.pk.users.services.NewUsersService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +18,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @AllArgsConstructor
-public class UsersController {
-  UsersService usersService;
+@RequestMapping("/manage")
+public class ManagementUsersController {
+  NewUsersService usersService;
 
   @GetMapping("/user")
   public User getUserByUsername(@RequestParam String username) {

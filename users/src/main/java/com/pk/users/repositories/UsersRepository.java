@@ -2,13 +2,12 @@ package com.pk.users.repositories;
 
 import com.pk.users.models.User;
 
-import org.springframework.stereotype.Repository;
-
-@Repository
 public interface UsersRepository {
   
   User getByUsername(String username);
 
+  User getByEmail(String email);
+  
   Integer save(User user);
 
   Boolean update(User user);

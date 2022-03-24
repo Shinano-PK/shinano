@@ -1,14 +1,21 @@
 package com.pk.users.models;
 
 import java.sql.Date;
-import lombok.Value;
+import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Value
+@Data
+@AllArgsConstructor
 public class User {
-  String username;
-  String email;
-  String password;
+  @NotNull String name;
+  @NotNull String surname;
+  @NotNull Date birthDate;
   Integer enabled;
   Date created;
+  @NotNull String email;
+  @NotNull String login;
+  @NotNull String password;
   String authority;
+  String token;
 }
