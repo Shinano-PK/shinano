@@ -1,14 +1,11 @@
 package com.pk.internal.controllers;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-
 import javax.validation.Valid;
-
 import com.pk.internal.models.ErrMsg;
 import com.pk.internal.models.User;
-
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/management")
 public class UserManagementController {
 
   @GetMapping("/allUsers")
@@ -34,12 +31,12 @@ public class UserManagementController {
   }
 
   @PostMapping("/user")
-  public User addNewUser(@RequestBody @Valid User user) {
+  public User addNewUser(@RequestBody @Valid User user, BindingResult bindResult) {
     return user;
   }
 
   @PutMapping("/user")
-  public User updateUser(@RequestBody @Valid User user) {
+  public User updateUser(@RequestBody @Valid User user, BindingResult bindResult) {
     return user;
   }
 

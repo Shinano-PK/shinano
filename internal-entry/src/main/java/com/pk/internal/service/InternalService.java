@@ -1,19 +1,23 @@
 package com.pk.internal.service;
 
-import com.pk.internal.models.Weather;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+import com.pk.internal.models.Root;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 @Slf4j
+@Service
 @AllArgsConstructor
 public class InternalService {
-  
+
   RestTemplate restTemplate;
 
-  public Weather getWeather(String lat, String lon) throws Exception {
-    ResponseEntity<Weather> weather = restTemplate.getForEntity("//TODO add url", Weather.class);
+  public Root getWeather(String lat, String lon) throws Exception {
+    ResponseEntity<Root> weather =
+        restTemplate.getForEntity(
+            "http://weather-service/oneDay?lat={lat}&lon={lon}", Root.class, lat, lon);
     log.debug(weather.toString());
     if (weather.getBody() == null) {
       throw new Exception("weather is null");

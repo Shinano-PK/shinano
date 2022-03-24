@@ -2,9 +2,13 @@ package com.pk.internal.models;
 
 import java.sql.Date;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
   String username;
   String email;

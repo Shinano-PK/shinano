@@ -8,5 +8,4 @@ import lombok.Getter;
 public class AuthResp {
   private String jwt;
   private String role;
-  private Integer balance;
 }

@@ -1,9 +1,6 @@
 package com.pk.internal.security;
 
-import javax.sql.DataSource;
-
 import com.pk.internal.service.CustomUserDetailsService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,29 +27,21 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity httpSecurity) throws Exception {
-    httpSecurity.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
-    // httpSecurity
-    //     .csrf()
-    //     .disable()
-    //     .authorizeRequests()
-    //     .antMatchers("/auth/login")
-    //     .permitAll()
-    //     .antMatchers("/auth/register")
-    //     .permitAll()
-    //     .antMatchers("/auth/verifyAcc/**")
-    //     .permitAll()
-    //     .antMatchers("/auth/verifyPassword/**")
-    //     .permitAll()
-    //     .antMatchers("/auth/resetPassword/**")
-    //     .permitAll()
-    //     .antMatchers("/h2-console/**")
-    //     .permitAll()
-    //     .anyRequest()
-    //     .authenticated()
-    //     .and()
-    //     .sessionManagement()
-    //     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    // httpSecurity.addFilterBefore(jwtReqFilter, UsernamePasswordAuthenticationFilter.class);
+    // httpSecurity.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
+    httpSecurity
+        .csrf()
+        .disable()
+        .authorizeRequests()
+        .antMatchers("/new/**")
+        .permitAll()
+        .antMatchers("/h2-console/**")
+        .permitAll()
+        .anyRequest()
+        .authenticated()
+        .and()
+        .sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    httpSecurity.addFilterBefore(jwtReqFilter, UsernamePasswordAuthenticationFilter.class);
   }
 
   @Override
