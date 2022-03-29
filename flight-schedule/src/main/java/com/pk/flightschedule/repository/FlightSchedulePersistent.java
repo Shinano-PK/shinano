@@ -26,7 +26,9 @@ public class FlightSchedulePersistent implements FlightScheduleRepository {
   public List<FlightSchedule> getPeriod(Date start, Date end) {
     try {
       return jdbcTemplate.query(
-          "SELECXT * FROM FLIGHT_SCHEDULE WHERE SCHEDULE_START_DATE < ? AND SCHEDULE_END_DATE = ?", // TODO This should have different query
+          "SELECXT * FROM FLIGHT_SCHEDULE WHERE SCHEDULE_START_DATE < ? AND SCHEDULE_END_DATE = ?", // TODO This should
+                                                                                                    // have different
+                                                                                                    // query
           (rs, rowNum) -> new FlightSchedule(
               rs.getInt("ID_FLIGHT_SCHEDULE"),
               rs.getInt("START_WEEKDAY"),
@@ -75,6 +77,40 @@ public class FlightSchedulePersistent implements FlightScheduleRepository {
     } catch (Exception e) {
       log.warn("Exception: " + e.getMessage());
       return 0;
+    }
+  }
+
+  @Override
+  public Boolean update(FlightSchedule input) {
+    try {
+      return (jdbcTemplate.update(
+          "UPDATE FLIGHT_SCHEDULE SET (ID_FLIGHT_SCHEDULE = ?, START_WEEKDAY = ?,"
+              + " END_WEEKDAY = ?, START_TIME = ?, END_TIME = ?, SCHEDULE_START_DATE = ?,"
+              + " SCHEDULE_END_DATE = ?, DESTINATION = ?, FROM = ?, KIND = ? WHERE ID_FLIGHT_SCHEDULE = ?;",
+          input.getId(),
+          input.getStartWeekday(),
+          input.getEndWeekday(),
+          input.getStartTime(),
+          input.getEndTime(),
+          input.getScheduleStartDate(),
+          input.getScheduleEndDate(),
+          input.getDestination(),
+          input.getFrom(),
+          input.getKind(),
+          input.getId()) > 0);
+    } catch (Exception e) {
+      log.warn("Exception: " + e.getMessage());
+      return false;
+    }
+  }
+
+  @Override
+  public Boolean delete(Integer id) {
+    try {
+      return (jdbcTemplate.update("DELETE FROM FLIGHT_SCHEDULE WHERE ID_FLIGHT_SCHEDULE = ?", id) > 0);
+    } catch (Exception e) {
+      log.warn("Exception: " + e.getMessage());
+      return false;
     }
   }
 }

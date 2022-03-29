@@ -2,6 +2,7 @@ package com.pk.flightschedule.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.ValidationException;
 
 import com.pk.flightschedule.models.FlightSchedule;
@@ -11,9 +12,10 @@ import com.pk.flightschedule.services.FlightScheduleService;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
@@ -26,15 +28,27 @@ public class FlightScheduleController {
   private FlightScheduleService flightScheduleService;
 
   @GetMapping("/flightSchedule")
-  public List<FlightSchedule> getFlightSchedule(FlightScheduleRequest request,
+  public List<FlightSchedule> getFlightSchedule(@Valid FlightScheduleRequest request,
       BindingResult bindingResult) {
     validateInput(bindingResult);
     return flightScheduleService.getFlightScheduleForDates(request);
   }
 
-  public Integer saveFlightSchedule(FlightScheduleInput input, BindingResult bindingResult) {
+  @PostMapping("/flightSchedule")
+  public Integer saveFlightSchedule(@Valid FlightScheduleInput input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return flightScheduleService.saveFlightSchedule(input);
+  }
+
+  @PutMapping("/flightSchedule")
+  public Boolean updateFlightSchedule(@Valid FlightSchedule input, BindingResult bindingResult) {
+    validateInput(bindingResult);
+    return flightScheduleService.updateFlightSchedule(input);
+  }
+
+  @DeleteMapping("/flightSchedule")
+  public Boolean deleteFlightSchedule(Integer id) {
+    return flightScheduleService.deleteFlightSchedule(id);
   }
 
   private void validateInput(BindingResult bindingResult) {

@@ -25,7 +25,15 @@ public class FlightScheduleService {
     return flightScheduleRepository.getPeriod(request.getScheduleStartDate(), request.getScheduleEndDate());
   }
 
+  public Boolean updateFlightSchedule(FlightSchedule input) {
+    return flightScheduleRepository.update(input);
+  }
+
   public Integer saveFlightSchedule(FlightScheduleInput input) {
     return flightScheduleRepository.save(input);
+  }
+
+  public Boolean deleteFlightSchedule(Integer input) {
+    return flightScheduleRepository.delete(input);
   }
 }

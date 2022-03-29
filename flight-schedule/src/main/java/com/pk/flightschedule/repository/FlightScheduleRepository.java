@@ -11,4 +11,8 @@ public interface FlightScheduleRepository {
   List<FlightSchedule> getPeriod(Date start, Date end);
 
   Integer save(FlightScheduleInput input);
+
+  Boolean update(FlightSchedule input);
+
+  Boolean delete(Integer id);
 }
