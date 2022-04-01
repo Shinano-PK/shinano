@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#menu-bar {
+    background: #C4C4C4;
+    height: 100px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#logo {
+    float: left;
+    display: block;
+}
+
+#logo img {
+    height: 90px;
+}
+
+#post {
+    float: bottom;
+    width: fit-content;
+    margin: auto;
+    padding: 20px;
+    font-family: "Roboto Bold", sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+#worker-name {
+    float: right;
+    font-family: "Roboto Bold", sans-serif;
+    font-size: 36px;
+    width: fit-content;
+    padding: 0;
+}
+
+@media only screen and (max-width: 630px) {
+
+}
