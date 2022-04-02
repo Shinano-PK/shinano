@@ -1,0 +1,26 @@
+#arrivals {
+    float: left;
+    margin-left: 5rem;
+    padding: 5rem;
+}
+
+#departures {
+    float: right;
+    margin-right: 5rem;
+    padding: 5rem;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: black solid;
+    padding: 0.5rem;
+}
+
+input {
+    margin-top: 20%;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+}

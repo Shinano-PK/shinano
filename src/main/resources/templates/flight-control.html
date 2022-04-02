@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Witaj!</title>
+    <link rel="stylesheet" href="/src/main/resources/static/css/style.css"/>
+    <link rel="stylesheet" href="/src/main/resources/static/css/flight-control.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/src/main/resources/static/js/script.js"></script>
+    <script type="text/javascript" src="/src/main/resources/static/js/flight-control.js"></script>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<div id="header">
+    <img src="/src/main/resources/static/images/airplane-logo.png" alt="logo"/>
+    <div id="side-menu">
+        <ol>
+            <li><a href="#">Imie Nazwisko</a>
+                <ul>
+                    <li><a href="#">A</a></li>
+                    <li><a href="#">B</a></li>
+                    <li><a href="#">C</a></li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    <div id="greeting">
+        <p>
+            Kontrola lotów
+        </p>
+    </div>
+</div>
+<div id="center">
+    <form id="manageFlights" action="flight-control" method="post">
+        <div id="arrivals">
+            <table>
+                <tr>
+                    <th colspan="5">PRZYLOTY</th>
+                </tr>
+                <tr>
+                    <th>Nr lotu</th>
+                    <th>Godzina</th>
+                    <th>Status</th>
+                    <th>Pas</th>
+                    <th>Zgoda</th>
+                </tr>
+                <tr>
+                    <td><input type="hidden" name="flightNumber" value="JP2137">JP2137</td>
+                    <td>21:37</td>
+                    <td>Oczekiwanie na zgodę</td>
+                    <td>
+                        <select name="lane">
+                            <option value="" selected>---</option>
+                            <option value="A1">A1</option>
+                            <option value="A1">A2</option>
+                            <option value="A1">A3</option>
+                            <option value="A1">A4</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="permission">
+                            <option value="" selected>Brak</option>
+                            <option value="approve">Udzielona</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="hidden" name="flightNumber" value="XD1234">XD1234</td>
+                    <td>20:30</td>
+                    <td>Podejście do lądowania</td>
+                    <td>
+                        <select name="lane">
+                            <option value="" selected>---</option>
+                            <option value="A1">A1</option>
+                            <option value="A1">A2</option>
+                            <option value="A1">A3</option>
+                            <option value="A1">A4</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="permission">
+                            <option value="" selected>Brak</option>
+                            <option value="approve">Udzielona</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="departures">
+            <table>
+                <tr>
+                    <th colspan="5">ODLOTY</th>
+                </tr>
+                <tr>
+                    <th>Nr lotu</th>
+                    <th>Godzina</th>
+                    <th>Status</th>
+                    <th>Pas</th>
+                    <th>Zgoda</th>
+                </tr>
+                <tr>
+                    <td><input type="hidden" name="flightNumber" value="MA3344">MA3344</td>
+                    <td>00:19</td>
+                    <td>Oczekiwanie na zgodę</td>
+                    <td>
+                        <select name="lane">
+                            <option value="" selected>---</option>
+                            <option value="A1">A1</option>
+                            <option value="A1">A2</option>
+                            <option value="A1">A3</option>
+                            <option value="A1">A4</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="permission">
+                            <option value="" selected>Brak</option>
+                            <option value="approve">Udzielona</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="hidden" name="flightNumber" value="LV6789">LV6789</td>
+                    <td>01:20</td>
+                    <td>Wyjazd na pas startowy</td>
+                    <td>
+                        <select name="lane">
+                            <option value="" selected>---</option>
+                            <option value="A1">A1</option>
+                            <option value="A1">A2</option>
+                            <option value="A1">A3</option>
+                            <option value="A1">A4</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="permission">
+                            <option value="" selected>Brak</option>
+                            <option value="approve">Udzielona</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <input type="submit" id="approve" value="Zatwierdź">
+    </form>
+    <div id="themeInformation">
+        <p>Wiadomości</p>
+    </div>
+</div>
+</body>
+</html>
