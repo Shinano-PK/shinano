@@ -50,6 +50,10 @@ public class NewUsersService {
     return usersRepository.getByUsername(username);
   }
 
+  public User getUserByEmail(String email) {
+    return usersRepository.getByEmail(email);
+  }
+
   public User addUser(User user) throws Exception {
     // validate input
     String emailString = user.getEmail();
@@ -104,9 +108,9 @@ public class NewUsersService {
     return user;
   }
   
-  public ErrMsg deleteUser(Integer id) throws Exception {
-    if (Boolean.FALSE.equals(usersRepository.deleteById(id))) {
-      throw new Exception("cannot update user");
+  public ErrMsg deleteUser(String email) throws Exception {
+    if (Boolean.FALSE.equals(usersRepository.deleteByEmail(email))) {
+      throw new Exception("cannot delete user");
     }
     return new ErrMsg("ok");
   }

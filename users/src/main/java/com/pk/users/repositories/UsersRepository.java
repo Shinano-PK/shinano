@@ -12,5 +12,5 @@ public interface UsersRepository {
 
   Boolean update(User user);
 
-  Boolean deleteById(Integer id);  
+  Boolean deleteByEmail(String email);
 }

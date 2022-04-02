@@ -138,9 +138,9 @@ public class PersistentUserRepository implements UsersRepository {
   }
 
   @Override
-  public Boolean deleteById(Integer id) {
+  public Boolean deleteByEmail(String email) {
     try {
-      return (jdbcTemplate.update("delete from \"user\" where email = ?", id) > 0);
+      return (jdbcTemplate.update("delete from \"user\" where email = ?", email) > 0);
     } catch (Exception e) {
       log.warn("Exception: " + e.getMessage());
       return false;

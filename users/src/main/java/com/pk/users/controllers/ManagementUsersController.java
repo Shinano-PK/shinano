@@ -1,13 +1,19 @@
 package com.pk.users.controllers;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
+import javax.validation.ValidationException;
 import com.pk.users.models.ErrMsg;
 import com.pk.users.models.User;
 import com.pk.users.services.NewUsersService;
-
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,25 +30,46 @@ public class ManagementUsersController {
 
   @GetMapping("/user")
   public User getUserByUsername(@RequestParam String username) {
-    log.trace("getUserById()");
+    log.trace("getUserByUsername()");
     return usersService.getUserByUsername(username);
   }
 
+  @GetMapping("/user")
+  public User getUserByEmail(@RequestParam String email) {
+    log.trace("getUserByEmail()");
+    return usersService.getUserByEmail(email);
+  }
+
   @PostMapping("/user")
-  public User addUser(User user) throws Exception {
+  public User addUser(@RequestBody @Valid User user, BindingResult bindingResult) throws Exception {
     log.trace("addUser()");
+    validateInput(bindingResult);
     return usersService.addUser(user);
   }
 
   @PutMapping("/user")
-  public User updateUser(User user) throws Exception {
+  public User updateUser(@RequestBody @Valid User user, BindingResult bindingResult) throws Exception {
     log.trace("updateUser()");
+    validateInput(bindingResult);
     return usersService.updateUser(user);
   }
 
   @DeleteMapping("/user")
-  public ErrMsg deleteUser(Integer id) throws Exception {
+  public ErrMsg deleteUser(@RequestParam String email) throws Exception {
     log.trace("deleteUser()");
-    return usersService.deleteUser(id);
+    return usersService.deleteUser(email);
+  }
+
+  private void validateInput(BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      log.debug(bindingResult.getAllErrors().toString());
+      List<String> errors =
+          bindingResult.getAllErrors().stream()
+              .map(
+                  error ->
+                      "Error: " + ((FieldError) error).getField() + " " + error.getDefaultMessage())
+              .collect(Collectors.toList());
+      throw new ValidationException(errors.toString());
+    }
   }
 }
