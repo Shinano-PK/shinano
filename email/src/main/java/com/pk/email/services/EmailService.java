@@ -48,12 +48,38 @@ public class EmailService {
                 resourceLoader.getResource("classpath:password_reset.html").getInputStream(),
                 StandardCharsets.UTF_8));
 
-    log.info(
-        "emailCreateAcc: {} (first 500 chars)", emailCreateAccTemplate.substring(0, 500));
-    log.info(
-        "emailConfirmed: {} (first 500 chars)", emailConfirmedTemplate.substring(0, 500));
-    log.info(
-        "emailResetPass: {} (first 500 chars)", emailResetPassTemplate.substring(0, 500));
+    String logoImgB64 =
+        CharStreams.toString(
+            new InputStreamReader(
+                resourceLoader.getResource("classpath:img/logo.b64").getInputStream(),
+                StandardCharsets.UTF_8));
+
+    String witamyImgB64 =
+        CharStreams.toString(
+            new InputStreamReader(
+                resourceLoader.getResource("classpath:img/WITAMY.b64").getInputStream(),
+                StandardCharsets.UTF_8));
+    String tloImgB64 =
+        CharStreams.toString(
+            new InputStreamReader(
+                resourceLoader.getResource("classpath:img/TLO.b64").getInputStream(),
+                StandardCharsets.UTF_8));
+
+    log.info("emailCreateAcc: {} (first 500 chars)", emailCreateAccTemplate.substring(0, 500));
+    log.info("emailConfirmed: {} (first 500 chars)", emailConfirmedTemplate.substring(0, 500));
+    log.info("emailResetPass: {} (first 500 chars)", emailResetPassTemplate.substring(0, 500));
+
+    emailCreateAccTemplate = emailCreateAccTemplate.replace("{{LOGO}}", logoImgB64);
+    emailCreateAccTemplate = emailCreateAccTemplate.replace("{{TLO}}", tloImgB64);
+    emailCreateAccTemplate = emailCreateAccTemplate.replace("{{WITAMY}}", witamyImgB64);
+
+    emailConfirmedTemplate = emailConfirmedTemplate.replace("{{LOGO}}", logoImgB64);
+    emailConfirmedTemplate = emailConfirmedTemplate.replace("{{TLO}}", tloImgB64);
+    emailConfirmedTemplate = emailConfirmedTemplate.replace("{{WITAMY}}", witamyImgB64);
+
+    emailResetPassTemplate = emailResetPassTemplate.replace("{{LOGO}}", logoImgB64);
+    emailResetPassTemplate = emailResetPassTemplate.replace("{{TLO}}", tloImgB64);
+    emailResetPassTemplate = emailResetPassTemplate.replace("{{WITAMY}}", witamyImgB64);
   }
 
   public void sendEmail(Email email) throws Exception {

@@ -19,7 +19,8 @@ public class EmailServiceInternal {
 
     public void sendSimpleMessage(
       String to, String subject, String text) {
-        log.info("sendSimpleMessage, to: {}, subject: {}, text: {}", to, subject, text);
+        log.info("sendSimpleMessage, to: {}, subject: {}", to, subject);
+        log.debug("sendSimpleMessage, text: {}", text);
         SimpleMailMessage message = new SimpleMailMessage(); 
         // TODO make it customizable
         message.setFrom("noreply@pkproject.com");
@@ -30,7 +31,8 @@ public class EmailServiceInternal {
     }
 
     public void sendHtmlMessage(String to, String subject, String htmlMsg) throws MessagingException {
-      log.info("sendHtmlMessage, to: {}, subject: {}, htmlMsg: {}", to, subject, htmlMsg);
+      log.info("sendHtmlMessage, to: {}, subject: {}", to, subject);
+      log.debug("sendSimpleMessage, text: {}", htmlMsg);
       MimeMessage mimeMessage = mailSender.createMimeMessage();
       MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
       helper.setText(htmlMsg, true);
