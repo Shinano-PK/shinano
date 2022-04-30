@@ -1,4 +1,4 @@
-package com.pk.email.services;
+package com.pk.email.service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;

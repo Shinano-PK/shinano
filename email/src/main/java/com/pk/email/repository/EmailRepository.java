@@ -1,8 +1,9 @@
 package com.pk.email.repository;
 
-import com.pk.email.models.EmailDB;
 import java.sql.Date;
 import java.util.List;
+
+import com.pk.email.model.EmailDB;
 
 public interface EmailRepository {
 

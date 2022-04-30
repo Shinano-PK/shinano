@@ -1,4 +1,4 @@
-package com.pk.email.models;
+package com.pk.email.model;
 
 import java.sql.Date;
 

@@ -1,8 +1,9 @@
-package com.pk.email.services;
+package com.pk.email.service;
 
 import com.google.common.io.CharStreams;
-import com.pk.email.models.Email;
-import com.pk.email.models.EmailDB;
+import com.pk.email.exception.EmailException;
+import com.pk.email.model.Email;
+import com.pk.email.model.EmailDB;
 import com.pk.email.repository.EmailRepository;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -82,7 +83,7 @@ public class EmailService {
     emailResetPassTemplate = emailResetPassTemplate.replace("{{WITAMY}}", witamyImgB64);
   }
 
-  public void sendEmail(Email email) throws Exception {
+  public void sendEmail(Email email) throws EmailException, IOException, MessagingException {
     log.debug("Email type: {}", email.getEmailType());
     switch (email.getEmailType()) {
       case "newAcc":
@@ -95,7 +96,7 @@ public class EmailService {
         sendResetPassword(email.getDstEmail(), email.getMessage());
         break;
       default:
-        throw new Exception("Invalid email type");
+        throw new EmailException("Invalid email type");
     }
     log.debug("Saving email to DB : {}", email);
     emailRepository.save(

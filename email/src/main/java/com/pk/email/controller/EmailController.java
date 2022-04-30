@@ -1,10 +1,15 @@
-package com.pk.email.controllers;
+package com.pk.email.controller;
 
-import com.pk.email.models.Email;
-import com.pk.email.models.ErrMsg;
-import com.pk.email.services.EmailService;
+import com.pk.email.exception.EmailException;
+import com.pk.email.model.Email;
+import com.pk.email.model.ErrMsg;
+import com.pk.email.service.EmailService;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 import lombok.AllArgsConstructor;
@@ -21,15 +26,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmailController {
   private EmailService emailService;
 
-  // TODO Post,Put,Delete ???
   @PostMapping("/email")
   public ErrMsg sendEmail(@RequestBody @Valid Email email, BindingResult bindingResult) {
     validateInput(bindingResult);
     try {
       emailService.sendEmail(email);
       return new ErrMsg("ok");
-      // TODO make it specific
-    } catch (Exception e) {
+    } catch (EmailException | IOException | MessagingException e) {
       log.warn("Cannot send email, error: {}", e);
       return new ErrMsg("Cannot send email");
     }

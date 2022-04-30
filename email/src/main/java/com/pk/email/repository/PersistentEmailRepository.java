@@ -1,11 +1,13 @@
 package com.pk.email.repository;
 
-import com.pk.email.models.EmailDB;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collections;
 import java.util.List;
+
+import com.pk.email.model.EmailDB;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -32,7 +34,7 @@ public class PersistentEmailRepository implements EmailRepository {
                   rs.getString("subject"),
                   rs.getString("message"),
                   rs.getString("message_type"),
-                  rs.getDate("send_at")));
+                  rs.getDate("sent_at")));
     } catch (Exception e) {
       log.warn("Got exception: ", e);
       return Collections.emptyList();
@@ -51,12 +53,12 @@ public class PersistentEmailRepository implements EmailRepository {
 
   @Override
   public List<EmailDB> findByDstEmail(String dst) {
-    return internalFind("destination_email", dst);
+    return internalFind("destination_address", dst);
   }
 
   @Override
   public List<EmailDB> findBySrcEmail(String src) {
-    return internalFind("source_email", src);
+    return internalFind("source_address", src);
   }
 
   @Override
@@ -67,6 +69,7 @@ public class PersistentEmailRepository implements EmailRepository {
   @Override
   public List<EmailDB> findByDate(Date date) {
     // TODO check this toString() conversion
+    log.info("ToString date: {}", date.toString());
     return internalFind("sent_at", date.toString());
   }
 
@@ -88,10 +91,10 @@ public class PersistentEmailRepository implements EmailRepository {
                       rs.getString("subject"),
                       rs.getString("message"),
                       rs.getString("message_type"),
-                      rs.getDate("send_at")),
+                      rs.getDate("sent_at")),
               value);
       if (emails.isEmpty()) {
-        log.error("Find by username failed");
+        log.error("Internal search failed");
         return Collections.emptyList();
       }
       return emails;
@@ -146,8 +149,8 @@ public class PersistentEmailRepository implements EmailRepository {
   public boolean update(EmailDB updatedEmail) {
     try {
       return (jdbcTemplate.update(
-              "update Email set (source_address = ?, destination_address = ?, message = ?,"
-                  + " subject = ?, sent_at = ?, message_type = ?) where email_id = ?",
+              "update Email set source_address = ?, destination_address = ?, message = ?,"
+                  + " subject = ?, sent_at = ?, message_type = ? where email_id = ?",
               updatedEmail.getSrcAddress(),
               updatedEmail.getDstAddress(),
               updatedEmail.getMessage(),
