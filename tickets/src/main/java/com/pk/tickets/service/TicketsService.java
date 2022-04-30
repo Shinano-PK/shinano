@@ -1,7 +1,7 @@
 package com.pk.tickets.service;
 
-import com.pk.tickets.models.ErrMsg;
-import com.pk.tickets.models.Ticket;
+import com.pk.tickets.model.ErrMsg;
+import com.pk.tickets.model.Ticket;
 import com.pk.tickets.repository.TicketRepository;
 
 import org.springframework.stereotype.Service;

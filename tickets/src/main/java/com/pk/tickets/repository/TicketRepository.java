@@ -1,6 +1,6 @@
 package com.pk.tickets.repository;
 
-import com.pk.tickets.models.Ticket;
+import com.pk.tickets.model.Ticket;
 
 public interface TicketRepository {
   Ticket getById(Integer id);

@@ -3,7 +3,9 @@ package com.pk.tickets.repository;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
-import com.pk.tickets.models.Ticket;
+
+import com.pk.tickets.model.Ticket;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -23,7 +25,7 @@ public class PersistentTicketRepository implements TicketRepository {
     try {
       List<Ticket> tickets =
           jdbcTemplate.query(
-              "select * from \"Ticket\" where ticket_id = ?",
+              "select * from Ticket where ticket_id = ?",
               (rs, rowNum) ->
                   new Ticket(
                       rs.getInt("ticket_id"),
@@ -53,15 +55,14 @@ public class PersistentTicketRepository implements TicketRepository {
           connection -> {
             PreparedStatement ps =
                 connection.prepareStatement(
-                    "insert into \"Ticket\" (ticket_id, user_id, flight_id, reserved_date, bought_date, price, status) values(?, ?, ?, ?, ?, ?, ?)",
+                    "insert into Ticket (user_id, flight_id, reserved_date, bought_date, price, status) values(?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, ticket.getTicketId());
-            ps.setInt(2, ticket.getUserId());
-            ps.setInt(3, ticket.getFlightId());
-            ps.setDate(4, ticket.getReservedDate());
-            ps.setDate(5, ticket.getBoughtDate());
-            ps.setInt(6, ticket.getPrice());
-            ps.setInt(7, ticket.getStatus());
+            ps.setInt(1, ticket.getUserId());
+            ps.setInt(2, ticket.getFlightId());
+            ps.setDate(3, ticket.getReservedDate());
+            ps.setDate(4, ticket.getBoughtDate());
+            ps.setInt(5, ticket.getPrice());
+            ps.setInt(6, ticket.getStatus());
             return ps;
           },
           keyHolder);
@@ -80,8 +81,8 @@ public class PersistentTicketRepository implements TicketRepository {
   public boolean update(Ticket ticket) {
     try {
       return (jdbcTemplate.update(
-              "update \"Ticket\" set (user_id = ?, flight_id = ?,"
-                  + " reserved_date = ?, bought_date = ?, price_id = ? where ticket_id = ?",
+              "update Ticket set user_id = ?, flight_id = ?,"
+                  + " reserved_date = ?, bought_date = ?, price = ?, status = ? where ticket_id = ?",
               ticket.getUserId(),
               ticket.getFlightId(),
               ticket.getReservedDate(),
@@ -99,7 +100,7 @@ public class PersistentTicketRepository implements TicketRepository {
   @Override
   public boolean delete(Integer id) {
     try {
-      return (jdbcTemplate.update("delete from \"Ticket\" where ticket_id = ?", id) > 0);
+      return (jdbcTemplate.update("delete from Ticket where ticket_id = ?", id) > 0);
     } catch (Exception e) {
       log.warn("Exception: " + e.getMessage());
       return false;

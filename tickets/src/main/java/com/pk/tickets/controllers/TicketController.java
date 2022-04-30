@@ -1,9 +1,8 @@
 package com.pk.tickets.controllers;
 
-import com.pk.tickets.models.ErrMsg;
-import com.pk.tickets.models.Ticket;
+import com.pk.tickets.model.ErrMsg;
+import com.pk.tickets.model.Ticket;
 import com.pk.tickets.service.TicketsService;
-
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

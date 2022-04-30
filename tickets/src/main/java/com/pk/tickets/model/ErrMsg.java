@@ -1,4 +1,4 @@
-package com.pk.tickets.models;
+package com.pk.tickets.model;
 
 import lombok.Value;
 
