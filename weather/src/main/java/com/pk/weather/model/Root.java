@@ -1,4 +1,4 @@
-package com.pk.weather.models;
+package com.pk.weather.model;
 
 import java.util.ArrayList;
 import java.util.List;

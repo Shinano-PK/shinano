@@ -1,13 +1,14 @@
-package com.pk.users.controllers;
+package com.pk.users.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import com.netflix.config.validation.ValidationException;
-import com.pk.users.models.ErrMsg;
-import com.pk.users.models.NewPassword;
-import com.pk.users.models.User;
-import com.pk.users.services.NewUsersService;
+import com.pk.users.model.ErrMsg;
+import com.pk.users.model.NewPassword;
+import com.pk.users.model.User;
+import com.pk.users.service.NewUsersService;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.PostMapping;

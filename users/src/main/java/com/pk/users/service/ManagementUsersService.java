@@ -1,4 +1,4 @@
-package com.pk.users.services;
+package com.pk.users.service;
 
 import org.springframework.stereotype.Service;
 

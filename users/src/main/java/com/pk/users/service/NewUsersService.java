@@ -1,13 +1,13 @@
-package com.pk.users.services;
+package com.pk.users.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pk.users.models.Email;
-import com.pk.users.models.ErrMsg;
-import com.pk.users.models.NewPassword;
-import com.pk.users.models.Token;
-import com.pk.users.models.User;
-import com.pk.users.repositories.TokenRepository;
-import com.pk.users.repositories.UsersRepository;
+import com.pk.users.model.Email;
+import com.pk.users.model.ErrMsg;
+import com.pk.users.model.NewPassword;
+import com.pk.users.model.Token;
+import com.pk.users.model.User;
+import com.pk.users.repository.TokenRepository;
+import com.pk.users.repository.UserRepository;
 
 import java.sql.Date;
 import java.time.LocalDate;
@@ -27,7 +27,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 @AllArgsConstructor
 public class NewUsersService {
-  UsersRepository usersRepository;
+  UserRepository usersRepository;
   TokenRepository tokenRepository;
   RestTemplate restTemplate;
   ObjectMapper objectMapper;
@@ -65,7 +65,7 @@ public class NewUsersService {
     }
 
     // generate token
-    Token token = new Token("", "resetPassword", Date.valueOf(LocalDate.now().plusDays(TOKEN_VALID_DAYS)));
+    Token token = new Token("", Date.valueOf(LocalDate.now().plusDays(TOKEN_VALID_DAYS)), "resetPassword");
     
     String tokenValue = tokenRepository.save(token);
     if (tokenValue == null || tokenValue.isEmpty()) {
@@ -117,7 +117,7 @@ public class NewUsersService {
 
   public ErrMsg resetPassword(String email) throws Exception {
     // TODO more error handling
-    Token token = new Token("", "resetPassword", Date.valueOf(LocalDate.now().plusDays(TOKEN_VALID_DAYS)));
+    Token token = new Token("", Date.valueOf(LocalDate.now().plusDays(TOKEN_VALID_DAYS)), "resetPassword");
     tokenRepository.save(token);
     User user = usersRepository.getByEmail(email);
     if (user == null) {

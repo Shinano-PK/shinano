@@ -1,9 +1,11 @@
-package com.pk.users.repositories;
+package com.pk.users.repository;
 
-import com.pk.users.models.User;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
+
+import com.pk.users.model.User;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Repository;
 @Slf4j
 @Repository
 @AllArgsConstructor
-public class PersistentUserRepository implements UsersRepository {
+public class PersistentUserRepository implements UserRepository {
   JdbcTemplate jdbcTemplate;
 
   // TODO ignoring exceptions to return null??
@@ -26,6 +28,7 @@ public class PersistentUserRepository implements UsersRepository {
               "select * from \"user\" where username = ?",
               (rs, rowNum) ->
                   new User(
+                      rs.getInt("user_id"),
                       rs.getString("name"),
                       rs.getString("surname"),
                       rs.getDate("birth_date"),
@@ -58,6 +61,7 @@ public class PersistentUserRepository implements UsersRepository {
               "select * from \"user\" where email = ?",
               (rs, rowNum) ->
                   new User(
+                      rs.getInt("user_id"),
                       rs.getString("name"),
                       rs.getString("surname"),
                       rs.getDate("birth_date"),
@@ -119,8 +123,8 @@ public class PersistentUserRepository implements UsersRepository {
   public Boolean update(User user) {
     try {
       return (jdbcTemplate.update(
-              "update \"user\" set (name = ?, surname = ?, birth_date = ?, enabled = ?, creation_date ="
-                  + " ?, username = ?, password = ?, role = ?, token = ?) where email = ?",
+              "update \"user\" set name = ?, surname = ?, birth_date = ?, enabled = ?, creation_date ="
+                  + " ?, username = ?, password = ?, role = ?, token = ? where user_id = ?",
               user.getName(),
               user.getSurname(),
               user.getBirthDate(),
@@ -129,7 +133,8 @@ public class PersistentUserRepository implements UsersRepository {
               user.getUsername(),
               user.getPassword(),
               user.getAuthority(),
-              user.getToken())
+              user.getToken(),
+              user.getUserId())
           > 0);
     } catch (Exception e) {
       log.warn("Exception: " + e.getMessage());

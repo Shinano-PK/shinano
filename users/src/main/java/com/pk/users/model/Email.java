@@ -1,4 +1,4 @@
-package com.pk.users.models;
+package com.pk.users.model;
 
 import javax.validation.constraints.NotNull;
 import lombok.Value;

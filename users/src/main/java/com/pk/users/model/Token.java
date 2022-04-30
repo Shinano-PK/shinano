@@ -1,4 +1,4 @@
-package com.pk.users.models;
+package com.pk.users.model;
 
 import java.sql.Date;
 
@@ -10,6 +10,6 @@ import lombok.Data;
 public class Token {
   String token;
   // TODO Enum ?
-  String type;
   Date validUntil;
+  String type;
 }

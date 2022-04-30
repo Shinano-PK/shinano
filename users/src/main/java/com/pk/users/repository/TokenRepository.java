@@ -1,6 +1,6 @@
-package com.pk.users.repositories;
+package com.pk.users.repository;
 
-import com.pk.users.models.Token;
+import com.pk.users.model.Token;
 
 public interface TokenRepository {
   Token get(String token);

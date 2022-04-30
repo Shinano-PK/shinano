@@ -1,8 +1,8 @@
-package com.pk.users.repositories;
+package com.pk.users.repository;
 
-import com.pk.users.models.User;
+import com.pk.users.model.User;
 
-public interface UsersRepository {
+public interface UserRepository {
   
   User getByUsername(String username);
 

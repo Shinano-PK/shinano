@@ -1,4 +1,4 @@
-package com.pk.users.models;
+package com.pk.users.model;
 
 import java.sql.Date;
 import javax.validation.constraints.NotNull;
@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class User {
+  Integer userId;
   @NotNull String name;
   @NotNull String surname;
   @NotNull Date birthDate;

@@ -1,10 +1,12 @@
-package com.pk.users.repositories;
+package com.pk.users.repository;
 
-import com.pk.users.models.Token;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import java.util.UUID;
+
+import com.pk.users.model.Token;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,7 +31,7 @@ public class PersistentTokenRepository implements TokenRepository {
           jdbcTemplate.query(
               "select * from Token where token = ?",
               (rs, rowNum) ->
-                  new Token(rs.getString("token"), rs.getString("type"), rs.getDate("valid_until")),
+                  new Token(rs.getString("token"), rs.getDate("valid_until"), rs.getString("type")),
               token);
       if (tokens.size() > 1) {
         log.error("Find by token failed, more than 1 token with same key (???)");
@@ -84,10 +86,11 @@ public class PersistentTokenRepository implements TokenRepository {
   public Boolean update(Token token) {
     try {
       return (jdbcTemplate.update(
-              "update token set (token = ?, type = ?, valid_until = ?) where email = ?",
+              "update token set token = ?, type = ?, valid_until = ? where token = ?",
               token.getToken(),
               token.getType(),
-              token.getValidUntil())
+              token.getValidUntil(),
+              token.getToken())
           > 0);
     } catch (Exception e) {
       log.warn("Exception: " + e.getMessage());

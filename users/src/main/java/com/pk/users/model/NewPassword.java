@@ -1,4 +1,4 @@
-package com.pk.users.models;
+package com.pk.users.model;
 
 import lombok.NonNull;
 import lombok.Value;

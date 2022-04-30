@@ -1,4 +1,4 @@
-package com.pk.weather.models;
+package com.pk.weather.model;
 
 import lombok.Getter;
 import lombok.Setter;
