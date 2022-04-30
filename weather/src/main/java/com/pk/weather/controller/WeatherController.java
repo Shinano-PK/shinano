@@ -1,6 +1,6 @@
 package com.pk.weather.controller;
 
-import com.pk.weather.models.Root;
+import com.pk.weather.model.Root;
 import com.pk.weather.service.WeatherService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

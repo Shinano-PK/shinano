@@ -1,6 +1,7 @@
 package com.pk.weather.advice;
 
-import com.pk.weather.models.ErrMsg;
+import com.pk.weather.model.ErrMsg;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
