@@ -1,11 +1,12 @@
-package com.pk.internal.controllers;
+package com.pk.internal.controller;
 
 import javax.validation.Valid;
-import com.pk.internal.models.ErrMsg;
-import com.pk.internal.models.LoginData;
-import com.pk.internal.models.NewPassword;
-import com.pk.internal.models.User;
-import com.pk.internal.security.AuthResp;
+
+import com.pk.internal.model.AuthResp;
+import com.pk.internal.model.ErrMsg;
+import com.pk.internal.model.LoginData;
+import com.pk.internal.model.NewPassword;
+import com.pk.internal.model.User;
 import com.pk.internal.service.AccountsService;
 import org.springframework.boot.context.properties.bind.validation.ValidationErrors;
 import org.springframework.security.core.context.SecurityContextHolder;

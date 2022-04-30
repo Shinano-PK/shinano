@@ -2,7 +2,7 @@ package com.pk.internal.advice;
 
 import javax.validation.ValidationException;
 
-import com.pk.internal.models.ErrMsg;
+import com.pk.internal.model.ErrMsg;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;

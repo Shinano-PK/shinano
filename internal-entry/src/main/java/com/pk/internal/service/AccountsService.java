@@ -2,10 +2,10 @@ package com.pk.internal.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pk.internal.models.ErrMsg;
-import com.pk.internal.models.LoginData;
-import com.pk.internal.models.User;
-import com.pk.internal.security.AuthResp;
+import com.pk.internal.model.AuthResp;
+import com.pk.internal.model.ErrMsg;
+import com.pk.internal.model.LoginData;
+import com.pk.internal.model.User;
 import com.pk.internal.security.JwtUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -65,10 +65,10 @@ public class AccountsService {
   private User getUser(String username) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
-    ResponseEntity<com.pk.internal.models.User> userEntity =
+    ResponseEntity<com.pk.internal.model.User> userEntity =
         restTemplate.getForEntity(
             "http://users-service/manage/user?username={username}",
-            com.pk.internal.models.User.class,
+            com.pk.internal.model.User.class,
             username);
     log.debug("User service response: {}", userEntity.getBody());
     return userEntity.getBody();

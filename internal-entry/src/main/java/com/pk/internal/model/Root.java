@@ -1,4 +1,4 @@
-package com.pk.internal.models;
+package com.pk.internal.model;
 
 import java.util.ArrayList;
 import java.util.List;

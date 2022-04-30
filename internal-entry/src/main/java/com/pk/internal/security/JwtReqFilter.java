@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pk.internal.models.ErrMsg;
+import com.pk.internal.model.ErrMsg;
 import com.pk.internal.service.CustomUserDetailsService;
 
 import org.springframework.beans.factory.annotation.Autowired;

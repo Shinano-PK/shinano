@@ -1,4 +1,4 @@
-package com.pk.internal.security;
+package com.pk.internal.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

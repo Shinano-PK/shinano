@@ -1,4 +1,4 @@
-package com.pk.internal.models;
+package com.pk.internal.model;
 
 import javax.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;

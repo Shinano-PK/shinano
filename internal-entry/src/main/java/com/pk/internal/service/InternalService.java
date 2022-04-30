@@ -1,8 +1,8 @@
 package com.pk.internal.service;
 
-import com.pk.internal.models.Root;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import com.pk.internal.model.Root;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

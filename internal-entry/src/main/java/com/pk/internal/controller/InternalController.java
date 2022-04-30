@@ -1,6 +1,6 @@
-package com.pk.internal.controllers;
+package com.pk.internal.controller;
 
-import com.pk.internal.models.Root;
+import com.pk.internal.model.Root;
 import com.pk.internal.service.InternalService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -27,13 +27,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     // log in via users microservice
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
-    ResponseEntity<com.pk.internal.models.User> userEntity =
+    ResponseEntity<com.pk.internal.model.User> userEntity =
         restTemplate.getForEntity(
             "http://users-service/manage/user?username={username}",
-            com.pk.internal.models.User.class,
+            com.pk.internal.model.User.class,
             username);
     log.debug("User service response: {}", userEntity.getBody());
-    com.pk.internal.models.User user = userEntity.getBody();
+    com.pk.internal.model.User user = userEntity.getBody();
     if (user == null) {
       throw new UsernameNotFoundException("User not found");
     }
