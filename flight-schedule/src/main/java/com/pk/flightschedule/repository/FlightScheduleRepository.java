@@ -8,6 +8,8 @@ import com.pk.flightschedule.models.FlightScheduleInput;
 
 public interface FlightScheduleRepository {
 
+  FlightSchedule get(Integer id);
+
   List<FlightSchedule> getPeriod(Date start, Date end);
 
   Integer save(FlightScheduleInput input);

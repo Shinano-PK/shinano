@@ -17,6 +17,10 @@ import lombok.AllArgsConstructor;
 public class FlightScheduleService {
   private FlightScheduleRepository flightScheduleRepository;
 
+  public FlightSchedule getFlightScheduleById(Integer id) {
+    return flightScheduleRepository.get(id);
+  }
+
   public List<FlightSchedule> getFlightScheduleForDates(FlightScheduleRequest request) {
     if (request.getScheduleEndDate().after(request.getScheduleEndDate())) {
       return Collections.emptyList();
