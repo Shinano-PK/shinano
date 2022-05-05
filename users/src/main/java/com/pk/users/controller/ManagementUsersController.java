@@ -30,6 +30,12 @@ import lombok.extern.slf4j.Slf4j;
 public class ManagementUsersController {
   NewUsersService usersService;
 
+  @GetMapping("/user/check")
+  public Boolean findIfUserExists(@RequestParam Integer id) {
+    log.trace("findIfUserExists");
+    return usersService.findIfUserExists(id);
+  }
+
   @GetMapping("/user")
   public User getUserByUsername(@RequestParam String username) {
     log.trace("getUserByUsername()");

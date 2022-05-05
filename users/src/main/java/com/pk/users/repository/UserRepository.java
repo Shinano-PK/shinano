@@ -3,7 +3,8 @@ package com.pk.users.repository;
 import com.pk.users.model.User;
 
 public interface UserRepository {
-  
+  User getById(Integer id);
+
   User getByUsername(String username);
 
   User getByEmail(String email);

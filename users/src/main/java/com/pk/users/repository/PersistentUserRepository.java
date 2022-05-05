@@ -19,6 +19,39 @@ import org.springframework.stereotype.Repository;
 public class PersistentUserRepository implements UserRepository {
   JdbcTemplate jdbcTemplate;
 
+  @Override
+  public User getById(Integer id) {
+    try {
+      List<User> users =
+          jdbcTemplate.query(
+              "select * from \"user\" where user_id = ?",
+              (rs, rowNum) ->
+                  new User(
+                      rs.getInt("user_id"),
+                      rs.getString("name"),
+                      rs.getString("surname"),
+                      rs.getDate("birth_date"),
+                      rs.getInt("enabled"),
+                      rs.getDate("creation_date"),
+                      rs.getString("email"),
+                      rs.getString("username"),
+                      rs.getString("password"),
+                      rs.getString("role"),
+                      rs.getString("token")),
+              id);
+      if (users.size() > 1) {
+        log.error("Find by username failed, more than 1 user with same id (???)");
+        throw new Exception("Database tolerates duplicate id");
+      } else if (!users.isEmpty()) {
+        return users.get(0);
+      }
+      return null;
+    } catch (Exception e) {
+      log.warn("Exception: " + e.getMessage());
+      return null;
+    }
+  }
+
   // TODO ignoring exceptions to return null??
   @Override
   public User getByUsername(String username) {

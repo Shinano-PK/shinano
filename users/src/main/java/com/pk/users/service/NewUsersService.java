@@ -46,6 +46,10 @@ public class NewUsersService {
 
   private static final Long TOKEN_VALID_DAYS = 3L;
 
+  public Boolean findIfUserExists(Integer id) {
+    return usersRepository.getById(id) != null;
+  }
+
   public User getUserByUsername(String username) {
     return usersRepository.getByUsername(username);
   }

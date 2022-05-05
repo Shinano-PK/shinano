@@ -40,6 +40,12 @@ public class PersistentUserRepositoryTest {
   }
 
   @Test
+  public void testGetById() {
+    assertNotNull(userRepository.getById(1));
+    assertNull(userRepository.getById(100));
+  }
+
+  @Test
   public void testGetByUsername() {
     assertNotNull(userRepository.getByUsername("test2"));
     assertNull(userRepository.getByUsername("null"));
