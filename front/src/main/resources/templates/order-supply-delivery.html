@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Witaj!</title>
+    <link rel="stylesheet" href="/front/src/main/resources/static/css/style.css"/>
+    <link rel="stylesheet" href="/front/src/main/resources/static/css/restock-supply.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/front/src/main/resources/static/js/script.js"></script>
+    <script type="text/javascript" src="/front/src/main/resources/static/js/restock-supply.js"></script>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<div id="header">
+    <img src="/front/src/main/resources/static/images/airplane-logo.png" alt="logo"/>
+    <div id="side-menu">
+        <ol>
+            <li><a href="#">Imie Nazwisko</a>
+                <ul>
+                    <li><a href="#">A</a></li>
+                    <li><a href="#">B</a></li>
+                    <li><a href="#">C</a></li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    <div id="greeting">
+        <p>
+            Zamawianie dostawy zaopatrzenia
+        </p>
+    </div>
+</div>
+<div id="center">
+    <form id="orderSupplies" action="supply-system" method="post">
+        <div id="supplies">
+            <table>
+                <tr>
+                    <th>Id przedmiotu</th>
+                    <th>Nazwa</th>
+                    <th>Ilość na stanie</th>
+                    <th colspan="3">Status</th>
+                </tr>
+                <tr>
+                    <td><input type="hidden" name="itemId" value="1234">1234</td>
+                    <td>Papier toaletowy</td>
+                    <td>300</td>
+                    <td>
+                        <input type="text" name="quantity" placeholder="Ilość">
+                    </td>
+                    <td>
+                        <input type="date" name="date">
+                    </td>
+                    <td>
+                        <button>Zamów dostawę</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="hidden" name="itemId" value="1234">5678</td>
+                    <td>Długopisy</td>
+                    <td>70</td>
+                    <td>
+                        <input type="text" name="quantity" placeholder="Ilość">
+                    </td>
+                    <td>
+                        <input type="date" name="date">
+                    </td>
+                    <td>
+                        <button>Zamów dostawę</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <div id="themeInformation">
+        <p>Wiadomości</p>
+    </div>
+</div>
+</body>
+</html>
