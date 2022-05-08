@@ -1,0 +1,15 @@
+table {
+    border-collapse: collapse;
+    margin: 2rem auto;
+}
+
+table, th, td {
+    border: black solid;
+    padding: 0.5rem;
+}
+
+input {
+    margin-top: 20%;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+}
