@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Witaj!</title>
+    <link rel="stylesheet" href="/front/src/main/resources/static/css/style.css"/>
+    <link rel="stylesheet" href="/front/src/main/resources/static/css/service-form.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/front/src/main/resources/static/js/script.js"></script>
+    <script type="text/javascript" src="/front/src/main/resources/static/js/service-form.js"></script>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<div id="header">
+    <img src="/front/src/main/resources/static/images/airplane-logo.png" alt="logo"/>
+    <div id="side-menu">
+        <ol>
+            <li><a href="#">Imie Nazwisko</a>
+                <ul>
+                    <li><a href="#">A</a></li>
+                    <li><a href="#">B</a></li>
+                    <li><a href="#">C</a></li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    <div id="greeting">
+        <p>
+            Zgłaszanie problemu ze sprzętem
+        </p>
+    </div>
+</div>
+<div id="center">
+    <form id="reportMalfunction" action="report-service" method="post">
+        <div id="report">
+            <textarea rows="7" name="Message" placeholder="Opisz problem"></textarea>
+            <br>
+            <input type="text" name="ItemId" placeholder="Podaj ID sprzętu">
+            <br>
+            <button type="submit">Wyślij zgłoszenie</button>
+        </div>
+    </form>
+    <div id="themeInformation">
+        <p>Wiadomości</p>
+    </div>
+</div>
+</body>
+</html>

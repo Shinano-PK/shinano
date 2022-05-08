@@ -1,0 +1,1 @@
+//TODO obsługa buttonów do zgłaszania problemów ze sprzętem
