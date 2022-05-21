@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Witaj!</title>
+    <link rel="stylesheet" href="/front/src/main/resources/static/css/style.css"/>
+    <link rel="stylesheet" href="/front/src/main/resources/static/css/restock-supply.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/front/src/main/resources/static/js/script.js"></script>
+    <script type="text/javascript" src="/front/src/main/resources/static/js/user-management.js"></script>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<div id="header">
+    <img src="/front/src/main/resources/static/images/airplane-logo.png" alt="logo"/>
+    <div id="side-menu">
+        <ol>
+            <li><a href="#">Imie Nazwisko</a>
+                <ul>
+                    <li><a href="#">A</a></li>
+                    <li><a href="#">B</a></li>
+                    <li><a href="#">C</a></li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    <div id="greeting">
+        <p>
+            Zarządzanie użytkownikami
+        </p>
+    </div>
+</div>
+<div id="center">
+    <form id="manageSupplies" action="users-system" method="post">
+        <div id="supplies">
+            <table>
+                <tr>
+                    <th>E-mail</th>
+                    <th>Imię i nazwisko</th>
+                    <th>Rola</th>
+                    <th colspan="2"></th>
+                </tr>
+                <tr>
+                    <td><input type="hidden" name="itemId" value="1234">jan.kowalski@airport.com</td>
+                    <td>Jan Kowalski</td>
+                    <td>Administrator</td>
+                    <td>
+                        <button>Zablokuj</button>
+                    </td>
+                    <td>
+                        <button>Usuń</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="hidden" name="itemId" value="1234">grazyna.miller@airport.com</td>
+                    <td>Grażyna Miller</td>
+                    <td>Stewardessa</td>
+                    <td>
+                        <button>Zablokuj</button>
+                    </td>
+                    <td>
+                        <button>Usuń</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+    <div id="themeInformation">
+        <p>Wiadomości</p>
+    </div>
+</div>
+</body>
+</html>
