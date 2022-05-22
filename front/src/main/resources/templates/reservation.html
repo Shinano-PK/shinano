@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Witaj!</title>
+    <link rel="stylesheet" href="/front/src/main/resources/static/css/style.css"/>
+    <link rel="stylesheet" href="/front/src/main/resources/static/css/reservation.css"/>
+    <script type="text/javascript" src="/front/src/main/resources/static/js/script.js"></script>
+    <script type="text/javascript" src="/front/src/main/resources/static/js/reservation.js"></script>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<div id="header">
+    <img src="/front/src/main/resources/static/images/airplane-logo.png" alt="logo"/>
+    <div id="side-menu">
+        <ol>
+            <li><a href="#">Imie Nazwisko</a>
+                <ul>
+                    <li><a href="#">A</a></li>
+                    <li><a href="#">B</a></li>
+                    <li><a href="#">C</a></li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+    <div id="greeting">
+        <p>
+            Rezerwacja i zakup biletów
+        </p>
+    </div>
+</div>
+<div id="center">
+
+    <div id="search">
+        <form autocomplete="off" action="tickets">
+            <div class="autocomplete" style="width:300px;">
+                <input id="fromWhere" type="text" name="myCountry" placeholder="Skąd?">
+                <input id="toWhere" type="text" name="myCountry" placeholder="Dokąd?">
+            </div>
+            <br>
+            <input type="date" name="date">
+            <br>
+            <label for="adults">Dorośli:</label>
+            <select name="adults" id="adults">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+            <label for="kids">Dzieci:</label>
+            <select name="kids" id="kids">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+            </select>
+            <br>
+            <input type="submit" value="Wyszukaj">
+        </form>
+    </div>
+    <div id="step1">
+        <form>
+            <table>
+                <tr>
+                    <th>Przewoźnik</th>
+                    <th>Odlot</th>
+                    <th>Przylot</th>
+                    <th>Numer lotu</th>
+                    <th colspan="2">Cena</th>
+                </tr>
+                <tr>
+                    <td>Ryanair</td>
+                    <td>12:45</td>
+                    <td>14:50</td>
+                    <td>FR9020</td>
+                    <td>499,99 zł</td>
+                    <td>
+                        <input type="submit" value="Wybierz">
+                    </td>
+                </tr>
+                <tr>
+                    <td>LOT</td>
+                    <td>15:35</td>
+                    <td>18:00</td>
+                    <td>AT8020</td>
+                    <td>479,99 zł</td>
+                    <td>
+                        <input type="submit" value="Wybierz">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <div id="step2">
+        <form>
+            <div>
+                <p>Pasażer 1:</p>
+                <input name="name1" type="text" placeholder="Imię">
+                <input name="surname1" type="text" placeholder="Nazwisko">
+                <label>Data urodzenia:</label>
+                <input name="birthdate1" type="date">
+            </div>
+            <input type="submit" value="Dalej">
+        </form>
+    </div>
+    <div id="step3">
+        <form>
+            <p>Dane zamawiającego:</p>
+            <input name="buyerName" type="text" placeholder="Imię">
+            <input name="buyerSurname" type="text" placeholder="Nazwisko">
+            <br>
+            <input name="buyerCity" type="text" placeholder="Miasto">
+            <input name="buyerStreet" type="text" placeholder="Ulica">
+            <input name="buyerHouseNumber" type="text" placeholder="Numer budynku i lokalu">
+            <br>
+            <p>Rodzaj zamówienia:</p>
+            <input type="radio" id="reservation" name="orderType" value="reservation">
+            <label for="reservation">Rezerwacja</label><br>
+            <input type="radio" id="purchase" name="orderType" value="purchase">
+            <label for="purchase">Zakup</label><br>
+            <input type="submit" value="Dalej">
+        </form>
+    </div>
+    <div id="step4">
+        <p>Forma płatności:</p>
+        <input type="radio" id="transfer" name="payment" value="transfer">
+        <label for="transfer">Przelew</label><br>
+        <input type="radio" id="card" name="payment" value="card">
+        <label for="card">Karta płatnicza</label><br>
+        <input type="radio" id="blik" name="payment" value="blik">
+        <label for="blik">BLIK</label>
+        <br>
+        <input type="submit" value="Zapłać">
+    </div>
+    <div id="themeInformation">
+        <p>Wiadomości</p>
+    </div>
+</div>
+
+<script>
+    var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre &amp; Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts &amp; Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad &amp; Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks &amp; Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
+    autocomplete(document.getElementById("fromWhere"), countries);
+    autocomplete(document.getElementById("toWhere"), countries);
+</script>
+</body>
+</html>
