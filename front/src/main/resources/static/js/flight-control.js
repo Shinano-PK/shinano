@@ -1,15 +1,42 @@
 $(document).ready(function () {
-
     $("#manageFlights").submit(function (event) {
-        event.preventDefault();
-        console.log("clicked");
-        let form = document.getElementById("manageFlights");
+        var valuesFlightNumber = $.map($(".flightNumber"), function (elem) {
+            return $(elem).val();
+        });
+        var valuesLane = $.map($(".lane"), function (elem) {
+            return $(elem).val();
+        });
+        var valuesPermission = $.map($(".permission"), function (elem) {
+            return $(elem).val();
+        });
 
-        //TODO przygotować backend do przydzielania pasów
-        $.post(
-            "endpoint",
-            $(this).serializeArray()
-        );
+        var formData = [];
+        var flight = {};
+
+        for (let i = 0; i < valuesFlightNumber.length; i++) {
+            flight = {
+                flightNumber: valuesFlightNumber[i],
+                lane: valuesLane[i],
+                permission: valuesPermission[i]
+            };
+            formData.push(flight);
+            console.log(formData);
+        }
+
+        formData = JSON.stringify(Object.assign({}, formData));
+
+
+        $.ajax({
+            type: "POST",
+            url: "/flightManager",
+            data: formData,
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            console.log(data);
+        });
+
+        event.preventDefault();
 
     });
 });

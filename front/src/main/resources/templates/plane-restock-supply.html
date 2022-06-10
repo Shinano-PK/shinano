@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/front/src/main/resources/static/css/restock-supply.css"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script type="text/javascript" src="/front/src/main/resources/static/js/script.js"></script>
-  <script type="text/javascript" src="/front/src/main/resources/static/js/restock-supply.js"></script>
+  <script type="text/javascript" src="/front/src/main/resources/static/js/plane-restock-supply.js"></script>
   <meta charset="UTF-8"/>
 </head>
 <body>
@@ -31,27 +31,30 @@
   </div>
 </div>
 <div id="center">
-  <form id="manageSupplies" action="supply-system" method="post">
+  <form id="managePlaneSupplies">
     <div id="supplies">
       <table>
         <tr>
           <th>Id przedmiotu</th>
           <th>Nazwa</th>
           <th>Ilość na stanie</th>
+          <th>Zapotrzebowanie</th>
           <th>Status</th>
         </tr>
         <tr>
-          <td><input type="hidden" name="itemId" value="1234">1234</td>
+          <td><input class="itemId" type="hidden" name="itemId" value="1234">1234</td>
           <td>Papier toaletowy</td>
           <td>300</td>
+          <td><input class="quantity" type="text" name="quantity"></td>
           <td>
             <button>Wnioskuj o uzupełnienie</button>
           </td>
         </tr>
         <tr>
-          <td><input type="hidden" name="itemId" value="1234">5678</td>
+          <td><input class="itemId" type="hidden" name="itemId" value="1234">5678</td>
           <td>Długopisy</td>
           <td>70</td>
+          <td><input class="quantity" type="text" name="quantity"></td>
           <td>
             <button>Wnioskuj o uzupełnienie</button>
           </td>

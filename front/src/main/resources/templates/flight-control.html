@@ -31,7 +31,7 @@
     </div>
 </div>
 <div id="center">
-    <form id="manageFlights" action="flight-control" method="post">
+    <form id="manageFlights">
         <div id="arrivals">
             <table>
                 <tr>
@@ -45,11 +45,11 @@
                     <th>Zgoda</th>
                 </tr>
                 <tr>
-                    <td><input type="hidden" name="flightNumber" value="JP2137">JP2137</td>
+                    <td><input class="flightNumber" type="hidden" name="flightNumber" value="JP2137">JP2137</td>
                     <td>21:37</td>
                     <td>Oczekiwanie na zgodę</td>
                     <td>
-                        <select name="lane">
+                        <select class="lane" name="lane">
                             <option value="" selected>---</option>
                             <option value="A1">A1</option>
                             <option value="A1">A2</option>
@@ -58,18 +58,18 @@
                         </select>
                     </td>
                     <td>
-                        <select name="permission">
+                        <select class="permission" name="permission">
                             <option value="" selected>Brak</option>
                             <option value="approve">Udzielona</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td><input type="hidden" name="flightNumber" value="XD1234">XD1234</td>
+                    <td><input class="flightNumber" type="hidden" name="flightNumber" value="XD1234">XD1234</td>
                     <td>20:30</td>
                     <td>Podejście do lądowania</td>
                     <td>
-                        <select name="lane">
+                        <select class="lane" name="lane">
                             <option value="" selected>---</option>
                             <option value="A1">A1</option>
                             <option value="A1">A2</option>
@@ -78,7 +78,7 @@
                         </select>
                     </td>
                     <td>
-                        <select name="permission">
+                        <select class="permission" name="permission">
                             <option value="" selected>Brak</option>
                             <option value="approve">Udzielona</option>
                         </select>
@@ -99,11 +99,11 @@
                     <th>Zgoda</th>
                 </tr>
                 <tr>
-                    <td><input type="hidden" name="flightNumber" value="MA3344">MA3344</td>
+                    <td><input class="flightNumber" type="hidden" name="flightNumber" value="MA3344">MA3344</td>
                     <td>00:19</td>
                     <td>Oczekiwanie na zgodę</td>
                     <td>
-                        <select name="lane">
+                        <select class="lane" name="lane">
                             <option value="" selected>---</option>
                             <option value="A1">A1</option>
                             <option value="A1">A2</option>
@@ -112,7 +112,7 @@
                         </select>
                     </td>
                     <td>
-                        <select name="permission">
+                        <select class="permission" name="permission">
                             <option value="" selected>Brak</option>
                             <option value="approve">Udzielona</option>
                         </select>

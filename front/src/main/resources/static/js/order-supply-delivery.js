@@ -1,9 +1,12 @@
 $(document).ready(function () {
-    $("#manageSupplies").submit(function (event) {
+    $("#orderSupplies").submit(function (event) {
         var valuesItemId = $.map($(".itemId"), function (elem) {
             return $(elem).val();
         });
         var valuesQuantity = $.map($(".quantity"), function (elem) {
+            return $(elem).val();
+        });
+        var valuesDate = $.map($(".date"), function (elem) {
             return $(elem).val();
         });
 
@@ -14,6 +17,7 @@ $(document).ready(function () {
             item = {
                 itemId: valuesItemId[i],
                 quantity: valuesQuantity[i],
+                date: valuesDate[i]
             };
             formData.push(item);
             console.log(formData);
@@ -24,7 +28,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/manageSupplies",
+            url: "/orderSupplies",
             data: formData,
             dataType: "json",
             encode: true,

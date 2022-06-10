@@ -31,7 +31,7 @@
   </div>
 </div>
 <div id="center">
-  <form id="manageLuggage" action="luggage-system" method="post">
+  <form id="manageLuggage">
     <div id="arrivals">
       <table>
         <tr>
@@ -45,11 +45,11 @@
           <th>Nr stanowiska odbioru bagaży</th>
         </tr>
         <tr>
-          <td><input type="hidden" name="flightNumber" value="JP2137">JP2137</td>
+          <td><input class="flightNumber" type="hidden" name="flightNumber" value="JP2137">JP2137</td>
           <td>21:37</td>
           <td>Oczekiwanie na rozładunek</td>
           <td>
-            <select name="parkingSlot">
+            <select class="parkingSlot" name="parkingSlot">
               <option value="" selected>---</option>
               <option value="P20">P20</option>
               <option value="P21">P21</option>
@@ -58,7 +58,7 @@
             </select>
           </td>
           <td>
-            <select name="collectSlot">
+            <select class="collectSlot" name="collectSlot">
               <option value="" selected>---</option>
               <option value="F11">F11</option>
               <option value="F12">F12</option>
@@ -105,11 +105,11 @@
           <th>Nr stanowiska samolotu</th>
         </tr>
         <tr>
-          <td><input type="hidden" name="flightNumber" value="MA3344">MA3344</td>
+          <td><input class="flightNumber" type="hidden" name="flightNumber" value="MA3344">MA3344</td>
           <td>00:19</td>
           <td>Oczekiwanie na załadunek</td>
           <td>
-            <select name="dropOffSlot">
+            <select class="dropOffSlot" name="dropOffSlot">
               <option value="" selected>---</option>
               <option value="T1">T1</option>
               <option value="T2">T2</option>
@@ -118,7 +118,7 @@
             </select>
           </td>
           <td>
-            <select name="parkingSlot">
+            <select class="parkingSlot" name="parkingSlot">
               <option value="" selected>---</option>
               <option value="P20">P20</option>
               <option value="P21">P21</option>

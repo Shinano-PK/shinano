@@ -31,11 +31,11 @@
     </div>
 </div>
 <div id="center">
-    <form id="reportMalfunction" action="report-service" method="post">
+    <form id="reportMalfunction">
         <div id="report">
-            <textarea rows="7" name="Message" placeholder="Opisz problem"></textarea>
+            <textarea id="message" rows="7" name="Message" placeholder="Opisz problem"></textarea>
             <br>
-            <input type="text" name="ItemId" placeholder="Podaj ID sprzętu">
+            <input id="itemId" type="text" name="ItemId" placeholder="Podaj ID sprzętu">
             <br>
             <button type="submit">Wyślij zgłoszenie</button>
         </div>

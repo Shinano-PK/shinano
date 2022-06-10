@@ -1,21 +1,21 @@
 $(document).ready(function () {
-    $("#manageUsers").submit(function (event) {
-        var valuesUserId = $.map($(".userId"), function (elem) {
+    $("#managePlaneSupplies").submit(function (event) {
+        var valuesItemId = $.map($(".itemId"), function (elem) {
             return $(elem).val();
         });
-        var valuesAction = $.map($(".action"), function (elem) {
+        var valuesQuantity = $.map($(".quantity"), function (elem) {
             return $(elem).val();
         });
 
         var formData = [];
-        var user = {};
+        var item = {};
 
-        for (let i = 0; i < valuesUserId.length; i++) {
-            user = {
-                itemId: valuesUserId[i],
-                quantity: valuesAction[i]
+        for (let i = 0; i < valuesItemId.length; i++) {
+            item = {
+                itemId: valuesItemId[i],
+                quantity: valuesQuantity[i],
             };
-            formData.push(user);
+            formData.push(item);
             console.log(formData);
         }
 
@@ -24,7 +24,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/manageUsers",
+            url: "/managePlaneSupplies",
             data: formData,
             dataType: "json",
             encode: true,
