@@ -1,7 +1,5 @@
 package com.pk.logistics.repository;
 
-import com.pk.logistics.models.Storage;
-import com.pk.logistics.models.StorageRequest;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collections;
@@ -12,6 +10,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import com.pk.logistics.model.Storage;
+import com.pk.logistics.model.StorageRequest;
 
 @Repository
 @Slf4j

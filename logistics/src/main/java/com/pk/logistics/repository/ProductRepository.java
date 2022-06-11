@@ -2,8 +2,8 @@ package com.pk.logistics.repository;
 
 import java.util.List;
 
-import com.pk.logistics.models.Product;
-import com.pk.logistics.models.ProductRequest;
+import com.pk.logistics.model.Product;
+import com.pk.logistics.model.ProductRequest;
 
 public interface ProductRepository {
 

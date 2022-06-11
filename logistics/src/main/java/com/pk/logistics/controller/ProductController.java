@@ -1,8 +1,8 @@
-package com.pk.logistics.controllers;
+package com.pk.logistics.controller;
 
-import com.pk.logistics.models.Product;
-import com.pk.logistics.models.ProductRequest;
-import com.pk.logistics.services.ProductService;
+import com.pk.logistics.model.Product;
+import com.pk.logistics.model.ProductRequest;
+import com.pk.logistics.service.ProductService;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 import lombok.AllArgsConstructor;

@@ -1,12 +1,15 @@
-package com.pk.logistics.models;
+package com.pk.logistics.model;
 
 import javax.validation.constraints.NotNull;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Value
+@Data
+@AllArgsConstructor
 public class RestockSupply {
   @NotNull Integer id;
   @NotNull String name;
   @NotNull String description;
   @NotNull Integer amount;
+  @NotNull Integer request;
 }

@@ -1,4 +1,4 @@
-package com.pk.logistics.models;
+package com.pk.logistics.model;
 
 import javax.validation.constraints.NotNull;
 import lombok.Value;

@@ -3,8 +3,8 @@ package com.pk.logistics;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import com.pk.logistics.models.Storage;
-import com.pk.logistics.models.StorageRequest;
+import com.pk.logistics.model.Storage;
+import com.pk.logistics.model.StorageRequest;
 import com.pk.logistics.repository.StoragePersistent;
 import com.pk.logistics.repository.StorageRepository;
 import javax.sql.DataSource;

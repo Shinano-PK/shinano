@@ -1,8 +1,8 @@
-package com.pk.logistics.controllers;
+package com.pk.logistics.controller;
 
-import com.pk.logistics.models.Storage;
-import com.pk.logistics.models.StorageRequest;
-import com.pk.logistics.services.StorageService;
+import com.pk.logistics.model.Resource;
+import com.pk.logistics.model.ResourceRequest;
+import com.pk.logistics.service.ResourceService;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 import lombok.AllArgsConstructor;
@@ -18,30 +18,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @Slf4j
-public class StorageController {
+public class ResourceController {
 
-  private StorageService storageService;
+  private ResourceService resourceService;
 
-  @GetMapping("/storage")
-  public Storage getProduct(Integer id) {
-    return storageService.getStorageById(id);
+  @GetMapping("/resource")
+  public Resource getResource(Integer id) {
+    return resourceService.getResourceById(id);
   }
 
-  @PostMapping("/storage")
-  public Integer saveProduct(@Valid StorageRequest input, BindingResult bindingResult) {
+  @PostMapping("/resource")
+  public Integer saveResource(@Valid ResourceRequest input, BindingResult bindingResult) {
     validateInput(bindingResult);
-    return storageService.saveStorage(input);
+    return resourceService.saveResource(input);
   }
 
-  @PutMapping("/storage")
-  public Boolean updateProduct(@Valid Storage input, BindingResult bindingResult) {
+  @PutMapping("/resource")
+  public Boolean updateResource(@Valid Resource input, BindingResult bindingResult) {
     validateInput(bindingResult);
-    return storageService.updateStorage(input);
+    return resourceService.updateResource(input);
   }
 
-  @DeleteMapping("/storage")
-  public Boolean deleteProduct(Integer id) {
-    return storageService.deleteStorage(id);
+  @DeleteMapping("/resource")
+  public Boolean deleteResource(Integer id) {
+    return resourceService.deleteResource(id);
   }
 
   private void validateInput(BindingResult bindingResult) {

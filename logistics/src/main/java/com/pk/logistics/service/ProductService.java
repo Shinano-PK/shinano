@@ -1,7 +1,7 @@
-package com.pk.logistics.services;
+package com.pk.logistics.service;
 
-import com.pk.logistics.models.Product;
-import com.pk.logistics.models.ProductRequest;
+import com.pk.logistics.model.Product;
+import com.pk.logistics.model.ProductRequest;
 import com.pk.logistics.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

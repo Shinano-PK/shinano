@@ -1,7 +1,7 @@
 package com.pk.logistics.repository;
 
-import com.pk.logistics.models.Product;
-import com.pk.logistics.models.ProductRequest;
+import com.pk.logistics.model.Product;
+import com.pk.logistics.model.ProductRequest;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collections;

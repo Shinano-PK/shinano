@@ -2,8 +2,8 @@ package com.pk.logistics.repository;
 
 import java.util.List;
 
-import com.pk.logistics.models.Storage;
-import com.pk.logistics.models.StorageRequest;
+import com.pk.logistics.model.Storage;
+import com.pk.logistics.model.StorageRequest;
 
 public interface StorageRepository {
 
