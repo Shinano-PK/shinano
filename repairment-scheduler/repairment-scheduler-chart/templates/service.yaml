@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ include "repairment-scheduler-chart.name" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "repairment-scheduler-chart.name" . }}
+    app: {{ include "repairment-scheduler-chart.name" . }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.http.port }}
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ include "repairment-scheduler-chart.name" . }}
