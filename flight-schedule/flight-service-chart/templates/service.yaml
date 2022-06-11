@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ include "flight-schedule-chart.name" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "flight-schedule-chart.name" . }}
+    app: {{ include "flight-schedule-chart.name" . }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.http.port }}
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ include "flight-schedule-chart.name" . }}
