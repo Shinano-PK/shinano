@@ -10,6 +10,8 @@ public interface FlightScheduleRepository {
 
   FlightSchedule get(Integer id);
 
+  List<FlightSchedule> getAll();
+
   List<FlightSchedule> getPeriod(Date start, Date end);
 
   Integer save(FlightScheduleInput input);

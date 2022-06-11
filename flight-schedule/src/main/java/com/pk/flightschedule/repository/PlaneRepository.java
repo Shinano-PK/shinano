@@ -1,13 +1,15 @@
 package com.pk.flightschedule.repository;
 
 import com.pk.flightschedule.models.Plane;
-import com.pk.flightschedule.models.PlaneInput;
+import java.util.List;
 
 public interface PlaneRepository {
 
   Plane get(String id);
 
-  Integer save(PlaneInput input);
+  List<Plane> getAll();
+
+  String save(Plane input);
 
   Boolean update(Plane input);
 

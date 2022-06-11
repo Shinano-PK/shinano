@@ -1,7 +1,6 @@
 package com.pk.flightschedule.services;
 
 import com.pk.flightschedule.models.Plane;
-import com.pk.flightschedule.models.PlaneInput;
 import com.pk.flightschedule.repository.PlaneRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ public class PlaneService {
     return planeRepository.update(input);
   }
 
-  public Integer savePlane(PlaneInput input) {
+  public String savePlane(Plane input) {
     return planeRepository.save(input);
   }
 

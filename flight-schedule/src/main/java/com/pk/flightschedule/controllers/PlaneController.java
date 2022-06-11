@@ -1,7 +1,6 @@
 package com.pk.flightschedule.controllers;
 
 import com.pk.flightschedule.models.Plane;
-import com.pk.flightschedule.models.PlaneInput;
 import com.pk.flightschedule.services.PlaneService;
 import javax.validation.Valid;
 import javax.validation.ValidationException;
@@ -32,7 +31,7 @@ public class PlaneController {
   }
 
   @PostMapping("/plane")
-  public Integer saveController(@Valid PlaneInput input, BindingResult bindingResult) {
+  public String saveController(@Valid Plane input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return planeService.savePlane(input);
   }

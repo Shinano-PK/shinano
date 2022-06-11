@@ -1,14 +1,13 @@
 package com.pk.flightschedule.repository;
 
 import com.pk.flightschedule.models.Plane;
-import com.pk.flightschedule.models.PlaneInput;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.util.Collections;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,6 +15,24 @@ import org.springframework.stereotype.Repository;
 @AllArgsConstructor
 public class PlanePersistent implements PlaneRepository {
   private JdbcTemplate jdbcTemplate;
+
+  @Override
+  public List<Plane> getAll() {
+    try {
+      return jdbcTemplate.query(
+          "SELECT * FROM PLANE",
+          (rs, rowNum) ->
+              new Plane(
+                  rs.getString("ID_PLANE"),
+                  rs.getInt("FIRST_CLASS_CAPACITY"),
+                  rs.getInt("SECOND_CLASS_CAPACITY"),
+                  rs.getInt("CARRYING_CAPACITY"),
+                  rs.getString("OWNER")));
+    } catch (Exception e) {
+      log.warn("Got exception: ", e);
+      return Collections.emptyList();
+    }
+  }
 
   @Override
   public Plane get(String id) {
@@ -39,31 +56,26 @@ public class PlanePersistent implements PlaneRepository {
   }
 
   @Override
-  public Integer save(PlaneInput input) {
+  public String save(Plane input) {
     try {
-      KeyHolder keyHolder = new GeneratedKeyHolder();
       jdbcTemplate.update(
           connection -> {
             PreparedStatement ps =
                 connection.prepareStatement(
-                    "INSERT INTO PLANE (FIRST_CLASS_CAPACITY, SECOND_CLASS_CAPACITY,"
-                        + " CARRYING_CAPACITY, OWNER) VALUES (?, ?, ?, ?)",
+                    "INSERT INTO PLANE (ID_PLANE, FIRST_CLASS_CAPACITY, SECOND_CLASS_CAPACITY,"
+                        + " CARRYING_CAPACITY, OWNER) VALUES (?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, input.getFirstClassCapacity());
-            ps.setInt(2, input.getSecondClassCapacity());
-            ps.setInt(3, input.getCarryingCapacity());
-            ps.setString(4, input.getOwner());
+            ps.setString(1, input.getId());
+            ps.setInt(2, input.getFirstClassCapacity());
+            ps.setInt(3, input.getSecondClassCapacity());
+            ps.setInt(4, input.getCarryingCapacity());
+            ps.setString(5, input.getOwner());
             return ps;
-          },
-          keyHolder);
-      if (keyHolder.getKeys().size() > 1) {
-        return (Integer) keyHolder.getKeys().get("ID_PLANE");
-      } else {
-        return keyHolder.getKey().intValue();
-      }
+          });
+          return input.getId();
     } catch (Exception e) {
       log.warn("Exception: " + e.getMessage());
-      return 0;
+      return null;
     }
   }
 

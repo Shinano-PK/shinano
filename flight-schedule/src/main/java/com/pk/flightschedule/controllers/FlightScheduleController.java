@@ -1,15 +1,14 @@
 package com.pk.flightschedule.controllers;
 
-import java.util.List;
-
-import javax.validation.Valid;
-import javax.validation.ValidationException;
-
 import com.pk.flightschedule.models.FlightSchedule;
 import com.pk.flightschedule.models.FlightScheduleInput;
 import com.pk.flightschedule.models.FlightScheduleRequest;
 import com.pk.flightschedule.services.FlightScheduleService;
-
+import java.util.List;
+import javax.validation.Valid;
+import javax.validation.ValidationException;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,9 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
@@ -39,8 +35,8 @@ public class FlightScheduleController {
   }
 
   @GetMapping("/flightSchedulePeriod")
-  public List<FlightSchedule> getFlightSchedulePeriod(@Valid FlightScheduleRequest request,
-      BindingResult bindingResult) {
+  public List<FlightSchedule> getFlightSchedulePeriod(
+      @Valid FlightScheduleRequest request, BindingResult bindingResult) {
     validateInput(bindingResult);
     return flightScheduleService.getFlightScheduleForDates(request);
   }

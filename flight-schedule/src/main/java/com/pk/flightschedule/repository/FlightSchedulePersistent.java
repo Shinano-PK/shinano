@@ -1,21 +1,18 @@
 package com.pk.flightschedule.repository;
 
+import com.pk.flightschedule.models.FlightSchedule;
+import com.pk.flightschedule.models.FlightScheduleInput;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collections;
 import java.util.List;
-
-import com.pk.flightschedule.models.FlightSchedule;
-import com.pk.flightschedule.models.FlightScheduleInput;
-
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Repository
 @Slf4j
@@ -26,23 +23,49 @@ public class FlightSchedulePersistent implements FlightScheduleRepository {
   @Override
   public FlightSchedule get(Integer id) {
     try {
-      return jdbcTemplate.query(
-          "SELECT * FROM FLIGHT_SCHEDULE WHERE ID_FLIGHT_SCHEDULE = ?",
-          (rs, rowNum) -> new FlightSchedule(
-              rs.getInt("ID_FLIGHT_SCHEDULE"),
-              rs.getInt("START_WEEKDAY"),
-              rs.getInt("END_WEEKDAY"),
-              rs.getTime("START_TIME"),
-              rs.getTime("END_TIME"),
-              rs.getDate("SCHEDULE_START_DATE"),
-              rs.getDate("SCHEDULE_END_DATE"),
-              rs.getString("DESTINATION"),
-              rs.getString("FROM"),
-              rs.getString("KIND")),
-          id).get(0);
+      return jdbcTemplate
+          .query(
+              "SELECT * FROM FLIGHT_SCHEDULE WHERE ID_FLIGHT_SCHEDULE = ?",
+              (rs, rowNum) ->
+                  new FlightSchedule(
+                      rs.getInt("ID_FLIGHT_SCHEDULE"),
+                      rs.getInt("START_WEEKDAY"),
+                      rs.getInt("END_WEEKDAY"),
+                      rs.getTime("START_TIME"),
+                      rs.getTime("END_TIME"),
+                      rs.getDate("SCHEDULE_START_DATE"),
+                      rs.getDate("SCHEDULE_END_DATE"),
+                      rs.getString("DESTINATION"),
+                      rs.getString("FROM"),
+                      rs.getString("KIND")),
+              id)
+          .get(0);
     } catch (Exception e) {
       log.warn("Got exception: ", e);
       return null;
+    }
+  }
+
+  @Override
+  public List<FlightSchedule> getAll() {
+    try {
+      return jdbcTemplate.query(
+          "SELECT * FROM FLIGHT_SCHEDULE",
+          (rs, rowNum) ->
+              new FlightSchedule(
+                  rs.getInt("ID_FLIGHT_SCHEDULE"),
+                  rs.getInt("START_WEEKDAY"),
+                  rs.getInt("END_WEEKDAY"),
+                  rs.getTime("START_TIME"),
+                  rs.getTime("END_TIME"),
+                  rs.getDate("SCHEDULE_START_DATE"),
+                  rs.getDate("SCHEDULE_END_DATE"),
+                  rs.getString("DESTINATION"),
+                  rs.getString("FROM"),
+                  rs.getString("KIND")));
+    } catch (Exception e) {
+      log.warn("Got exception: ", e);
+      return Collections.emptyList();
     }
   }
 
@@ -52,17 +75,18 @@ public class FlightSchedulePersistent implements FlightScheduleRepository {
       return jdbcTemplate.query(
           "SELECT * FROM FLIGHT_SCHEDULE WHERE (SCHEDULE_START_DATE >= ? AND SCHEDULE_END_DATE > ?)"
               + " OR (SCHEDULE_START_DATE < ? AND SCHEDULE_END_DATE <= ?)",
-          (rs, rowNum) -> new FlightSchedule(
-              rs.getInt("ID_FLIGHT_SCHEDULE"),
-              rs.getInt("START_WEEKDAY"),
-              rs.getInt("END_WEEKDAY"),
-              rs.getTime("START_TIME"),
-              rs.getTime("END_TIME"),
-              rs.getDate("SCHEDULE_START_DATE"),
-              rs.getDate("SCHEDULE_END_DATE"),
-              rs.getString("DESTINATION"),
-              rs.getString("FROM"),
-              rs.getString("KIND")),
+          (rs, rowNum) ->
+              new FlightSchedule(
+                  rs.getInt("ID_FLIGHT_SCHEDULE"),
+                  rs.getInt("START_WEEKDAY"),
+                  rs.getInt("END_WEEKDAY"),
+                  rs.getTime("START_TIME"),
+                  rs.getTime("END_TIME"),
+                  rs.getDate("SCHEDULE_START_DATE"),
+                  rs.getDate("SCHEDULE_END_DATE"),
+                  rs.getString("DESTINATION"),
+                  rs.getString("FROM"),
+                  rs.getString("KIND")),
           start,
           start,
           end,
@@ -79,11 +103,12 @@ public class FlightSchedulePersistent implements FlightScheduleRepository {
       KeyHolder keyHolder = new GeneratedKeyHolder();
       jdbcTemplate.update(
           connection -> {
-            PreparedStatement ps = connection.prepareStatement(
-                "INSERT INTO FLIGHT_SCHEDULE (START_WEEKDAY, END_WEEKDAY, " +
-                    "START_TIME, END_TIME, SCHEDULE_START_DATE, SCHEDULE_END_DATE, DESTINATION, \"FROM\", KIND) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps =
+                connection.prepareStatement(
+                    "INSERT INTO FLIGHT_SCHEDULE (START_WEEKDAY, END_WEEKDAY, START_TIME, END_TIME,"
+                        + " SCHEDULE_START_DATE, SCHEDULE_END_DATE, DESTINATION, \"FROM\", KIND)"
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, input.getStartWeekday());
             ps.setInt(2, input.getEndWeekday());
             ps.setTime(3, input.getStartTime());
@@ -111,19 +136,20 @@ public class FlightSchedulePersistent implements FlightScheduleRepository {
   public Boolean update(FlightSchedule input) {
     try {
       return (jdbcTemplate.update(
-          "UPDATE FLIGHT_SCHEDULE SET START_WEEKDAY = ?,"
-              + " END_WEEKDAY = ?, START_TIME = ?, END_TIME = ?, SCHEDULE_START_DATE = ?,"
-              + " SCHEDULE_END_DATE = ?, DESTINATION = ?, \"FROM\" = ?, KIND = ? WHERE ID_FLIGHT_SCHEDULE = ?",
-          input.getStartWeekday(),
-          input.getEndWeekday(),
-          input.getStartTime(),
-          input.getEndTime(),
-          input.getScheduleStartDate(),
-          input.getScheduleEndDate(),
-          input.getDestination(),
-          input.getFrom(),
-          input.getKind(),
-          input.getId()) > 0);
+              "UPDATE FLIGHT_SCHEDULE SET START_WEEKDAY = ?, END_WEEKDAY = ?, START_TIME = ?,"
+                  + " END_TIME = ?, SCHEDULE_START_DATE = ?, SCHEDULE_END_DATE = ?, DESTINATION ="
+                  + " ?, \"FROM\" = ?, KIND = ? WHERE ID_FLIGHT_SCHEDULE = ?",
+              input.getStartWeekday(),
+              input.getEndWeekday(),
+              input.getStartTime(),
+              input.getEndTime(),
+              input.getScheduleStartDate(),
+              input.getScheduleEndDate(),
+              input.getDestination(),
+              input.getFrom(),
+              input.getKind(),
+              input.getId())
+          > 0);
     } catch (Exception e) {
       log.warn("Exception: " + e.getMessage());
       return false;
@@ -133,7 +159,8 @@ public class FlightSchedulePersistent implements FlightScheduleRepository {
   @Override
   public Boolean delete(Integer id) {
     try {
-      return (jdbcTemplate.update("DELETE FROM FLIGHT_SCHEDULE WHERE ID_FLIGHT_SCHEDULE = ?", id) > 0);
+      return (jdbcTemplate.update("DELETE FROM FLIGHT_SCHEDULE WHERE ID_FLIGHT_SCHEDULE = ?", id)
+          > 0);
     } catch (Exception e) {
       log.warn("Exception: " + e.getMessage());
       return false;
