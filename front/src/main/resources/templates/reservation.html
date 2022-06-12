@@ -79,14 +79,14 @@
                     <th>Numer lotu</th>
                     <th colspan="2">Cena</th>
                 </tr>
-                <tr>
-                    <td>Ryanair</td>
-                    <td>12:45</td>
-                    <td>14:50</td>
-                    <td>FR9020</td>
-                    <td>499,99 zł</td>
+                <tr th:each="{ticket : ${tickets}}">
+                    <td th:text="${ticket.company}"></td>
+                    <td th:text="${ticket.departureTime}"></td>
+                    <td th:text="${ticket.arrivalTime}"></td>
+                    <td th:text="${ticket.flightNumber}"></td>
+                    <td th:text="${ticket.price}"></td>
                     <td>
-                        <button class="offerId" type="submit" name="offerId" th:value="offerId">Wybierz</button>
+                        <button class="offerId" type="submit" name="offerId" th:value="${ticket.id}">Wybierz</button>
                     </td>
                 </tr>
             </table>
@@ -94,8 +94,8 @@
     </div>
     <div id="step2">
         <form id="passengers">
-            <div>
-                <p>Pasażer 1:</p>
+            <div th:each="{passenger : ${passengers}}">
+                <br>
                 <input class="passengerName" name="passengerName" type="text" placeholder="Imię">
                 <input class="passengerSurname" name="passengerSurname" type="text" placeholder="Nazwisko">
                 <label>Data urodzenia:</label>

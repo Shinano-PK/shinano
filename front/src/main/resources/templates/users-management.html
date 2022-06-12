@@ -40,23 +40,10 @@
                     <th>Rola</th>
                     <th>Akcja</th>
                 </tr>
-                <tr>
-                    <td><input class="userId" type="hidden" name="userId" value="1234">jan.kowalski@airport.com</td>
-                    <td>Jan Kowalski</td>
-                    <td>Administrator</td>
-                    <td>
-                        <select class="action" name="action">
-                            <option value="" selected></option>
-                            <option value="ban">Zablokuj</option>
-                            <option value="unban">Odblokuj</option>
-                            <option value="delete">Usuń</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input class="userId" type="hidden" name="userId" value="1234">grazyna.miller@airport.com</td>
-                    <td>Grażyna Miller</td>
-                    <td>Stewardessa</td>
+                <tr th:each="{user : ${users}}">
+                    <td th:text="${user.id}"><input class="userId" type="hidden" name="userId" th:value="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.role}"></td>
                     <td>
                         <select class="action" name="action">
                             <option value="" selected></option>

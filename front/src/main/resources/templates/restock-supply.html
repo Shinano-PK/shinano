@@ -41,19 +41,10 @@
                     <th>Zapotrzebowanie</th>
                     <th>Status</th>
                 </tr>
-                <tr>
-                    <td><input class="itemId" type="hidden" name="itemId" value="1234">1234</td>
-                    <td>Papier toaletowy</td>
-                    <td>300</td>
-                    <td><input class="quantity" type="text" name="quantity"></td>
-                    <td>
-                        <button>Wnioskuj o uzupełnienie</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input class="itemId" type="hidden" name="itemId" value="1234">5678</td>
-                    <td>Długopisy</td>
-                    <td>70</td>
+                <tr th:each="{supply : ${supplies}}">
+                    <td th:text="${supply.id}"><input class="itemId" type="hidden" name="itemId" th:value="${supply.id}"></td>
+                    <td th:text="${supply.name}"></td>
+                    <td th:text="${supply.quantity}"></td>
                     <td><input class="quantity" type="text" name="quantity"></td>
                     <td>
                         <button>Wnioskuj o uzupełnienie</button>

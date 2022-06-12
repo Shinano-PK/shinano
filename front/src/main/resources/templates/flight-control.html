@@ -43,27 +43,13 @@
                     <th>Status</th>
                     <th>Pas</th>
                 </tr>
-                <tr>
-                    <td><input class="flightNumber" type="hidden" name="flightNumber" value="JP2137">JP2137</td>
-                    <td>21:37</td>
-                    <td>Oczekiwanie na zgodę</td>
+                <tr th:each="{flight : ${arrivals}}">
+                    <td th:text="${flight.number}"><input class="flightNumber" type="hidden" name="flightNumber" th:value="${flight.number}"></td>
+                    <td th:text="${flight.time}"></td>
+                    <td th:text="${flight.status}"></td>
                     <td>
                         <select class="lane" name="lane">
-                            <option value="" selected>---</option>
-                            <option value="A1">A1</option>
-                            <option value="A1">A2</option>
-                            <option value="A1">A3</option>
-                            <option value="A1">A4</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input class="flightNumber" type="hidden" name="flightNumber" value="XD1234">XD1234</td>
-                    <td>20:30</td>
-                    <td>Podejście do lądowania</td>
-                    <td>
-                        <select class="lane" name="lane">
-                            <option value="" selected>---</option>
+                            <option th:value="${flight.lane}" th:text="${flight.lane}" selected></option>
                             <option value="A1">A1</option>
                             <option value="A1">A2</option>
                             <option value="A1">A3</option>
@@ -84,27 +70,13 @@
                     <th>Status</th>
                     <th>Pas</th>
                 </tr>
-                <tr>
-                    <td><input class="flightNumber" type="hidden" name="flightNumber" value="MA3344">MA3344</td>
-                    <td>00:19</td>
-                    <td>Oczekiwanie na zgodę</td>
+                <tr th:each="{flight : ${departures}}">
+                    <td th:text="${flight.number}"><input class="flightNumber" type="hidden" name="flightNumber" th:value="${flight.number}"></td>
+                    <td th:text="${flight.time}"></td>
+                    <td th:text="${flight.status}"></td>
                     <td>
                         <select class="lane" name="lane">
-                            <option value="" selected>---</option>
-                            <option value="A1">A1</option>
-                            <option value="A1">A2</option>
-                            <option value="A1">A3</option>
-                            <option value="A1">A4</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><input type="hidden" name="flightNumber" value="LV6789">LV6789</td>
-                    <td>01:20</td>
-                    <td>Wyjazd na pas startowy</td>
-                    <td>
-                        <select name="lane">
-                            <option value="" selected>---</option>
+                            <option th:value="${flight.lane}" th:text="${flight.lane}" selected></option>
                             <option value="A1">A1</option>
                             <option value="A1">A2</option>
                             <option value="A1">A3</option>

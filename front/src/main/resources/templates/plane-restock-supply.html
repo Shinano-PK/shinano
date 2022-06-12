@@ -25,9 +25,7 @@
     </ol>
   </div>
   <div id="greeting">
-    <p>
-      Zaopatrzenie samolotu nr JP2137
-    </p>
+    <p th:text="${plane.id}"></p>
   </div>
 </div>
 <div id="center">
@@ -41,22 +39,13 @@
           <th>Zapotrzebowanie</th>
           <th>Status</th>
         </tr>
-        <tr>
-          <td><input class="itemId" type="hidden" name="itemId" value="1234">1234</td>
-          <td>Papier toaletowy</td>
-          <td>300</td>
+        <tr th:each="{item : ${plane.items}}">
+          <td th:text="${item.id}"><input class="itemId" type="hidden" name="itemId" th:value="${item.id}"></td>
+          <td th:text="${item.name}"></td>
+          <td th:text="${item.quantity}"></td>
           <td><input class="quantity" type="text" name="quantity"></td>
           <td>
-            <button>Wnioskuj o uzupełnienie</button>
-          </td>
-        </tr>
-        <tr>
-          <td><input class="itemId" type="hidden" name="itemId" value="1234">5678</td>
-          <td>Długopisy</td>
-          <td>70</td>
-          <td><input class="quantity" type="text" name="quantity"></td>
-          <td>
-            <button>Wnioskuj o uzupełnienie</button>
+            <button type="submit">Wnioskuj o uzupełnienie</button>
           </td>
         </tr>
       </table>

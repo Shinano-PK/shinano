@@ -40,23 +40,14 @@
                 <th>Imię i nazwisko</th>
                 <th>Miejsce</th>
             </tr>
-            <tr>
-                <td>123456</td>
-                <td>Kraków</td>
-                <td>Ateny</td>
-                <td>25.06.2023</td>
-                <td>13:30</td>
-                <td>Jan Kowalski</td>
-                <td>E31</td>
-            </tr>
-            <tr>
-                <td>123457</td>
-                <td>Kraków</td>
-                <td>Ateny</td>
-                <td>25.06.2023</td>
-                <td>13:30</td>
-                <td>Grażyna Kowalska</td>
-                <td>E32</td>
+            <tr th:each="{ticket : ${tickets}}">
+                <td th:text="${ticket.id}"></td>
+                <td th:text="${ticket.from}"></td>
+                <td th:text="${ticket.destination}"></td>
+                <td th:text="${ticket.departureDate}"></td>
+                <td th:text="${ticket.departureTime}"></td>
+                <td th:text="${ticket.passenger}"></td>
+                <td th:text="${ticket.seat}"></td>
             </tr>
         </table>
     </div>

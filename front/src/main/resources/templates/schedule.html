@@ -40,18 +40,13 @@
         <th>Godzina</th>
         <th>Status</th>
       </tr>
-      <tr>
-        <td>JP2137</td>
-        <td>Rzym</td>
-        <td>21:37</td>
-        <td>Planowy</td>
+      <tr th:each="flight : ${arrivals}">
+        <td th:text="${flight.number}"></td>
+        <td th:text="${flight.from}"></td>
+        <td th:text="${flight.time}"></td>
+        <td th:text="${flight.status}"></td>
       </tr>
-      <tr>
-        <td>XD1234</td>
-        <td>Majorka</td>
-        <td>23:40</td>
-        <td>Opóźniony</td>
-      </tr>
+
     </table>
   </div>
   <div id="departures">
@@ -65,17 +60,11 @@
         <th>Godzina</th>
         <th>Status</th>
       </tr>
-      <tr>
-        <td>MA3344</td>
-        <td>Madagaskar</td>
-        <td>00:19</td>
-        <td>Boarding</td>
-      </tr>
-      <tr>
-        <td>LV6789</td>
-        <td>Las Vegas</td>
-        <td>01:20</td>
-        <td>Odprawa</td>
+      <tr th:each="flight : ${departures}">
+        <td th:text="${flight.number}"></td>
+        <td th:text="${flight.destination}"></td>
+        <td th:text="${flight.time}"></td>
+        <td th:text="${flight.status}"></td>
       </tr>
     </table>
   </div>
