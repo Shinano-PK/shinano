@@ -5,8 +5,10 @@ $(document).ready(function () {
             flightNumber: $("#flightNumber").val(),
             from: $("#from").val(),
             destination: $("#destination").val(),
-            time: $("#time").val(),
-            date: $("#date").val(),
+            startTime: $("#startTime").val(),
+            startDate: $("#startDate").val(),
+            endTime: $("#endTime").val(),
+            endDate: $("#endDate").val(),
             status: $("#status").val()
         };
 
