@@ -101,7 +101,7 @@ class FlightScheduleApplicationTests {
 
   @Test
   void delete() {
-    Integer id = 1;
+    Integer id = 3;
     repository.delete(id);
     assertEquals(null, repository.get(id));
   }
