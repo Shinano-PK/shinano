@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
     <meta charset="UTF-8">
     <title>Witaj!</title>
     <link rel="stylesheet" href="/front/src/main/resources/static/css/style.css"/>
     <link rel="stylesheet" href="/front/src/main/resources/static/css/reservation.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/front/src/main/resources/static/js/script.js"></script>
     <script type="text/javascript" src="/front/src/main/resources/static/js/reservation.js"></script>
     <meta charset="UTF-8"/>
@@ -32,13 +33,13 @@
 <div id="center">
 
     <div id="search">
-        <form autocomplete="off" action="tickets">
+        <form id="searchForm" autocomplete="off">
             <div class="autocomplete" style="width:300px;">
                 <input id="fromWhere" type="text" name="myCountry" placeholder="Skąd?">
                 <input id="toWhere" type="text" name="myCountry" placeholder="Dokąd?">
             </div>
             <br>
-            <input type="date" name="date">
+            <input id="date" type="date" name="date">
             <br>
             <label for="adults">Dorośli:</label>
             <select name="adults" id="adults">
@@ -69,7 +70,7 @@
         </form>
     </div>
     <div id="step1">
-        <form>
+        <form id="chooseTicket">
             <table>
                 <tr>
                     <th>Przewoźnik</th>
@@ -85,62 +86,54 @@
                     <td>FR9020</td>
                     <td>499,99 zł</td>
                     <td>
-                        <input type="submit" value="Wybierz">
-                    </td>
-                </tr>
-                <tr>
-                    <td>LOT</td>
-                    <td>15:35</td>
-                    <td>18:00</td>
-                    <td>AT8020</td>
-                    <td>479,99 zł</td>
-                    <td>
-                        <input type="submit" value="Wybierz">
+                        <button class="offerId" type="submit" name="offerId" th:value="offerId">Wybierz</button>
                     </td>
                 </tr>
             </table>
         </form>
     </div>
     <div id="step2">
-        <form>
+        <form id="passengers">
             <div>
                 <p>Pasażer 1:</p>
-                <input name="name1" type="text" placeholder="Imię">
-                <input name="surname1" type="text" placeholder="Nazwisko">
+                <input class="passengerName" name="passengerName" type="text" placeholder="Imię">
+                <input class="passengerSurname" name="passengerSurname" type="text" placeholder="Nazwisko">
                 <label>Data urodzenia:</label>
-                <input name="birthdate1" type="date">
+                <input class="passengerBirthdate" name="birthdate" type="date">
             </div>
             <input type="submit" value="Dalej">
         </form>
     </div>
     <div id="step3">
-        <form>
+        <form id="orderData">
             <p>Dane zamawiającego:</p>
-            <input name="buyerName" type="text" placeholder="Imię">
-            <input name="buyerSurname" type="text" placeholder="Nazwisko">
+            <input id="buyerName" name="buyerName" type="text" placeholder="Imię">
+            <input id="buyerSurname" name="buyerSurname" type="text" placeholder="Nazwisko">
             <br>
-            <input name="buyerCity" type="text" placeholder="Miasto">
-            <input name="buyerStreet" type="text" placeholder="Ulica">
-            <input name="buyerHouseNumber" type="text" placeholder="Numer budynku i lokalu">
+            <input id="buyerCity" name="buyerCity" type="text" placeholder="Miasto">
+            <input id="buyerStreet" name="buyerStreet" type="text" placeholder="Ulica">
+            <input id="buyerHouseNumber" name="buyerHouseNumber" type="text" placeholder="Numer budynku i lokalu">
             <br>
-            <p>Rodzaj zamówienia:</p>
+            <!---<p>Rodzaj zamówienia:</p>
             <input type="radio" id="reservation" name="orderType" value="reservation">
             <label for="reservation">Rezerwacja</label><br>
             <input type="radio" id="purchase" name="orderType" value="purchase">
-            <label for="purchase">Zakup</label><br>
+            <label for="purchase">Zakup</label><br>--->
             <input type="submit" value="Dalej">
         </form>
     </div>
     <div id="step4">
-        <p>Forma płatności:</p>
-        <input type="radio" id="transfer" name="payment" value="transfer">
-        <label for="transfer">Przelew</label><br>
-        <input type="radio" id="card" name="payment" value="card">
-        <label for="card">Karta płatnicza</label><br>
-        <input type="radio" id="blik" name="payment" value="blik">
-        <label for="blik">BLIK</label>
-        <br>
-        <input type="submit" value="Zapłać">
+        <form id="payment">
+            <p>Forma płatności:</p>
+            <input class="method" type="radio" id="transfer" name="payment" value="transfer">
+            <label for="transfer">Przelew</label><br>
+            <input class="method" type="radio" id="card" name="payment" value="card">
+            <label for="card">Karta płatnicza</label><br>
+            <input class="method" type="radio" id="blik" name="payment" value="blik">
+            <label for="blik">BLIK</label>
+            <br>
+            <input type="submit" value="Zapłać">
+        </form>
     </div>
     <div id="themeInformation">
         <p>Wiadomości</p>

@@ -15,11 +15,10 @@ $(document).ready(function () {
                 flightNumber: valuesFlightNumber[i],
                 lane: valuesLane[i]
             };
-            formData.push(flight);
+            formData[i] = flight;
             console.log(formData);
         }
 
-        formData = JSON.stringify(Object.assign({}, formData));
 
 
         $.ajax({

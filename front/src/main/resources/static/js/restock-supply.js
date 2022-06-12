@@ -7,7 +7,7 @@ $(document).ready(function () {
             return $(elem).val();
         });
 
-        var formData = [];
+        var formData = {};
         var item = {};
 
         for (let i = 0; i < valuesItemId.length; i++) {
@@ -15,11 +15,9 @@ $(document).ready(function () {
                 itemId: valuesItemId[i],
                 quantity: valuesQuantity[i],
             };
-            formData.push(item);
+            formData[i] = item;
             console.log(formData);
         }
-
-        formData = JSON.stringify(Object.assign({}, formData));
 
 
         $.ajax({

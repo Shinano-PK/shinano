@@ -19,11 +19,10 @@ $(document).ready(function () {
                 quantity: valuesQuantity[i],
                 date: valuesDate[i]
             };
-            formData.push(item);
+            formData[i] = item;
             console.log(formData);
         }
 
-        formData = JSON.stringify(Object.assign({}, formData));
 
 
         $.ajax({

@@ -94,3 +94,130 @@ function autocomplete(inp, arr) {
         closeAllLists(e.target);
     });
 }
+
+$(document).ready(function () {
+    $("#searchForm").submit(function (event) {
+
+
+        var formData = {
+            fromWhere: $("#fromWhere").val(),
+            toWhere: $("#toWhere").val(),
+            date: $("#date").val(),
+            adults: $("#adults").val(),
+            kids: $("#kids").val()
+        }
+
+
+        $.ajax({
+            type: "GET",
+            url: "/search",
+            data: formData,
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            console.log(data);
+        });
+
+        event.preventDefault();
+
+    });
+
+    $("#chooseTicket").submit(function (event) {
+
+        var formData = {
+            offerId: $(".offerId").val()
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/chooseTicket",
+            data: formData,
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            console.log(data);
+        });
+
+        event.preventDefault();
+    });
+
+    $("#passengers").submit(function (event) {
+        var valuesPassengerNames = $.map($(".passengerName"), function (elem) {
+            return $(elem).val();
+        });
+        var valuesPassengerSurnames = $.map($(".passengerSurname"), function (elem) {
+            return $(elem).val();
+        });
+        var valuesPassengerBirthdates = $.map($(".passengerBirthdate"), function (elem) {
+            return $(elem).val();
+        });
+
+        var formData = {};
+        var passenger = {};
+
+        for (let i = 0; i < valuesPassengerNames.length; i++) {
+            passenger = {
+                name: valuesPassengerNames[i],
+                surname: valuesPassengerSurnames[i],
+                birthdate: valuesPassengerBirthdates[i]
+            };
+            formData[i] = passenger;
+            console.log(formData);
+        }
+
+
+        $.ajax({
+            type: "POST",
+            url: "/passengers",
+            data: formData,
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            console.log(data);
+        });
+
+        event.preventDefault();
+    });
+
+    $("#orderData").submit(function (event) {
+
+        var formData = {
+            buyerName: $("#buyerName").val(),
+            buyerSurname: $("#buyerSurname").val(),
+            buyerCity: $("#buyerCity").val(),
+            buyerStreet: $("#buyerStreet").val(),
+            buyerHouseNumber: $("#buyerHouseNumber").val()
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/orderData",
+            data: formData,
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            console.log(data);
+        });
+
+        event.preventDefault();
+    });
+
+    $("#payment").submit(function (event) {
+
+        var formData = {
+            method: $(".method").val()
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/payment",
+            data: formData,
+            dataType: "json",
+            encode: true,
+        }).done(function (data) {
+            console.log(data);
+        });
+
+        event.preventDefault();
+    });
+});

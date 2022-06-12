@@ -15,11 +15,10 @@ $(document).ready(function () {
                 itemId: valuesUserId[i],
                 quantity: valuesAction[i]
             };
-            formData.push(user);
+            formData[i] = user;
             console.log(formData);
         }
 
-        formData = JSON.stringify(Object.assign({}, formData));
 
 
         $.ajax({
