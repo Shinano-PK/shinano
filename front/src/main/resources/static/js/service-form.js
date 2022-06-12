@@ -3,7 +3,8 @@ $(document).ready(function () {
 
         var formData = {
             message: $("#message").val(),
-            itemId: $("#itemId").val()
+            planeId: $("#planeId").val(),
+            userId: $("#userId").val()
         }
 
 

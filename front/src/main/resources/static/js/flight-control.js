@@ -6,9 +6,6 @@ $(document).ready(function () {
         var valuesLane = $.map($(".lane"), function (elem) {
             return $(elem).val();
         });
-        var valuesPermission = $.map($(".permission"), function (elem) {
-            return $(elem).val();
-        });
 
         var formData = [];
         var flight = {};
@@ -16,8 +13,7 @@ $(document).ready(function () {
         for (let i = 0; i < valuesFlightNumber.length; i++) {
             flight = {
                 flightNumber: valuesFlightNumber[i],
-                lane: valuesLane[i],
-                permission: valuesPermission[i]
+                lane: valuesLane[i]
             };
             formData.push(flight);
             console.log(formData);

@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
     <meta charset="UTF-8">
     <title>Witaj!</title>
@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/front/src/main/resources/static/css/service-form.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/front/src/main/resources/static/js/script.js"></script>
-    <script type="text/javascript" src="/front/src/main/resources/static/js/service-form.js"></script>
+    <script type="text/javascript" src="/front/src/main/resources/static/js/flight-creator.js"></script>
     <meta charset="UTF-8"/>
 </head>
 <body>
@@ -26,19 +26,26 @@
     </div>
     <div id="greeting">
         <p>
-            Zgłaszanie problemu ze sprzętem
+            Dodawanie nowych lotów
         </p>
     </div>
 </div>
 <div id="center">
-    <form id="reportMalfunction">
+    <form id="addFlight">
         <div id="report">
-            <textarea id="message" rows="7" name="Message" placeholder="Opisz problem"></textarea>
+            <input id="flightNumber" type="text" name="flightNumber" placeholder="Podaj numer lotu">
             <br>
-            <input id="planeId" type="text" name="planeId" placeholder="Podaj ID samolotu">
+            <input id="from" type="text" name="from" placeholder="Podaj miejsce wylotu">
             <br>
-            <input type="hidden" th:value="">
-            <button type="submit">Wyślij zgłoszenie</button>
+            <input id="destination" type="text" name="destination" placeholder="Podaj destynację">
+            <br>
+            <input id="date" type="date" name="date" placeholder="Podaj datę przylotu/odlotu">
+            <br>
+            <input id="time" type="time" name="time" placeholder="Podaj czas przylotu/odlotu">
+            <br>
+            <input id="status" type="text" name="status" placeholder="Podaj status">
+            <br>
+            <button type="submit">Dodaj lot</button>
         </div>
     </form>
     <div id="themeInformation">
