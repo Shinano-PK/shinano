@@ -43,7 +43,7 @@ public class FlightController {
   }
 
   @GetMapping("/flight")
-  public Flight getPlane(Integer id) {
+  public Flight getFlight(Integer id) {
     return flightService.getFlightById(id);
   }
 

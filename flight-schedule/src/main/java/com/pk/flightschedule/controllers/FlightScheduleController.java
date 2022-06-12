@@ -2,7 +2,6 @@ package com.pk.flightschedule.controllers;
 
 import com.pk.flightschedule.models.FlightSchedule;
 import com.pk.flightschedule.models.FlightScheduleInput;
-import com.pk.flightschedule.models.FlightScheduleRequest;
 import com.pk.flightschedule.services.FlightScheduleService;
 import java.util.List;
 import javax.validation.Valid;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -24,21 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class FlightScheduleController {
   private FlightScheduleService flightScheduleService;
 
-  @GetMapping("/flightScheduleTest")
-  public String test(@RequestParam String temp) {
-    return "Request handled " + temp + "\n";
-  }
-
   @GetMapping("/flightSchedule")
   public FlightSchedule getFlightSchedule(Integer id) {
     return flightScheduleService.getFlightScheduleById(id);
   }
 
-  @GetMapping("/flightSchedulePeriod")
-  public List<FlightSchedule> getFlightSchedulePeriod(
-      @Valid FlightScheduleRequest request, BindingResult bindingResult) {
-    validateInput(bindingResult);
-    return flightScheduleService.getFlightScheduleForDates(request);
+  @GetMapping("/flightSchedules")
+  public List<FlightSchedule> getFlightSchedules() {
+    return flightScheduleService.getFlightSchedules();
   }
 
   @PostMapping("/flightSchedule")
