@@ -44,7 +44,8 @@ public class FrontController {
               new ParameterizedTypeReference<List<FlightControlRequest>>() {});
       log.debug("Flight service response: {}", arrivals.getBody());
       log.debug("Flight service response: {}", departures.getBody());
-      // TODO do sth with it
+      model.addAttribute("arrivals", arrivals.getBody());
+      model.addAttribute("departures", departures.getBody());
       return "schedule";
     } catch (RestClientException e) {
       log.error("getForEntity exception, e:", e);

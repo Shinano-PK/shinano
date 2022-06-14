@@ -1,15 +1,16 @@
 package com.pk.frontend.model;
 
 import java.sql.Time;
-import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class FlightControlRequest {
-  @NotNull Integer idFlight;
-  @NotNull Time time;
-  @NotNull String runway;
-  @NotNull String status;
+  public Integer idFlight;
+  public Time time;
+  public String destination;
+  public String from;
+  public String runway;
+  public String status;
 }

@@ -2,21 +2,21 @@ package com.pk.frontend.model;
 
 import java.sql.Date;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Ticket {
-  Integer ticketId;
-  Integer userId;
-  Integer flightId;
-  Date reservedDate;
-  Date boughtDate;
-  Integer price;
-  Integer status;
-  String name;
-  String surname;
-  String city;
-  String street;
-  Integer buildingNumber;
+  public Integer ticketId;
+  public Integer userId;
+  public Integer flightId;
+  public Date reservedDate;
+  public Date boughtDate;
+  public Integer price;
+  public Integer status;
+  public String name;
+  public String surname;
+  public String city;
+  public String street;
+  public Integer buildingNumber;
 }

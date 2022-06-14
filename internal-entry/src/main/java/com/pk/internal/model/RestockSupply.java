@@ -1,9 +1,12 @@
 package com.pk.internal.model;
 
 import javax.validation.constraints.NotNull;
-import lombok.Value;
 
-@Value
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class RestockSupply {
   @NotNull Integer id;
   @NotNull String name;
