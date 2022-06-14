@@ -22,7 +22,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/manageSupplies",
+            url: "localhost:8080/logistics/restockSupply",
             data: formData,
             dataType: "json",
             encode: true,

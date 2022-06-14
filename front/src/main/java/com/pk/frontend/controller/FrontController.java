@@ -26,7 +26,6 @@ public class FrontController {
   @GetMapping("/schedule")
   public String loadSchedule(Model model) {
 
-    // wywołanie do backendu
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     try {
@@ -79,7 +78,7 @@ public class FrontController {
               null,
               new ParameterizedTypeReference<List<FlightControlRequest>>() {});
       log.debug("Logistics service response: {}", supplies.getBody());
-      // TODO do sth with it
+      model.addAttribute("supplies", supplies.getBody());
       return "order-supply-delivery";
     } catch (RestClientException e) {
       log.error("getForEntity exception, e:", e);

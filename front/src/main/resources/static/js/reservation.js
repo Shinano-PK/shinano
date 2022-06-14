@@ -96,6 +96,13 @@ function autocomplete(inp, arr) {
 }
 
 $(document).ready(function () {
+    $('#step1').hide();
+    $('#step2').hide();
+    $('#step3').hide();
+    $('#step4').hide();
+    $('#success').hide();
+
+
     $("#searchForm").submit(function (event) {
 
 
@@ -107,7 +114,7 @@ $(document).ready(function () {
             kids: $("#kids").val()
         }
 
-
+        $('#step1').show();
         $.ajax({
             type: "GET",
             url: "/search",
@@ -127,7 +134,7 @@ $(document).ready(function () {
         var formData = {
             offerId: $(".offerId").val()
         }
-
+        $('#step2').show();
         $.ajax({
             type: "POST",
             url: "/chooseTicket",
@@ -155,6 +162,7 @@ $(document).ready(function () {
         var formData = {};
         var passenger = {};
 
+        $('#step3').show();
         for (let i = 0; i < valuesPassengerNames.length; i++) {
             passenger = {
                 name: valuesPassengerNames[i],
@@ -188,6 +196,7 @@ $(document).ready(function () {
             buyerStreet: $("#buyerStreet").val(),
             buyerHouseNumber: $("#buyerHouseNumber").val()
         }
+        $('#step4').show();
 
         $.ajax({
             type: "POST",
@@ -207,7 +216,7 @@ $(document).ready(function () {
         var formData = {
             method: $(".method").val()
         }
-
+        $("#success").show();
         $.ajax({
             type: "POST",
             url: "/payment",

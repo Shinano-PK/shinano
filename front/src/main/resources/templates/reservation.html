@@ -17,9 +17,17 @@
         <ol>
             <li><a href="#">Imie Nazwisko</a>
                 <ul>
-                    <li><a href="#">A</a></li>
-                    <li><a href="#">B</a></li>
-                    <li><a href="#">C</a></li>
+                    <li><a href="/flight-control">Kontrola lotów</a></li>
+                    <li><a href="/flight-creator">Dodawanie lotów</a></li>
+                    <li><a href="/order-supply-delivery">Zamawianie dostawy</a></li>
+                    <li><a href="/plane-restock-delivery">Zaopatrzenie samolotu</a></li>
+                    <li><a href="/reservation">Zakup biletów</a></li>
+                    <li><a href="/restock-supply">Zaopatrzenie lotniska</a></li>
+                    <li><a href="/schedule">Rozkład lotów</a></li>
+                    <li><a href="/service-form">Formularz serwisowy</a></li>
+                    <li><a href="/tickets">Zakupione bilety</a></li>
+                    <li><a href="/users-management">Zarządzanie użytkownikami</a></li>
+                    <li><a href="/weather">Pogoda</a></li>
                 </ul>
             </li>
         </ol>
@@ -69,7 +77,7 @@
             <input type="submit" value="Wyszukaj">
         </form>
     </div>
-    <div id="step1">
+    <section id="step1">
         <form id="chooseTicket">
             <table>
                 <tr>
@@ -79,23 +87,60 @@
                     <th>Numer lotu</th>
                     <th colspan="2">Cena</th>
                 </tr>
-                <tr th:each="{ticket : ${tickets}}">
-                    <td th:text="${ticket.company}"></td>
-                    <td th:text="${ticket.departureTime}"></td>
-                    <td th:text="${ticket.arrivalTime}"></td>
-                    <td th:text="${ticket.flightNumber}"></td>
-                    <td th:text="${ticket.price}"></td>
+                <tr>
+                    <td>RYANAIR</td>
+                    <td>22.06.2022-21:45</td>
+                    <td>22.06.2022-23:30</td>
+                    <td>HG5436</td>
+                    <td>499,99 zł</td>
                     <td>
-                        <button class="offerId" type="submit" name="offerId" th:value="${ticket.id}">Wybierz</button>
+                        <button class="offerId" type="submit" name="offerId">Wybierz</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>LOT</td>
+                    <td>22.06.2022-12:25</td>
+                    <td>22.06.2022-14:30</td>
+                    <td>CU8734</td>
+                    <td>439,99 zł</td>
+                    <td>
+                        <button class="offerId" type="submit" name="offerId">Wybierz</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>PKS-SKRZYDŁO</td>
+                    <td>22.06.2022-10:10</td>
+                    <td>22.06.2022-15:20</td>
+                    <td>JD1234</td>
+                    <td>699,99 zł</td>
+                    <td>
+                        <button class="offerId" type="submit" name="offerId">Wybierz</button>
                     </td>
                 </tr>
             </table>
         </form>
-    </div>
-    <div id="step2">
+    </section>
+    <section id="step2">
         <form id="passengers">
-            <div th:each="{passenger : ${passengers}}">
+            <div>
                 <br>
+                <p>PASAŻER 1</p>
+                <input class="passengerName" name="passengerName" type="text" placeholder="Imię">
+                <input class="passengerSurname" name="passengerSurname" type="text" placeholder="Nazwisko">
+                <label>Data urodzenia:</label>
+                <input class="passengerBirthdate" name="birthdate" type="date">
+            </div>
+            <div>
+                <br>
+                <p>PASAŻER 2</p>
+                <input class="passengerName" name="passengerName" type="text" placeholder="Imię">
+                <input class="passengerSurname" name="passengerSurname" type="text" placeholder="Nazwisko">
+                <label>Data urodzenia:</label>
+                <input class="passengerBirthdate" name="birthdate" type="date">
+            </div>
+            <div>
+                <br>
+                <p>PASAŻER 3</p>
                 <input class="passengerName" name="passengerName" type="text" placeholder="Imię">
                 <input class="passengerSurname" name="passengerSurname" type="text" placeholder="Nazwisko">
                 <label>Data urodzenia:</label>
@@ -103,8 +148,8 @@
             </div>
             <input type="submit" value="Dalej">
         </form>
-    </div>
-    <div id="step3">
+    </section>
+    <section id="step3">
         <form id="orderData">
             <p>Dane zamawiającego:</p>
             <input id="buyerName" name="buyerName" type="text" placeholder="Imię">
@@ -121,8 +166,8 @@
             <label for="purchase">Zakup</label><br>--->
             <input type="submit" value="Dalej">
         </form>
-    </div>
-    <div id="step4">
+    </section>
+    <section id="step4">
         <form id="payment">
             <p>Forma płatności:</p>
             <input class="method" type="radio" id="transfer" name="payment" value="transfer">
@@ -134,14 +179,15 @@
             <br>
             <input type="submit" value="Zapłać">
         </form>
-    </div>
+    </section>
+    <h6 id="success">SUKCES</h6>
     <div id="themeInformation">
         <p>Wiadomości</p>
     </div>
 </div>
 
 <script>
-    var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre &amp; Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts &amp; Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad &amp; Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks &amp; Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
+    var countries = ["Kraków", "Lizbona", "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre &amp; Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts &amp; Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad &amp; Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks &amp; Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
     autocomplete(document.getElementById("fromWhere"), countries);
     autocomplete(document.getElementById("toWhere"), countries);
 </script>
