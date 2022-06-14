@@ -142,4 +142,28 @@ public class InternalController {
     }
   }
 
+  @PostMapping("/logistics/restockSupply")
+  public List<RestockSupply> changeSupply(@RequestBody List<RestockSupply> supplies) {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<String> entity;
+    ResponseEntity<List<RestockSupply>> restockSupply;
+    try {
+      entity = new HttpEntity<>(objectMapper.writeValueAsString(supplies), headers);
+      restockSupply =
+          restTemplate.exchange(
+              "http://logistics-service/restockSupply",
+              HttpMethod.POST,
+              entity,
+              new ParameterizedTypeReference<List<RestockSupply>>() {});
+    } catch (JsonProcessingException e) {
+      log.error("Json processing error", e);
+      return Collections.emptyList();
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      return Collections.emptyList();
+    }
+    log.debug("Supply service response: {}", restockSupply.getBody());
+    return restockSupply.getBody();
+  }
 }
