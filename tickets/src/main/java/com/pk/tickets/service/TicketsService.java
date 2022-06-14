@@ -4,6 +4,8 @@ import com.pk.tickets.model.ErrMsg;
 import com.pk.tickets.model.Ticket;
 import com.pk.tickets.repository.TicketRepository;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -15,13 +17,17 @@ import lombok.extern.slf4j.Slf4j;
 public class TicketsService {
   TicketRepository ticketRepository;
 
-  public Ticket getTickerDetails(Integer id) throws Exception {
-    log.trace("getTickerDetails() called");
+  public Ticket getTicketDetails(Integer id) throws Exception {
+    log.trace("getTicketDetails() called");
     Ticket ticket = ticketRepository.getById(id);
     if (ticket == null) {
       throw new Exception("Ticket not found");
     }
     return ticket;
+  }
+
+  public List<Ticket> getTickets() {
+    return ticketRepository.getAll();
   }
 
   public Ticket addNewTicket(Ticket ticket) throws Exception {

@@ -141,7 +141,7 @@ public class FrontController {
     try {
       ResponseEntity<List<Ticket>> tickets =
           restTemplate.exchange(
-              "http://internal-entry-service/tickets",
+              "http://internal-entry-service/ticket",
               HttpMethod.GET,
               null,
               new ParameterizedTypeReference<List<Ticket>>() {});

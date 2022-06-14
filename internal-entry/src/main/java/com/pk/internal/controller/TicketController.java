@@ -21,16 +21,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @AllArgsConstructor
+@RestController
 public class TicketController {
   RestTemplate restTemplate;
   ObjectMapper objectMapper;
 
-  @GetMapping("/tickets/{id}")
+  @GetMapping("/ticket/{id}")
   public List<Ticket> getUserTickets(@PathVariable @Valid Integer id) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
@@ -57,11 +59,11 @@ public class TicketController {
     try {
       ResponseEntity<List<Ticket>> ticketEntity =
           restTemplate.exchange(
-              "http://flight-schedule-service/flight/control/arrival",
+              "http://ticket-service/ticket",
               HttpMethod.GET,
               null,
               new ParameterizedTypeReference<List<Ticket>>() {});
-      log.debug("Flight service response: {}", ticketEntity.getBody());
+      log.debug("Ticket service response: {}", ticketEntity.getBody());
       return ticketEntity.getBody();
     } catch (RestClientException e) {
       log.error("getForEntity exception, e:", e);

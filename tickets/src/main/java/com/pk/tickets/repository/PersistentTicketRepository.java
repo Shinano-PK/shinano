@@ -50,6 +50,33 @@ public class PersistentTicketRepository implements TicketRepository {
   }
 
   @Override
+  public List<Ticket> getAll() {
+    try {
+      List<Ticket> tickets =
+          jdbcTemplate.query(
+              "select * from Ticket",
+              (rs, rowNum) ->
+                  new Ticket(
+                      rs.getInt("ticket_id"),
+                      rs.getInt("user_id"),
+                      rs.getInt("flight_id"),
+                      rs.getDate("reserved_date"),
+                      rs.getDate("bought_date"),
+                      rs.getInt("price"),
+                      rs.getInt("status"),
+                      rs.getString("name"),
+                      rs.getString("surname"),
+                      rs.getString("city"),
+                      rs.getString("street"),
+                      rs.getInt("building_number")));
+      return tickets;
+    } catch (Exception e) {
+      log.warn("Exception: " + e.getMessage());
+      return null;
+    }
+  }
+
+  @Override
   public Integer save(Ticket ticket) {
     try {
       KeyHolder keyHolder = new GeneratedKeyHolder();
