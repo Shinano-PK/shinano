@@ -32,13 +32,13 @@ public class FrontController {
     try {
       ResponseEntity<List<FlightControlRequest>> arrivals =
           restTemplate.exchange(
-              "http://internal-entry-service/flight/control/arrival",
+              "http://internal-entry-service/flightSchedule/arrival",
               HttpMethod.GET,
               null,
               new ParameterizedTypeReference<List<FlightControlRequest>>() {});
       ResponseEntity<List<FlightControlRequest>> departures =
           restTemplate.exchange(
-              "http://internal-entry-service/flight/control/departure",
+              "http://internal-entry-service/flightSchedule/departure",
               HttpMethod.GET,
               null,
               new ParameterizedTypeReference<List<FlightControlRequest>>() {});
