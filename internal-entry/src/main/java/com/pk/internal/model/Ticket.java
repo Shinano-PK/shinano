@@ -1,4 +1,4 @@
-package com.pk.tickets.model;
+package com.pk.internal.model;
 
 import java.sql.Date;
 import lombok.AllArgsConstructor;

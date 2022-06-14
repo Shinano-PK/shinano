@@ -11,6 +11,7 @@ import com.pk.users.repository.UserRepository;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.regex.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +49,10 @@ public class NewUsersService {
 
   public Boolean findIfUserExists(Integer id) {
     return usersRepository.getById(id) != null;
+  }
+
+  public List<User> getAllUsers() {
+    return usersRepository.getAllUsers();
   }
 
   public User getUserByUsername(String username) {

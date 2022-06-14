@@ -1,19 +1,165 @@
 package com.pk.internal.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pk.internal.model.FlightControlRequest;
+import com.pk.internal.model.RestockSupply;
 import com.pk.internal.model.Root;
+import com.pk.internal.model.Ticket;
 import com.pk.internal.service.InternalService;
+import java.util.Collections;
+import java.util.List;
+import javax.validation.Valid;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import lombok.AllArgsConstructor;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
+@Slf4j
 @RestController
 @AllArgsConstructor
 public class InternalController {
+  RestTemplate restTemplate;
   InternalService internalService;
+  ObjectMapper objectMapper;
 
   @GetMapping("/weather/oneDay")
   public Root getWeather(@RequestParam String lat, @RequestParam String lon) throws Exception {
     return internalService.getWeather(lat, lon);
-  }  
+  }
+
+  @GetMapping("/logistics/status")
+  public List<RestockSupply> getStatus() {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    try {
+      ResponseEntity<List<RestockSupply>> userEntity =
+          restTemplate.exchange(
+              "http://logistics-service/restockSupply",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<RestockSupply>>() {});
+
+      log.debug("User service response: {}", userEntity.getBody());
+      return userEntity.getBody();
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      return Collections.emptyList();
+    }
+  }
+
+  @PostMapping("/logistics/status")
+  public RestockSupply requestRestock(
+      @RequestBody @Valid RestockSupply restockSupply, BindingResult bindResult) {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<String> entity;
+    ResponseEntity<RestockSupply> userEntity;
+    try {
+      entity = new HttpEntity<>(objectMapper.writeValueAsString(restockSupply), headers);
+      userEntity =
+          restTemplate.exchange(
+              "http://logistics-service/restockSupply",
+              HttpMethod.POST,
+              entity,
+              RestockSupply.class);
+    } catch (JsonProcessingException e) {
+      log.error("Json processing error", e);
+      return null;
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      return null;
+    }
+    log.debug("User service response: {}", userEntity.getBody());
+    return userEntity.getBody();
+  }
+
+  @GetMapping("/tickets/")
+  public List<Ticket> getUserTickets(@RequestParam @Valid Integer id) {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    try {
+      ResponseEntity<List<Ticket>> ticketEntity =
+          restTemplate.exchange(
+              "http://tickets-service/",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<Ticket>>() {});
+
+      log.debug("Ticket service response: {}", ticketEntity.getBody());
+      return ticketEntity.getBody();
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      return Collections.emptyList();
+    }
+  }
+
+  @GetMapping("/flightSchedule/departure")
+  public List<FlightControlRequest> getDepartures() {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    try {
+      ResponseEntity<List<FlightControlRequest>> flightSchedule =
+          restTemplate.exchange(
+              "http://flight-schedule-service/flight/control/departure",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+      log.debug("Ticket service response: {}", flightSchedule.getBody());
+      return flightSchedule.getBody();
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      return Collections.emptyList();
+    }
+  }
+
+  @GetMapping("/flightSchedule/arrival")
+  public List<FlightControlRequest> getArrivals() {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    try {
+      ResponseEntity<List<FlightControlRequest>> flightSchedule =
+          restTemplate.exchange(
+              "http://flight-schedule-service/flight/control/arrival",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+      log.debug("Flight service response: {}", flightSchedule.getBody());
+      return flightSchedule.getBody();
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      return Collections.emptyList();
+    }
+  }
+
+  @GetMapping("/ticket/reservation")
+  public List<Ticket> getTickets() {
+    // HttpHeaders headers = new HttpHeaders();
+    // headers.setContentType(MediaType.APPLICATION_JSON);
+    // try {
+    //   ResponseEntity<List<FlightControlRequest>> ticketEntity =
+    //       restTemplate.exchange(
+    //           "http://flight-schedule-service/flight/control/arrival",
+    //           HttpMethod.GET,
+    //           null,
+    //           new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+    //   log.debug("Flight service response: {}", ticketEntity.getBody());
+    //   return ticketEntity.getBody();
+    // } catch (RestClientException e) {
+    //   log.error("getForEntity exception, e:", e);
+    //   return Collections.emptyList();
+    // }
+  }
 }

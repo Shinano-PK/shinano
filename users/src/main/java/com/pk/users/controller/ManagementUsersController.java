@@ -36,6 +36,12 @@ public class ManagementUsersController {
     return usersService.findIfUserExists(id);
   }
 
+  @GetMapping("/user/all")
+  public List<User> getAllUsers() {
+    log.trace("getAllUsers()");
+    return usersService.getAllUsers();
+  }
+
   @GetMapping("/user")
   public User getUserByUsername(@RequestParam String username) {
     log.trace("getUserByUsername()");

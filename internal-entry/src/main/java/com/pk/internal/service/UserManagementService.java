@@ -7,6 +7,8 @@ import com.pk.internal.model.User;
 import java.util.Collections;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,7 +25,22 @@ public class UserManagementService {
   RestTemplate restTemplate;
 
   public List<User> getAllUsers() {
-    return Collections.emptyList();
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    try {
+      ResponseEntity<List<User>> ticketEntity =
+          restTemplate.exchange(
+              "http://users-service/",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<User>>() {});
+
+      log.debug("User service response: {}", ticketEntity.getBody());
+      return ticketEntity.getBody();
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      return Collections.emptyList();
+    }
   }
 
   public User getUser(String email) {

@@ -1,11 +1,9 @@
 package com.pk.users.repository;
 
+import com.pk.users.model.User;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
-
-import com.pk.users.model.User;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -46,6 +44,30 @@ public class PersistentUserRepository implements UserRepository {
         return users.get(0);
       }
       return null;
+    } catch (Exception e) {
+      log.warn("Exception: " + e.getMessage());
+      return null;
+    }
+  }
+
+  @Override
+  public List<User> getAllUsers() {
+    try {
+      return jdbcTemplate.query(
+          "select * from \"user\"",
+          (rs, rowNum) ->
+              new User(
+                  rs.getInt("user_id"),
+                  rs.getString("name"),
+                  rs.getString("surname"),
+                  rs.getDate("birth_date"),
+                  rs.getInt("enabled"),
+                  rs.getDate("creation_date"),
+                  rs.getString("email"),
+                  rs.getString("username"),
+                  rs.getString("password"),
+                  rs.getString("role"),
+                  rs.getString("token")));
     } catch (Exception e) {
       log.warn("Exception: " + e.getMessage());
       return null;
@@ -125,9 +147,8 @@ public class PersistentUserRepository implements UserRepository {
           connection -> {
             PreparedStatement ps =
                 connection.prepareStatement(
-                    "insert into \"user\" (name, surname, birth_date, enabled, creation_date, email,"
-                        + " username, password, role) values(?, ?, ?, ?, ?, ?, ?, ?,"
-                        + " ?)",
+                    "insert into \"user\" (name, surname, birth_date, enabled, creation_date,"
+                        + " email, username, password, role) values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getName());
             ps.setString(2, user.getSurname());
@@ -156,8 +177,9 @@ public class PersistentUserRepository implements UserRepository {
   public Boolean update(User user) {
     try {
       return (jdbcTemplate.update(
-              "update \"user\" set name = ?, surname = ?, birth_date = ?, enabled = ?, creation_date ="
-                  + " ?, username = ?, password = ?, role = ?, token = ? where user_id = ?",
+              "update \"user\" set name = ?, surname = ?, birth_date = ?, enabled = ?,"
+                  + " creation_date = ?, username = ?, password = ?, role = ?, token = ? where"
+                  + " user_id = ?",
               user.getName(),
               user.getSurname(),
               user.getBirthDate(),

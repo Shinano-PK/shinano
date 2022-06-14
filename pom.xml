@@ -7,12 +7,14 @@
   <version>0.0.1-SNAPSHOT</version>
   <modules>
     <module>internal-entry</module>
-    <module>external-entry</module>
     <module>email</module>
     <module>users</module>
     <module>tickets</module>
     <module>weather</module>
+    <module>logistics</module>
     <module>eureka-server</module>
+    <module>work-schedule</module>
+    <module>flight-schedule</module>
   </modules>
   <properties>
     <java.version>11</java.version>

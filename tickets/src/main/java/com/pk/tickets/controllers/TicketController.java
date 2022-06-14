@@ -21,7 +21,7 @@ public class TicketController {
   TicketsService ticketsService;
 
   @GetMapping("/ticket")
-  public Ticket getTickerDetails(@RequestParam Integer id) throws Exception {
+  public Ticket getTicketDetails(@RequestParam Integer id) throws Exception {
     log.trace("getTickerDetails() called");
     return ticketsService.getTickerDetails(id);
   }
