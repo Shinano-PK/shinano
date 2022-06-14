@@ -14,4 +14,9 @@ public class Ticket {
   Date boughtDate;
   Integer price;
   Integer status;
+  String name;
+  String surname;
+  String city;
+  String street;
+  Integer buildingNumber;
 }

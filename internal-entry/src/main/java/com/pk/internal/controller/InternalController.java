@@ -146,6 +146,7 @@ public class InternalController {
 
   @GetMapping("/ticket/reservation")
   public List<Ticket> getTickets() {
+    return Collections.emptyList();
     // HttpHeaders headers = new HttpHeaders();
     // headers.setContentType(MediaType.APPLICATION_JSON);
     // try {

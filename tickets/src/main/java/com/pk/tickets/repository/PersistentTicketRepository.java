@@ -1,23 +1,20 @@
 package com.pk.tickets.repository;
 
+import com.pk.tickets.model.Ticket;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
-
-import com.pk.tickets.model.Ticket;
-
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Repository
 @AllArgsConstructor
 public class PersistentTicketRepository implements TicketRepository {
-
   JdbcTemplate jdbcTemplate;
 
   @Override
@@ -34,7 +31,12 @@ public class PersistentTicketRepository implements TicketRepository {
                       rs.getDate("reserved_date"),
                       rs.getDate("bought_date"),
                       rs.getInt("price"),
-                      rs.getInt("status")),
+                      rs.getInt("status"),
+                      rs.getString("name"),
+                      rs.getString("surname"),
+                      rs.getString("city"),
+                      rs.getString("street"),
+                      rs.getInt("building_number")),
               id);
       if (tickets.isEmpty()) {
         log.error("Find by id failed");
@@ -55,7 +57,9 @@ public class PersistentTicketRepository implements TicketRepository {
           connection -> {
             PreparedStatement ps =
                 connection.prepareStatement(
-                    "insert into Ticket (user_id, flight_id, reserved_date, bought_date, price, status) values(?, ?, ?, ?, ?, ?)",
+                    "insert into Ticket (user_id, flight_id, reserved_date, bought_date, price,"
+                        + " status, name, surname, city, street, building_number) values(?, ?, ?,"
+                        + " ?, ?, ?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, ticket.getUserId());
             ps.setInt(2, ticket.getFlightId());
@@ -63,6 +67,11 @@ public class PersistentTicketRepository implements TicketRepository {
             ps.setDate(4, ticket.getBoughtDate());
             ps.setInt(5, ticket.getPrice());
             ps.setInt(6, ticket.getStatus());
+            ps.setString(7, ticket.getName());
+            ps.setString(8, ticket.getSurname());
+            ps.setString(9, ticket.getCity());
+            ps.setString(10, ticket.getStreet());
+            ps.setInt(11, ticket.getBuildingNumber());
             return ps;
           },
           keyHolder);
@@ -81,14 +90,20 @@ public class PersistentTicketRepository implements TicketRepository {
   public boolean update(Ticket ticket) {
     try {
       return (jdbcTemplate.update(
-              "update Ticket set user_id = ?, flight_id = ?,"
-                  + " reserved_date = ?, bought_date = ?, price = ?, status = ? where ticket_id = ?",
+              "update Ticket set user_id = ?, flight_id = ?, reserved_date = ?, bought_date = ?,"
+                  + " price = ?, status = ?, name = ?, surname = ?, city = ?, street = ?,"
+                  + " building_number = ? where ticket_id = ?",
               ticket.getUserId(),
               ticket.getFlightId(),
               ticket.getReservedDate(),
               ticket.getBoughtDate(),
               ticket.getPrice(),
               ticket.getStatus(),
+              ticket.getName(),
+              ticket.getSurname(),
+              ticket.getCity(),
+              ticket.getStreet(),
+              ticket.getBuildingNumber(),
               ticket.getTicketId())
           > 0);
     } catch (Exception e) {

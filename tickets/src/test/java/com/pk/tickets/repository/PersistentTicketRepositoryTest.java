@@ -6,10 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.sql.Date;
-
-import javax.sql.DataSource;
 import com.pk.tickets.model.Ticket;
+import java.sql.Date;
+import javax.sql.DataSource;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,10 +46,23 @@ public class PersistentTicketRepositoryTest {
 
   @Test
   public void testSave() {
-    Ticket ticket = new Ticket(0, 3, 3, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), 200, 0);
+    Ticket ticket =
+        new Ticket(
+            0,
+            3,
+            3,
+            new Date(System.currentTimeMillis()),
+            new Date(System.currentTimeMillis()),
+            200,
+            0,
+            "",
+            "",
+            "",
+            "",
+            0);
     assertNull(ticketRepository.getById(4));
     assertNotEquals(0, ticketRepository.save(ticket));
-    assertNotNull(ticketRepository.getById(4));  
+    assertNotNull(ticketRepository.getById(4));
   }
 
   @Test
@@ -68,5 +80,4 @@ public class PersistentTicketRepositoryTest {
     assertTrue(ticketRepository.delete(2));
     assertNull(ticketRepository.getById(2));
   }
-
 }
