@@ -9,16 +9,18 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Slf4j
-public class Controller {
+@Controller
+public class FrontController {
   RestTemplate restTemplate;
 
-  @GetMapping
+  @GetMapping("/schedule")
   public String loadSchedule(Model model) {
 
     // wywołanie do backendu
@@ -48,22 +50,22 @@ public class Controller {
     }
   }
 
-  @GetMapping
+  @GetMapping("/flight-control")
   public String loadFlightControl(Model model) {
     return "flight-control";
   }
 
-  @GetMapping
+  @GetMapping("flight-creator")
   public String loadFlightCreator(Model model) {
     return "flight-creator";
   }
 
-  @GetMapping
+  @GetMapping("/")
   public String loadIndex(Model model) {
     return "index";
   }
 
-  @GetMapping
+  @GetMapping("/order-supply-delivery")
   public String loadOrderSupplyDelivery(Model model) {
     try {
       ResponseEntity<List<FlightControlRequest>> supplies =
@@ -82,12 +84,12 @@ public class Controller {
     }
   }
 
-  @GetMapping
+  @GetMapping("/reservation")
   public String loadReservation(Model model) {
     return "reservation";
   }
 
-  @GetMapping
+  @GetMapping("/plane-restock-supply")
   public String loadPlaneRestockSupply(Model model) {
     try {
       ResponseEntity<List<FlightControlRequest>> supplies =
@@ -106,7 +108,7 @@ public class Controller {
     }
   }
 
-  @GetMapping
+  @GetMapping("/restock-supply")
   public String loadRestockSupply(Model model) {
     try {
       ResponseEntity<List<FlightControlRequest>> supplies =
@@ -125,12 +127,12 @@ public class Controller {
     }
   }
 
-  @GetMapping
+  @GetMapping("/service-form")
   public String loadServiceForm(Model model) {
     return "service-form";
   }
 
-  @GetMapping
+  @GetMapping("/tickets")
   public String loadTickets(Model model) {
     try {
       ResponseEntity<List<Ticket>> tickets =
@@ -149,7 +151,7 @@ public class Controller {
     }
   }
 
-  @GetMapping
+  @GetMapping("/users-management")
   public String loadUsersManagement(Model model) {
     try {
       ResponseEntity<List<Ticket>> tickets =
@@ -168,7 +170,7 @@ public class Controller {
     }
   }
 
-  @GetMapping
+  @GetMapping("/weather")
   public String loadWeather(Model model) {
     return "weather";
   }
