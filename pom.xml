@@ -15,6 +15,7 @@
     <module>eureka-server</module>
     <module>work-schedule</module>
     <module>flight-schedule</module>
+    <module>front</module>
   </modules>
   <properties>
     <java.version>11</java.version>
