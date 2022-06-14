@@ -25,21 +25,21 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity httpSecurity) throws Exception {
-    // httpSecurity.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
-    httpSecurity
-        .csrf()
-        .disable()
-        .authorizeRequests()
-        .antMatchers("/new/**")
-        .permitAll()
-        .antMatchers("/h2-console/**")
-        .permitAll()
-        .anyRequest()
-        .authenticated()
-        .and()
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    httpSecurity.addFilterBefore(jwtReqFilter, UsernamePasswordAuthenticationFilter.class);
+    httpSecurity.csrf().disable().authorizeRequests().antMatchers("/**").permitAll();
+    // httpSecurity
+    //     .csrf()
+    //     .disable()
+    //     .authorizeRequests()
+    //     .antMatchers("/new/**")
+    //     .permitAll()
+    //     .antMatchers("/h2-console/**")
+    //     .permitAll()
+    //     .anyRequest()
+    //     .authenticated()
+    //     .and()
+    //     .sessionManagement()
+    //     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    // httpSecurity.addFilterBefore(jwtReqFilter, UsernamePasswordAuthenticationFilter.class);
   }
 
   @Override
