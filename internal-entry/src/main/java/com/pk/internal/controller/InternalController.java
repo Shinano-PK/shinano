@@ -122,4 +122,24 @@ public class InternalController {
       return Collections.emptyList();
     }
   }
+
+  @GetMapping("/logistics/restockSupply")
+  public List<RestockSupply> loadSupplyDelivery() {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    try {
+      ResponseEntity<List<RestockSupply>> restockSupply =
+          restTemplate.exchange(
+              "http://logistics-service/restockSupply",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<RestockSupply>>() {});
+      log.debug("Logistics service response: {}", restockSupply.getBody());
+      return restockSupply.getBody();
+    } catch (RestClientException e) {
+      log.error("exchange exception, e:", e);
+      return Collections.emptyList();
+    }
+  }
+
 }

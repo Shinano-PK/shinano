@@ -1,112 +1,175 @@
 package com.pk.frontend.controller;
 
+import com.pk.frontend.model.FlightControlRequest;
+import com.pk.frontend.model.Ticket;
+import java.util.List;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
+@Slf4j
 public class Controller {
+  RestTemplate restTemplate;
 
   @GetMapping
   public String loadSchedule(Model model) {
 
-    //wywołanie do backendu
-
-    return "schedule";
+    // wywołanie do backendu
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    try {
+      ResponseEntity<List<FlightControlRequest>> arrivals =
+          restTemplate.exchange(
+              "http://internal-entry-service/flight/control/arrival",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+      ResponseEntity<List<FlightControlRequest>> departures =
+          restTemplate.exchange(
+              "http://internal-entry-service/flight/control/departure",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+      log.debug("Flight service response: {}", arrivals.getBody());
+      log.debug("Flight service response: {}", departures.getBody());
+      // TODO do sth with it
+      return "schedule";
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      // FIXME error page
+      return "ERROR_PAGE";
+    }
   }
 
   @GetMapping
   public String loadFlightControl(Model model) {
-
-    //wywołanie do backendu
-
     return "flight-control";
   }
 
   @GetMapping
   public String loadFlightCreator(Model model) {
-
-    //wywołanie do backendu
-
     return "flight-creator";
   }
 
   @GetMapping
   public String loadIndex(Model model) {
-
-    //wywołanie do backendu
-
     return "index";
   }
 
   @GetMapping
-  public String loadLogs(Model model) {
-
-    //wywołanie do backendu
-
-    return "logs";
-  }
-
-  @GetMapping
   public String loadOrderSupplyDelivery(Model model) {
-
-    //wywołanie do backendu
-
-    return "order-supply-selivery";
-  }
-
-  @GetMapping
-  public String loadPlaneRestockSupply(Model model) {
-
-    //wywołanie do backendu
-
-    return "plane-restock-supply";
+    try {
+      ResponseEntity<List<FlightControlRequest>> supplies =
+          restTemplate.exchange(
+              "http://internal-entry-service/logistics/restockSupply",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+      log.debug("Logistics service response: {}", supplies.getBody());
+      // TODO do sth with it
+      return "order-supply-delivery";
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      // FIXME error page
+      return "ERROR_PAGE";
+    }
   }
 
   @GetMapping
   public String loadReservation(Model model) {
-
-    //wywołanie do backendu
-
     return "reservation";
   }
 
   @GetMapping
+  public String loadPlaneRestockSupply(Model model) {
+    try {
+      ResponseEntity<List<FlightControlRequest>> supplies =
+          restTemplate.exchange(
+              "http://internal-entry-service/logistics/restockSupply",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+      log.debug("Logistics service response: {}", supplies.getBody());
+      // TODO do sth with it
+      return "plane-restock-supply";
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      // FIXME error page
+      return "ERROR_PAGE";
+    }
+  }
+
+  @GetMapping
   public String loadRestockSupply(Model model) {
-
-    //wywołanie do backendu
-
-    return "restock-supply";
+    try {
+      ResponseEntity<List<FlightControlRequest>> supplies =
+          restTemplate.exchange(
+              "http://internal-entry-service/logistics/restockSupply",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+      log.debug("Logistics service response: {}", supplies.getBody());
+      // TODO do sth with it
+      return "restock-supply";
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      // FIXME error page
+      return "ERROR_PAGE";
+    }
   }
 
   @GetMapping
   public String loadServiceForm(Model model) {
-
-    //wywołanie do backendu
-
     return "service-form";
   }
 
   @GetMapping
   public String loadTickets(Model model) {
-
-    //wywołanie do backendu
-
-    return "tickets";
+    try {
+      ResponseEntity<List<Ticket>> tickets =
+          restTemplate.exchange(
+              "http://internal-entry-service/tickets",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<Ticket>>() {});
+      log.debug("Tickets service response: {}", tickets.getBody());
+      // TODO do sth with it
+      return "tickets";
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      // FIXME error page
+      return "ERROR_PAGE";
+    }
   }
 
   @GetMapping
   public String loadUsersManagement(Model model) {
-
-    //wywołanie do backendu
-
-    return "users-management";
+    try {
+      ResponseEntity<List<Ticket>> tickets =
+          restTemplate.exchange(
+              "http://internal-entry-service/management/allUsers",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<Ticket>>() {});
+      log.debug("Users service response: {}", tickets.getBody());
+      // TODO do sth with it
+      return "users-management";
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      // FIXME error page
+      return "ERROR_PAGE";
+    }
   }
 
   @GetMapping
   public String loadWeather(Model model) {
-
-    //wywołanie do backendu
-
     return "weather";
   }
-
 }
