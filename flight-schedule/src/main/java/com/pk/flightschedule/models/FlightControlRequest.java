@@ -12,6 +12,8 @@ import lombok.Data;
 public class FlightControlRequest {
   @NotNull Integer idFlight;
   @NotNull Time time;
+  @NotNull String destination;
+  @NotNull String from;
   @NotNull String runway;
   @NotNull String status;
 }

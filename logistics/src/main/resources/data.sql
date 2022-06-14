@@ -1,0 +1,78 @@
+INSERT INTO STORAGE (TYPE, CAPACITY, AMOUNT)
+VALUES ('SOLID', 100, 0);
+INSERT INTO STORAGE (TYPE, CAPACITY, AMOUNT)
+VALUES ('LIQUID', 100, 0);
+INSERT INTO PRODUCT (
+    NAME,
+    PRODUCER,
+    OUTSIDE_ID,
+    DESCRIPTION,
+    PRICE,
+    UNIT,
+    TYPE
+  )
+VALUES (
+    'PLATKI NESTLE CZEKOLADOWE',
+    'NESTLE',
+    'PLATKI',
+    'CAMP POSITIVE',
+    20.03,
+    'KG',
+    'SOLID'
+  );
+INSERT INTO PRODUCT (
+    NAME,
+    PRODUCER,
+    OUTSIDE_ID,
+    DESCRIPTION,
+    PRICE,
+    UNIT,
+    TYPE
+  )
+VALUES (
+    'KINDER NIESPODZIANKA',
+    'KINDER',
+    'NIESPODZIANKA',
+    'WILL SURPRISE YOU WITH YOUR LIFE',
+    10.40,
+    'KG',
+    'SOLID'
+  );
+INSERT INTO PRODUCT (
+    NAME,
+    PRODUCER,
+    OUTSIDE_ID,
+    DESCRIPTION,
+    PRICE,
+    UNIT,
+    TYPE
+  )
+VALUES (
+    'DUMMY',
+    'DUMMY',
+    'DUMMY',
+    'DUMMY',
+    999,
+    'KG',
+    'SOLID'
+  );
+INSERT INTO RESOURCE (
+    ID_PRODUCT,
+    ID_STORAGE,
+    QUANTITY
+  )
+VALUES (
+    1,
+    1,
+    10
+  );
+INSERT INTO RESOURCE (
+    ID_PRODUCT,
+    ID_STORAGE,
+    QUANTITY
+  )
+VALUES (
+    2,
+    1,
+    20
+  );
