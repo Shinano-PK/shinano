@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pk.internal.model.FlightControlRequest;
 import com.pk.internal.model.RestockSupply;
 import com.pk.internal.model.Root;
-import com.pk.internal.model.Ticket;
 import com.pk.internal.service.InternalService;
 import java.util.Collections;
 import java.util.List;
@@ -86,26 +85,6 @@ public class InternalController {
     return userEntity.getBody();
   }
 
-  @GetMapping("/tickets/")
-  public List<Ticket> getUserTickets(@RequestParam @Valid Integer id) {
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    try {
-      ResponseEntity<List<Ticket>> ticketEntity =
-          restTemplate.exchange(
-              "http://tickets-service/",
-              HttpMethod.GET,
-              null,
-              new ParameterizedTypeReference<List<Ticket>>() {});
-
-      log.debug("Ticket service response: {}", ticketEntity.getBody());
-      return ticketEntity.getBody();
-    } catch (RestClientException e) {
-      log.error("getForEntity exception, e:", e);
-      return Collections.emptyList();
-    }
-  }
-
   @GetMapping("/flightSchedule/departure")
   public List<FlightControlRequest> getDepartures() {
     HttpHeaders headers = new HttpHeaders();
@@ -142,25 +121,5 @@ public class InternalController {
       log.error("getForEntity exception, e:", e);
       return Collections.emptyList();
     }
-  }
-
-  @GetMapping("/ticket/reservation")
-  public List<Ticket> getTickets() {
-    return Collections.emptyList();
-    // HttpHeaders headers = new HttpHeaders();
-    // headers.setContentType(MediaType.APPLICATION_JSON);
-    // try {
-    //   ResponseEntity<List<FlightControlRequest>> ticketEntity =
-    //       restTemplate.exchange(
-    //           "http://flight-schedule-service/flight/control/arrival",
-    //           HttpMethod.GET,
-    //           null,
-    //           new ParameterizedTypeReference<List<FlightControlRequest>>() {});
-    //   log.debug("Flight service response: {}", ticketEntity.getBody());
-    //   return ticketEntity.getBody();
-    // } catch (RestClientException e) {
-    //   log.error("getForEntity exception, e:", e);
-    //   return Collections.emptyList();
-    // }
   }
 }
