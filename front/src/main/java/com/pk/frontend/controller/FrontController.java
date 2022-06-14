@@ -3,6 +3,8 @@ package com.pk.frontend.controller;
 import com.pk.frontend.model.FlightControlRequest;
 import com.pk.frontend.model.Ticket;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Controller
+@AllArgsConstructor
 public class FrontController {
   RestTemplate restTemplate;
 
