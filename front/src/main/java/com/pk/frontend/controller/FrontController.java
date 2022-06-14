@@ -55,7 +55,31 @@ public class FrontController {
 
   @GetMapping("/flight-control")
   public String loadFlightControl(Model model) {
-    return "flight-control";
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    try {
+      ResponseEntity<List<FlightControlRequest>> arrivals =
+              restTemplate.exchange(
+                      "http://internal-entry-service/flightSchedule/arrival",
+                      HttpMethod.GET,
+                      null,
+                      new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+      ResponseEntity<List<FlightControlRequest>> departures =
+              restTemplate.exchange(
+                      "http://internal-entry-service/flightSchedule/departure",
+                      HttpMethod.GET,
+                      null,
+                      new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+      log.debug("Flight service response: {}", arrivals.getBody());
+      log.debug("Flight service response: {}", departures.getBody());
+      model.addAttribute("arrivals", arrivals.getBody());
+      model.addAttribute("departures", departures.getBody());
+      return "flight-control";
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      // FIXME error page
+      return "ERROR_PAGE";
+    }
   }
 
   @GetMapping("flight-creator")
@@ -102,7 +126,7 @@ public class FrontController {
               null,
               new ParameterizedTypeReference<List<FlightControlRequest>>() {});
       log.debug("Logistics service response: {}", supplies.getBody());
-      // TODO do sth with it
+      model.addAttribute("supplies", supplies.getBody());
       return "plane-restock-supply";
     } catch (RestClientException e) {
       log.error("getForEntity exception, e:", e);
@@ -121,7 +145,7 @@ public class FrontController {
               null,
               new ParameterizedTypeReference<List<FlightControlRequest>>() {});
       log.debug("Logistics service response: {}", supplies.getBody());
-      // TODO do sth with it
+      model.addAttribute("supplies", supplies.getBody());
       return "restock-supply";
     } catch (RestClientException e) {
       log.error("getForEntity exception, e:", e);
@@ -145,7 +169,7 @@ public class FrontController {
               null,
               new ParameterizedTypeReference<List<Ticket>>() {});
       log.debug("Tickets service response: {}", tickets.getBody());
-      // TODO do sth with it
+      model.addAttribute("tickets", tickets.getBody());
       return "tickets";
     } catch (RestClientException e) {
       log.error("getForEntity exception, e:", e);
@@ -164,7 +188,7 @@ public class FrontController {
               null,
               new ParameterizedTypeReference<List<Ticket>>() {});
       log.debug("Users service response: {}", tickets.getBody());
-      // TODO do sth with it
+      //model.addAttribute("users", )
       return "users-management";
     } catch (RestClientException e) {
       log.error("getForEntity exception, e:", e);

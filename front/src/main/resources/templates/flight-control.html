@@ -51,7 +51,7 @@
                     <th>Status</th>
                     <th>Pas</th>
                 </tr>
-                <tr th:each="{flight : ${arrivals}}">
+                <tr th:each="flight : ${arrivals}">
                     <td th:text="${flight.idFlight}"><input class="flightNumber" type="hidden" name="flightNumber" th:value="${flight.idFlight}"></td>
                     <td th:text="${flight.time}"></td>
                     <td th:text="${flight.status}"></td>
@@ -78,13 +78,13 @@
                     <th>Status</th>
                     <th>Pas</th>
                 </tr>
-                <tr th:each="{flight : ${departures}}">
-                    <td th:text="${flight.number}"><input class="flightNumber" type="hidden" name="flightNumber" th:value="${flight.number}"></td>
+                <tr th:each="flight : ${departures}">
+                    <td th:text="${flight.idFlight}"><input class="flightNumber" type="hidden" name="flightNumber" th:value="${flight.idFlight}"></td>
                     <td th:text="${flight.time}"></td>
                     <td th:text="${flight.status}"></td>
                     <td>
                         <select class="lane" name="lane">
-                            <option th:value="${flight.lane}" th:text="${flight.lane}" selected></option>
+                            <option th:value="${flight.runway}" th:text="${flight.runway}" selected></option>
                             <option value="A1">A1</option>
                             <option value="A1">A2</option>
                             <option value="A1">A3</option>

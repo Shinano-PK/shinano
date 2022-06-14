@@ -41,21 +41,17 @@
         <table>
             <tr>
                 <th>Numer biletu</th>
-                <th>Z</th>
-                <th>Do</th>
-                <th>Data</th>
-                <th>Godzina</th>
-                <th>Imię i nazwisko</th>
-                <th>Miejsce</th>
+                <th>Data i godzina</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>Status</th>
             </tr>
-            <tr th:each="{ticket : ${tickets}}">
-                <td th:text="${ticket.id}"></td>
-                <td th:text="${ticket.from}"></td>
-                <td th:text="${ticket.destination}"></td>
-                <td th:text="${ticket.departureDate}"></td>
-                <td th:text="${ticket.departureTime}"></td>
-                <td th:text="${ticket.passenger}"></td>
-                <td th:text="${ticket.seat}"></td>
+            <tr th:each="ticket : ${tickets}">
+                <td th:text="${ticket.ticketId}"></td>
+                <td th:text="${ticket.reservedDate}"></td>
+                <td th:text="${ticket.name}"></td>
+                <td th:text="${ticket.surname}"></td>
+                <td th:text="${ticket.status}"></td>
             </tr>
         </table>
     </div>
