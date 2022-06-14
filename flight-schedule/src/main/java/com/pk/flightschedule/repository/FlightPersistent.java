@@ -64,7 +64,7 @@ public class FlightPersistent implements FlightRepository {
   public List<Flight> getByFlightSchedule(Integer id) {
     try {
       return jdbcTemplate.query(
-          "SELECT * FROM FLIGHT WHERE IF_FLIGHT_SCHEDULE = ?",
+          "SELECT * FROM FLIGHT WHERE ID_FLIGHT_SCHEDULE = ?",
           (rs, rowNum) ->
               new Flight(
                   rs.getInt("ID_FLIGHT"),
@@ -72,7 +72,8 @@ public class FlightPersistent implements FlightRepository {
                   rs.getInt("ID_FLIGHT_SCHEDULE"),
                   rs.getInt("DELAY"),
                   rs.getString("STATUS"),
-                  rs.getString("RUNWAY")));
+                  rs.getString("RUNWAY")),
+          id);
     } catch (Exception e) {
       log.warn("Got exception: ", e);
       return Collections.emptyList();
@@ -87,7 +88,8 @@ public class FlightPersistent implements FlightRepository {
           connection -> {
             PreparedStatement ps =
                 connection.prepareStatement(
-                    "INSERT INTO FLIGHT (ID_PLANE, ID_FLIGHT_SCHEDULE, DELAY, STATUS, RUNWAY) VALUES (?, ?, ?, ?, ?)",
+                    "INSERT INTO FLIGHT (ID_PLANE, ID_FLIGHT_SCHEDULE, DELAY, STATUS, RUNWAY)"
+                        + " VALUES (?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, input.getIdPlane());
             ps.setInt(2, input.getIdFlightSchedule());
