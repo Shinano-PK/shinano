@@ -1,6 +1,7 @@
 package com.pk.frontend.controller;
 
 import com.pk.frontend.model.FlightControlRequest;
+import com.pk.frontend.model.RestockSupply;
 import com.pk.frontend.model.Ticket;
 import com.pk.frontend.model.User;
 
@@ -97,12 +98,12 @@ public class FrontController {
   @GetMapping("/order-supply-delivery")
   public String loadOrderSupplyDelivery(Model model) {
     try {
-      ResponseEntity<List<FlightControlRequest>> supplies =
+      ResponseEntity<List<RestockSupply>> supplies =
           restTemplate.exchange(
               "http://internal-entry-service/logistics/restockSupply",
               HttpMethod.GET,
               null,
-              new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+              new ParameterizedTypeReference<List<RestockSupply>>() {});
       log.debug("Logistics service response: {}", supplies.getBody());
       model.addAttribute("supplies", supplies.getBody());
       return "order-supply-delivery";
@@ -121,12 +122,12 @@ public class FrontController {
   @GetMapping("/plane-restock-supply")
   public String loadPlaneRestockSupply(Model model) {
     try {
-      ResponseEntity<List<FlightControlRequest>> supplies =
+      ResponseEntity<List<RestockSupply>> supplies =
           restTemplate.exchange(
               "http://internal-entry-service/logistics/restockSupply",
               HttpMethod.GET,
               null,
-              new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+              new ParameterizedTypeReference<List<RestockSupply>>() {});
       log.debug("Logistics service response: {}", supplies.getBody());
       model.addAttribute("supplies", supplies.getBody());
       return "plane-restock-supply";
@@ -140,12 +141,12 @@ public class FrontController {
   @GetMapping("/restock-supply")
   public String loadRestockSupply(Model model) {
     try {
-      ResponseEntity<List<FlightControlRequest>> supplies =
+      ResponseEntity<List<RestockSupply>> supplies =
           restTemplate.exchange(
               "http://internal-entry-service/logistics/restockSupply",
               HttpMethod.GET,
               null,
-              new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+              new ParameterizedTypeReference<List<RestockSupply>>() {});
       log.debug("Logistics service response: {}", supplies.getBody());
       model.addAttribute("supplies", supplies.getBody());
       return "restock-supply";
