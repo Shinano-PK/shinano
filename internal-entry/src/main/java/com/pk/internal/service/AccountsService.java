@@ -67,7 +67,7 @@ public class AccountsService {
     headers.setContentType(MediaType.APPLICATION_JSON);
     ResponseEntity<com.pk.internal.model.User> userEntity =
         restTemplate.getForEntity(
-            "http://users-service/manage/user?username={username}",
+            "http://users-service/manage/userByUsername?username={username}",
             com.pk.internal.model.User.class,
             username);
     log.debug("User service response: {}", userEntity.getBody());

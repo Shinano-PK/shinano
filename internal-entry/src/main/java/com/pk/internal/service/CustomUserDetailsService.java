@@ -29,15 +29,15 @@ public class CustomUserDetailsService implements UserDetailsService {
     headers.setContentType(MediaType.APPLICATION_JSON);
     ResponseEntity<com.pk.internal.model.User> userEntity =
         restTemplate.getForEntity(
-            "http://users-service/manage/user?username={username}",
+            "http://users-service/manage/userByUsername?username={username}",
             com.pk.internal.model.User.class,
             username);
-    log.debug("User service response: {}", userEntity.getBody());
+    log.info("User service response: {}", userEntity.getBody());
     com.pk.internal.model.User user = userEntity.getBody();
     if (user == null) {
       throw new UsernameNotFoundException("User not found");
     }
-    log.debug("Got user: {}", user);
+    log.info("Got user: {}", user);
     return new User(
         user.getUsername(),
         user.getPassword(),

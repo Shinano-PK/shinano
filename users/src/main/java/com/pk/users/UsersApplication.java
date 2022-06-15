@@ -1,5 +1,6 @@
 package com.pk.users;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -11,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class UsersApplication {
-
 	@Bean
 	@LoadBalanced
 	public RestTemplate getRestTemplate() {
@@ -25,6 +25,8 @@ public class UsersApplication {
 	}
 
 	public static void main(String[] args) {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		// System.out.println(bCryptPasswordEncoder.encode("test"));
 		SpringApplication.run(UsersApplication.class, args);
 	}
 }
