@@ -184,14 +184,14 @@ public class FrontController {
   @GetMapping("/users-management")
   public String loadUsersManagement(Model model) {
     try {
-      ResponseEntity<List<User>> tickets =
+      ResponseEntity<List<User>> users =
           restTemplate.exchange(
               "http://internal-entry-service/management/allUsers",
               HttpMethod.GET,
               null,
               new ParameterizedTypeReference<List<User>>() {});
-      log.debug("Users service response: {}", tickets.getBody());
-      //model.addAttribute("users", )
+      log.debug("Users service response: {}", users.getBody());
+      model.addAttribute("users", users.getBody());
       return "users-management";
     } catch (RestClientException e) {
       log.error("getForEntity exception, e:", e);
@@ -203,5 +203,15 @@ public class FrontController {
   @GetMapping("/weather")
   public String loadWeather(Model model) {
     return "weather";
+  }
+
+  @GetMapping("login")
+  public String loadLogin(Model model) {
+    return "login-page";
+  }
+
+  @GetMapping("/register")
+  public String loadRegister(Model model) {
+    return "register-page";
   }
 }

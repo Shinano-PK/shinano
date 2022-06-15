@@ -20,7 +20,7 @@
           <li><a href="/flight-control">Kontrola lotów</a></li>
           <li><a href="/flight-creator">Dodawanie lotów</a></li>
           <li><a href="/order-supply-delivery">Zamawianie dostawy</a></li>
-          <li><a href="/plane-restock-delivery">Zaopatrzenie samolotu</a></li>
+          <li><a href="/plane-restock-supply">Zaopatrzenie samolotu</a></li>
           <li><a href="/reservation">Zakup biletów</a></li>
           <li><a href="/restock-supply">Zaopatrzenie lotniska</a></li>
           <li><a href="/schedule">Rozkład lotów</a></li>
@@ -33,7 +33,7 @@
     </ol>
   </div>
   <div id="greeting">
-    <p th:text="${plane.id}"></p>
+    <p>Zaopatrzenie samolotu</p>
   </div>
 </div>
 <div id="center">
@@ -47,10 +47,10 @@
           <th>Zapotrzebowanie</th>
           <th>Status</th>
         </tr>
-        <tr th:each="{item : ${plane.items}}">
+        <tr th:each="item : ${supplies}">
           <td th:text="${item.id}"><input class="itemId" type="hidden" name="itemId" th:value="${item.id}"></td>
           <td th:text="${item.name}"></td>
-          <td th:text="${item.quantity}"></td>
+          <td th:text="${item.amount}"></td>
           <td><input class="quantity" type="text" name="quantity"></td>
           <td>
             <button type="submit">Wnioskuj o uzupełnienie</button>

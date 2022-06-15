@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Witaj!</title>
     <link rel="stylesheet" href="/css/style.css"/>
-    <link rel="stylesheet" href="/css/weather.css"/>
+    <link rel="stylesheet" href="/css/register-page.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="/js/script.js"></script>
-    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+    <script type="text/javascript" src="/js/register-page.js"></script>
     <meta charset="UTF-8"/>
 </head>
 <body>
@@ -33,12 +34,20 @@
     </div>
     <div id="greeting">
         <p>
-            Warunki atmosferyczne
+            Rejestracja
         </p>
     </div>
 </div>
 <div id="center">
-    <div class="elfsight-app-78e95c4c-8a77-454f-977d-2977a0354264"></div>
+    <form id="reportMalfunction">
+        <input id="username" type="text" name="username" placeholder="Podaj email">
+        <br>
+        <input id="name" type="text" name="name" placeholder="Podaj imię i nazwisko">
+        <br>
+        <input id="password" type="password" name="password" placeholder="Podaj hasło">
+        <br>
+        <button type="submit">Zarejestruj</button>
+    </form>
     <div id="themeInformation">
         <p>Wiadomości</p>
     </div>

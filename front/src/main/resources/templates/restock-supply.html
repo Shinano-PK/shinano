@@ -20,7 +20,7 @@
                     <li><a href="/flight-control">Kontrola lotów</a></li>
                     <li><a href="/flight-creator">Dodawanie lotów</a></li>
                     <li><a href="/order-supply-delivery">Zamawianie dostawy</a></li>
-                    <li><a href="/plane-restock-delivery">Zaopatrzenie samolotu</a></li>
+                    <li><a href="/plane-restock-supply">Zaopatrzenie samolotu</a></li>
                     <li><a href="/reservation">Zakup biletów</a></li>
                     <li><a href="/restock-supply">Zaopatrzenie lotniska</a></li>
                     <li><a href="/schedule">Rozkład lotów</a></li>
@@ -49,10 +49,10 @@
                     <th>Zapotrzebowanie</th>
                     <th>Status</th>
                 </tr>
-                <tr th:each="{supply : ${supplies}}">
+                <tr th:each="supply : ${supplies}">
                     <td th:text="${supply.id}"><input class="itemId" type="hidden" name="itemId" th:value="${supply.id}"></td>
                     <td th:text="${supply.name}"></td>
-                    <td th:text="${supply.quantity}"></td>
+                    <td th:text="${supply.amount}"></td>
                     <td><input class="quantity" type="text" name="quantity"></td>
                     <td>
                         <button>Wnioskuj o uzupełnienie</button>
