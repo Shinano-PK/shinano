@@ -2,6 +2,8 @@ package com.pk.frontend.controller;
 
 import com.pk.frontend.model.FlightControlRequest;
 import com.pk.frontend.model.Ticket;
+import com.pk.frontend.model.User;
+
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -181,12 +183,12 @@ public class FrontController {
   @GetMapping("/users-management")
   public String loadUsersManagement(Model model) {
     try {
-      ResponseEntity<List<Ticket>> tickets =
+      ResponseEntity<List<User>> tickets =
           restTemplate.exchange(
               "http://internal-entry-service/management/allUsers",
               HttpMethod.GET,
               null,
-              new ParameterizedTypeReference<List<Ticket>>() {});
+              new ParameterizedTypeReference<List<User>>() {});
       log.debug("Users service response: {}", tickets.getBody());
       //model.addAttribute("users", )
       return "users-management";
