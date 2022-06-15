@@ -1,9 +1,6 @@
 package com.pk.frontend.controller;
 
-import com.pk.frontend.model.FlightControlRequest;
-import com.pk.frontend.model.RestockSupply;
-import com.pk.frontend.model.Ticket;
-import com.pk.frontend.model.User;
+import com.pk.frontend.model.*;
 
 import java.util.List;
 
@@ -17,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -214,5 +213,30 @@ public class FrontController {
   @GetMapping("/register")
   public String loadRegister(Model model) {
     return "register-page";
+  }
+
+  @PostMapping("/restockSupply")
+  public void updateRestockSupply(@RequestBody List<RestockSupply> restockSupply){
+
+  }
+
+  @PostMapping("/flightControl")
+  public void updateFlightControl(@RequestBody List<FlightControlRequest> flightControlRequest){
+
+  }
+
+  @PostMapping("/login")
+  public AuthResp login(@RequestBody LoginData loginData){
+
+  }
+
+  @PostMapping("/register")
+  public ErrMsg updateRestockSupply(@RequestBody User user){
+
+  }
+
+  @PostMapping("/users-management")
+  public void updateUsers(@RequestBody List<User> users) {
+
   }
 }
