@@ -28,6 +28,8 @@
                     <li><a href="/tickets">Zakupione bilety</a></li>
                     <li><a href="/users-management">Zarządzanie użytkownikami</a></li>
                     <li><a href="/weather">Pogoda</a></li>
+                    <li><a href="/login">Logowanie</a></li>
+                    <li><a href="/register">Rejestracja</a></li>
                 </ul>
             </li>
         </ol>
@@ -50,8 +52,8 @@
                     <th>Status</th>
                 </tr>
                 <tr th:each="supply : ${supplies}">
-                    <td th:text="${supply.id}"><input class="itemId" type="hidden" name="itemId" th:value="${supply.id}"></td>
-                    <td th:text="${supply.name}"></td>
+                    <td class="itemId" th:text="${supply.id}"></td>
+                    <td class="names" th:text="${supply.name}"></td>
                     <td th:text="${supply.amount}"></td>
                     <td><input class="quantity" type="text" name="quantity"></td>
                     <td>

@@ -191,6 +191,7 @@ public class FrontController {
               null,
               new ParameterizedTypeReference<List<User>>() {});
       log.debug("Users service response: {}", users.getBody());
+      System.out.println(users.getBody());
       model.addAttribute("users", users.getBody());
       return "users-management";
     } catch (RestClientException e) {

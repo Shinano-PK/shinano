@@ -217,6 +217,10 @@ $(document).ready(function () {
             method: $(".method").val()
         }
         $("#success").show();
+        $("#step1").hide();
+        $("#step2").hide();
+        $("#step3").hide();
+        $("#step4").hide();
         $.ajax({
             type: "POST",
             url: "/payment",
