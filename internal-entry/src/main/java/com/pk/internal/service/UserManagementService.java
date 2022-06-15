@@ -30,7 +30,7 @@ public class UserManagementService {
     try {
       ResponseEntity<List<User>> ticketEntity =
           restTemplate.exchange(
-              "http://users-service/",
+              "http://users-service/manage/user/all",
               HttpMethod.GET,
               null,
               new ParameterizedTypeReference<List<User>>() {});
@@ -49,7 +49,7 @@ public class UserManagementService {
     try {
       ResponseEntity<User> userEntity =
           restTemplate.getForEntity(
-              "http://users-service/manage/user?email={email}", User.class, email);
+              "http://users-service/manage/userByEmail?email={email}", User.class, email);
       log.debug("User service response: {}", userEntity.getBody());
       return userEntity.getBody();
     } catch (RestClientException e) {

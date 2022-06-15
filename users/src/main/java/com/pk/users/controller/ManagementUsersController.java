@@ -42,13 +42,13 @@ public class ManagementUsersController {
     return usersService.getAllUsers();
   }
 
-  @GetMapping("/user")
+  @GetMapping("/userByUsername")
   public User getUserByUsername(@RequestParam String username) {
     log.trace("getUserByUsername()");
     return usersService.getUserByUsername(username);
   }
 
-  @GetMapping("/user")
+  @GetMapping("/userByEmail")
   public User getUserByEmail(@RequestParam String email) {
     log.trace("getUserByEmail()");
     return usersService.getUserByEmail(email);
