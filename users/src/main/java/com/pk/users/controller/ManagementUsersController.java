@@ -45,6 +45,7 @@ public class ManagementUsersController {
   @GetMapping("/userByUsername")
   public User getUserByUsername(@RequestParam String username) {
     log.trace("getUserByUsername()");
+    log.info("Got user: {}", username);
     return usersService.getUserByUsername(username);
   }
 
