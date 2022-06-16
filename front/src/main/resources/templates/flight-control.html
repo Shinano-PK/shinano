@@ -45,20 +45,24 @@
         <div id="arrivals">
             <table>
                 <tr>
-                    <th colspan="5">PRZYLOTY</th>
+                    <th colspan="6">PRZYLOTY</th>
                 </tr>
                 <tr>
                     <th>Nr lotu</th>
-                    <th>Godzina</th>
+                    <th>Termin</th>
+                    <th>Kierunek</th>
+                    <th>Miejsce wylotu</th>
                     <th>Status</th>
                     <th>Pas</th>
                 </tr>
                 <tr th:each="flight : ${arrivals}">
-                    <td th:text="${flight.idFlight}"><input class="flightNumber" type="hidden" name="flightNumber" th:value="${flight.idFlight}"></td>
-                    <td th:text="${flight.time}"></td>
-                    <td th:text="${flight.status}"></td>
+                    <td th:text="${flight.idFlight}" class="idFlight"></td>
+                    <td th:text="${flight.time}" class="time"></td>
+                    <td th:text="${flight.destination}" class="destination"></td>
+                    <td th:text="${flight.from}" class="from"></td>
+                    <td th:text="${flight.status}" class="status"></td>
                     <td>
-                        <select class="lane" name="lane">
+                        <select class="runway" name="lane">
                             <option th:value="${flight.runway}" th:text="${flight.runway}" selected></option>
                             <option value="A1">A1</option>
                             <option value="A2">A2</option>
@@ -72,25 +76,29 @@
         <div id="departures">
             <table>
                 <tr>
-                    <th colspan="5">ODLOTY</th>
+                    <th colspan="6">ODLOTY</th>
                 </tr>
                 <tr>
                     <th>Nr lotu</th>
-                    <th>Godzina</th>
+                    <th>Termin</th>
+                    <th>Kierunek</th>
+                    <th>Miejsce wylotu</th>
                     <th>Status</th>
                     <th>Pas</th>
                 </tr>
                 <tr th:each="flight : ${departures}">
-                    <td th:text="${flight.idFlight}"><input class="flightNumber" type="hidden" name="flightNumber" th:value="${flight.idFlight}"></td>
-                    <td th:text="${flight.time}"></td>
-                    <td th:text="${flight.status}"></td>
+                    <td th:text="${flight.idFlight}" class="idFlight"></td>
+                    <td th:text="${flight.time}" class="time"></td>
+                    <td th:text="${flight.destination}" class="destination"></td>
+                    <td th:text="${flight.from}" class="from"></td>
+                    <td th:text="${flight.status}" class="status"></td>
                     <td>
-                        <select class="lane" name="lane">
+                        <select class="runway" name="lane">
                             <option th:value="${flight.runway}" th:text="${flight.runway}" selected></option>
                             <option value="A1">A1</option>
-                            <option value="A1">A2</option>
-                            <option value="A1">A3</option>
-                            <option value="A1">A4</option>
+                            <option value="A2">A2</option>
+                            <option value="A3">A3</option>
+                            <option value="A4">A4</option>
                         </select>
                     </td>
                 </tr>

@@ -240,7 +240,7 @@ public class FrontController {
     }
   }
 
-  @PostMapping("/flightControl")
+  @PutMapping("/flight-control")
   public void updateFlightControl(@RequestBody List<FlightControlRequest> flightControlRequest)
       throws Exception {
     HttpHeaders headers = new HttpHeaders();
@@ -254,7 +254,7 @@ public class FrontController {
     }
     ResponseEntity<AuthResp> response =
         restTemplate.exchange(
-            "http://internal-entry-service/flightcontrol", HttpMethod.POST, entity, AuthResp.class);
+            "http://internal-entry-service/flightcontrol", HttpMethod.PUT, entity, AuthResp.class);
     if (response.getBody() == null) {
       throw new Exception("body is null, internal service malfunctioning");
     }
