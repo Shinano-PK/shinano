@@ -328,7 +328,22 @@ public class FrontController {
   }
 
   @PostMapping("/flight-creator")
-  public void createFlight(@RequestBody Flight flight) {
-
+  public void createFlight(@RequestBody Flight flight) throws Exception {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<String> entity;
+    try {
+      entity = new HttpEntity<>(objectMapper.writeValueAsString(flight), headers);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+      throw new Exception("Updated users are malformed");
+    }
+    ResponseEntity<User> response =
+        restTemplate.exchange(
+            "http://internal-entry-service/flight", HttpMethod.POST, entity, User.class);
+    log.info("Got response: {}", response.getBody());
+    if (response.getBody() == null) {
+      throw new Exception("body is null, internal service malfunctioning");
+    }
   }
 }

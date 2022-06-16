@@ -2,7 +2,9 @@ package com.pk.internal.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.pk.internal.model.Flight;
 import com.pk.internal.model.FlightControlRequest;
+import com.pk.internal.model.FlightInput;
 import com.pk.internal.model.RestockSupply;
 import com.pk.internal.model.Root;
 import com.pk.internal.service.InternalService;
@@ -169,19 +171,16 @@ public class InternalController {
   }
 
   @PutMapping("/flightcontrol")
-  public FlightControlRequest updateFlight(@RequestBody FlightControlRequest flightControlRequest) throws Exception {
+  public Flight updateFlight(@RequestBody Flight flight) throws Exception {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<String> entity;
-    ResponseEntity<FlightControlRequest> restockSupply;
+    ResponseEntity<Flight> flightResp;
     try {
-      entity = new HttpEntity<>(objectMapper.writeValueAsString(flightControlRequest), headers);
-      restockSupply =
+      entity = new HttpEntity<>(objectMapper.writeValueAsString(flight), headers);
+      flightResp =
           restTemplate.exchange(
-              "http://flight-schedule-service/flight",
-              HttpMethod.PUT,
-              entity,
-              FlightControlRequest.class);
+              "http://flight-schedule-service/flight", HttpMethod.PUT, entity, Flight.class);
     } catch (JsonProcessingException e) {
       log.error("Json processing error", e);
       throw new Exception("Invalid json");
@@ -189,19 +188,19 @@ public class InternalController {
       log.error("getForEntity exception, e:", e);
       throw new Exception("Communication error");
     }
-    log.debug("Supply service response: {}", restockSupply.getBody());
-    return restockSupply.getBody();
-  } 
+    log.debug("Supply service response: {}", flightResp.getBody());
+    return flightResp.getBody();
+  }
 
   @PostMapping("/flightcontrol")
-  public FlightControlRequest addFlight(@RequestBody FlightControlRequest flightControlRequest) throws Exception {
+  public FlightControlRequest addFlight(@RequestBody FlightControlRequest flight) throws Exception {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<String> entity;
-    ResponseEntity<FlightControlRequest> restockSupply;
+    ResponseEntity<FlightControlRequest> flightResp;
     try {
-      entity = new HttpEntity<>(objectMapper.writeValueAsString(flightControlRequest), headers);
-      restockSupply =
+      entity = new HttpEntity<>(objectMapper.writeValueAsString(flight), headers);
+      flightResp =
           restTemplate.exchange(
               "http://flight-schedule-service/flight",
               HttpMethod.POST,
@@ -214,9 +213,38 @@ public class InternalController {
       log.error("getForEntity exception, e:", e);
       throw new Exception("Communication error");
     }
-    log.debug("Supply service response: {}", restockSupply.getBody());
-    return restockSupply.getBody();
+    log.debug("Supply service response: {}", flightResp.getBody());
+    return flightResp.getBody();
   }
 
+  @PostMapping("/flight")
+  public FlightInput addFlight(@RequestBody Flight flight) throws Exception {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<String> entity;
+    ResponseEntity<FlightInput> flightResp;
 
+    FlightInput flightInput =
+        new FlightInput(
+            flight.getIdPlane(),
+            flight.getIdFlightSchedule(),
+            flight.getDelay(),
+            flight.getStatus(),
+            flight.getRunway());
+
+    try {
+      entity = new HttpEntity<>(objectMapper.writeValueAsString(flightInput), headers);
+      flightResp =
+          restTemplate.exchange(
+              "http://flight-schedule-service/flight", HttpMethod.POST, entity, FlightInput.class);
+    } catch (JsonProcessingException e) {
+      log.error("Json processing error", e);
+      throw new Exception("Invalid json");
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      throw new Exception("Communication error");
+    }
+    log.debug("Supply service response: {}", flightResp.getBody());
+    return flightResp.getBody();
+  }
 }
