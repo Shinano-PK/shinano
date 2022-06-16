@@ -218,10 +218,46 @@ public class FrontController {
   }
 
   @PostMapping("/restockSupply")
-  public void updateRestockSupply(@RequestBody List<RestockSupply> restockSupply) {}
+  public void updateRestockSupply(@RequestBody List<RestockSupply> restockSupply) throws Exception {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<String> entity;
+    try {
+      entity = new HttpEntity<>(objectMapper.writeValueAsString(restockSupply), headers);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+      throw new Exception("restockSupply data is malformed");
+    }
+    ResponseEntity<AuthResp> response =
+        restTemplate.exchange(
+            "http://internal-entry-service/logistics/restockSupply",
+            HttpMethod.POST,
+            entity,
+            AuthResp.class);
+    if (response.getBody() == null) {
+      throw new Exception("body is null, internal service malfunctioning");
+    }
+  }
 
   @PostMapping("/flightControl")
-  public void updateFlightControl(@RequestBody List<FlightControlRequest> flightControlRequest) {}
+  public void updateFlightControl(@RequestBody List<FlightControlRequest> flightControlRequest)
+      throws Exception {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<String> entity;
+    try {
+      entity = new HttpEntity<>(objectMapper.writeValueAsString(flightControlRequest), headers);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+      throw new Exception("flightControlRequest data is malformed");
+    }
+    ResponseEntity<AuthResp> response =
+        restTemplate.exchange(
+            "http://internal-entry-service/flightcontrol", HttpMethod.POST, entity, AuthResp.class);
+    if (response.getBody() == null) {
+      throw new Exception("body is null, internal service malfunctioning");
+    }
+  }
 
   @PostMapping("/login")
   public AuthResp login(@RequestBody LoginData loginData) throws Exception {
@@ -277,7 +313,10 @@ public class FrontController {
       }
       ResponseEntity<User> response =
           restTemplate.exchange(
-              "http://internal-entry-service/management/resetPassword", HttpMethod.POST, entity, User.class);
+              "http://internal-entry-service/management/resetPassword",
+              HttpMethod.POST,
+              entity,
+              User.class);
       log.info("Got response: {}", response.getBody());
       if (response.getBody() == null) {
         throw new Exception("body is null, internal service malfunctioning");
