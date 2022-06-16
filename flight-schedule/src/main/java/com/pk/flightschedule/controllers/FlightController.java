@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,12 +30,12 @@ public class FlightController {
   private FlightService flightService;
 
   @GetMapping("/flight/check")
-  public Boolean checkFlightExists(Integer id) {
+  public Boolean checkFlightExists(@RequestParam Integer id) {
     return flightService.getFlightById(id) == null;
   }
 
   @GetMapping("/flight/control/departure")
-  public List<FlightControlRequest> getDeparture(FlightControlRequest input) {
+  public List<FlightControlRequest> getDeparture(@RequestBody FlightControlRequest input) {
     return flightService.getPlaneControlDeparture(Date.valueOf(LocalDate.now()));
   }
 
@@ -43,24 +45,24 @@ public class FlightController {
   }
 
   @GetMapping("/flight")
-  public Flight getFlight(Integer id) {
+  public Flight getFlight(@RequestParam Integer id) {
     return flightService.getFlightById(id);
   }
 
   @PostMapping("/flight")
-  public Integer saveFlight(@Valid FlightInput input, BindingResult bindingResult) {
+  public Integer saveFlight(@Valid @RequestBody FlightInput input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return flightService.saveFlight(input);
   }
 
   @PutMapping("/flight")
-  public Boolean updateFlight(@Valid Flight input, BindingResult bindingResult) {
+  public Boolean updateFlight(@Valid @RequestBody Flight input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return flightService.updateFlight(input);
   }
 
   @DeleteMapping("/flight")
-  public Boolean deleteFlight(Integer id) {
+  public Boolean deleteFlight(@RequestParam Integer id) {
     return flightService.deleteFlight(id);
   }
 

@@ -11,6 +11,8 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,29 +23,29 @@ public class PlaneController {
   private PlaneService planeService;
 
   @GetMapping("/plane/check")
-  public Boolean checkPlaneExists(String id) {
+  public Boolean checkPlaneExists(@RequestParam String id) {
     return planeService.getPlaneById(id) == null;
   }
 
   @GetMapping("/plane")
-  public Plane getPlane(String id) {
+  public Plane getPlane(@RequestParam String id) {
     return planeService.getPlaneById(id);
   }
 
   @PostMapping("/plane")
-  public String saveController(@Valid Plane input, BindingResult bindingResult) {
+  public String saveController(@Valid @RequestBody Plane input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return planeService.savePlane(input);
   }
 
   @PutMapping("/plane")
-  public Boolean updatePlane(@Valid Plane input, BindingResult bindingResult) {
+  public Boolean updatePlane(@Valid @RequestBody Plane input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return planeService.updatePlane(input);
   }
 
   @DeleteMapping("/plane")
-  public Boolean deletePlane(String id) {
+  public Boolean deletePlane(@RequestParam String id) {
     return planeService.deletePlane(id);
   }
 

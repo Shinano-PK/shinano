@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,32 +25,32 @@ public class RepairmentSchedulerController {
   private RepairmentSchedulerService repairmentSchedulerService;
 
   @GetMapping("/repairmentScheduler")
-  public RepairmentScheduler getRepairmentScheduler(Integer id) {
+  public RepairmentScheduler getRepairmentScheduler(@RequestParam Integer id) {
     return repairmentSchedulerService.getRepairmentSchedulerById(id);
   }
 
   @GetMapping("/repairmentSchedulerByPlaneAndUser")
   public List<RepairmentScheduler> getRepairmentSchedulerByPlaneAndUser(
-      String idPlane, Integer idUser) {
+      @RequestParam String idPlane, @RequestParam Integer idUser) {
     return repairmentSchedulerService.getRepairmentSchedulerByPlaneAndUser(idPlane, idUser);
   }
 
   @PostMapping("/repairmentScheduler")
   public Integer saveRepairmentScheduler(
-      @Valid RepairmentSchedulerInput input, BindingResult bindingResult) {
+      @Valid @RequestBody RepairmentSchedulerInput input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return repairmentSchedulerService.saveRepairmentScheduler(input);
   }
 
   @PutMapping("/repairmentScheduler")
   public Boolean updateRepairmentScheduler(
-      @Valid RepairmentScheduler input, BindingResult bindingResult) {
+      @Valid @RequestBody RepairmentScheduler input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return repairmentSchedulerService.updateRepairmentScheduler(input);
   }
 
   @DeleteMapping("/repairmentScheduler")
-  public Boolean deleteRepairmentScheduler(Integer id) {
+  public Boolean deleteRepairmentScheduler(@RequestParam Integer id) {
     return repairmentSchedulerService.deleteRepairmentScheduler(id);
   }
 

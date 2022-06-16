@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,24 +25,24 @@ public class StorageController {
   private StorageService storageService;
 
   @GetMapping("/storage")
-  public Storage getProduct(Integer id) {
+  public Storage getProduct(@RequestParam Integer id) {
     return storageService.getStorageById(id);
   }
 
   @PostMapping("/storage")
-  public Integer saveProduct(@Valid StorageRequest input, BindingResult bindingResult) {
+  public Integer saveProduct(@Valid @RequestBody StorageRequest input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return storageService.saveStorage(input);
   }
 
   @PutMapping("/storage")
-  public Boolean updateProduct(@Valid Storage input, BindingResult bindingResult) {
+  public Boolean updateProduct(@Valid @RequestBody Storage input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return storageService.updateStorage(input);
   }
 
   @DeleteMapping("/storage")
-  public Boolean deleteProduct(Integer id) {
+  public Boolean deleteProduct(@RequestParam Integer id) {
     return storageService.deleteStorage(id);
   }
 

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,24 +25,24 @@ public class ProductController {
   private ProductService productService;
 
   @GetMapping("/product")
-  public Product getProduct(Integer id) {
+  public Product getProduct(@RequestParam Integer id) {
     return productService.getProductById(id);
   }
 
   @PostMapping("/product")
-  public Integer saveProduct(@Valid ProductRequest input, BindingResult bindingResult) {
+  public Integer saveProduct(@Valid @RequestBody ProductRequest input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return productService.saveProduct(input);
   }
 
   @PutMapping("/product")
-  public Boolean updateProduct(@Valid Product input, BindingResult bindingResult) {
+  public Boolean updateProduct(@Valid @RequestBody Product input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return productService.updateProduct(input);
   }
 
   @DeleteMapping("/product")
-  public Boolean deleteProduct(Integer id) {
+  public Boolean deleteProduct(@RequestParam Integer id) {
     return productService.deleteProduct(id);
   }
 

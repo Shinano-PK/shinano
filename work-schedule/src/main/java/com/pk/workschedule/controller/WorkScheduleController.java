@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,24 +24,24 @@ public class WorkScheduleController {
   private WorkScheduleService flightScheduleService;
 
   @GetMapping("/workSchedule")
-  public WorkSchedule getWorkSchedule(Integer id) {
+  public WorkSchedule getWorkSchedule(@RequestParam Integer id) {
     return flightScheduleService.getWorkScheduleById(id);
   }
 
   @PostMapping("/workSchedule")
-  public Integer saveWorkSchedule(@Valid WorkScheduleInput input, BindingResult bindingResult) {
+  public Integer saveWorkSchedule(@Valid @RequestBody WorkScheduleInput input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return flightScheduleService.saveWorkSchedule(input);
   }
 
   @PutMapping("/workSchedule")
-  public Boolean updateWorkSchedule(@Valid WorkSchedule input, BindingResult bindingResult) {
+  public Boolean updateWorkSchedule(@Valid @RequestBody WorkSchedule input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return flightScheduleService.updateWorkSchedule(input);
   }
 
   @DeleteMapping("/workSchedule")
-  public Boolean deleteWorkSchedule(Integer id) {
+  public Boolean deleteWorkSchedule(@RequestParam Integer id) {
     return flightScheduleService.deleteWorkSchedule(id);
   }
 

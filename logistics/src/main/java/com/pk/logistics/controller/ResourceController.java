@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,24 +25,24 @@ public class ResourceController {
   private ResourceService resourceService;
 
   @GetMapping("/resource")
-  public Resource getResource(Integer id) {
+  public Resource getResource(@RequestParam Integer id) {
     return resourceService.getResourceById(id);
   }
 
   @PostMapping("/resource")
-  public Integer saveResource(@Valid ResourceRequest input, BindingResult bindingResult) {
+  public Integer saveResource(@Valid @RequestBody ResourceRequest input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return resourceService.saveResource(input);
   }
 
   @PutMapping("/resource")
-  public Boolean updateResource(@Valid Resource input, BindingResult bindingResult) {
+  public Boolean updateResource(@Valid @RequestBody Resource input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return resourceService.updateResource(input);
   }
 
   @DeleteMapping("/resource")
-  public Boolean deleteResource(Integer id) {
+  public Boolean deleteResource(@RequestParam Integer id) {
     return resourceService.deleteResource(id);
   }
 
