@@ -50,6 +50,9 @@ public class LogisticsService {
   public List<RestockSupply> resupply(List<RestockSupply> list) {
     Resource resource;
     for (RestockSupply element : list) {
+      if (element.getAmount() == null) {
+        continue;
+      }
       resource = resourceRepository.get(element.getId());
       resourceRepository.update(
           new Resource(
