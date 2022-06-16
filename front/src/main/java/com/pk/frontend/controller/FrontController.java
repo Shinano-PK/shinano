@@ -326,4 +326,9 @@ public class FrontController {
       }
     }
   }
+
+  @PostMapping
+  public void createFlight(@RequestBody Flight flight) {
+
+  }
 }
