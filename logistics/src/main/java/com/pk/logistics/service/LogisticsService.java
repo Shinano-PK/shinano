@@ -56,7 +56,7 @@ public class LogisticsService {
               resource.getId(),
               resource.getIdProduct(),
               resource.getIdStorage(),
-              resource.getQuantity() + element.getRequest()));
+              resource.getQuantity() + element.getAmount()));
     }
     return list;
   }
