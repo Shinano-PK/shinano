@@ -246,17 +246,22 @@ public class FrontController {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<String> entity;
-    try {
-      entity = new HttpEntity<>(objectMapper.writeValueAsString(flightControlRequest), headers);
-    } catch (JsonProcessingException e) {
-      e.printStackTrace();
-      throw new Exception("flightControlRequest data is malformed");
-    }
-    ResponseEntity<AuthResp> response =
-        restTemplate.exchange(
-            "http://internal-entry-service/flightcontrol", HttpMethod.PUT, entity, AuthResp.class);
-    if (response.getBody() == null) {
-      throw new Exception("body is null, internal service malfunctioning");
+    for (FlightControlRequest req : flightControlRequest) {
+      try {
+        entity = new HttpEntity<>(objectMapper.writeValueAsString(req), headers);
+      } catch (JsonProcessingException e) {
+        e.printStackTrace();
+        throw new Exception("flightControlRequest data is malformed");
+      }
+      ResponseEntity<AuthResp> response =
+          restTemplate.exchange(
+              "http://internal-entry-service/flightcontrol",
+              HttpMethod.PUT,
+              entity,
+              AuthResp.class);
+      if (response.getBody() == null) {
+        throw new Exception("body is null, internal service malfunctioning");
+      }
     }
   }
 
@@ -314,10 +319,7 @@ public class FrontController {
       }
       ResponseEntity<User> response =
           restTemplate.exchange(
-              "http://internal-entry-service/management/user",
-              HttpMethod.PUT,
-              entity,
-              User.class);
+              "http://internal-entry-service/management/user", HttpMethod.PUT, entity, User.class);
       log.info("Got response: {}", response.getBody());
       if (response.getBody() == null) {
         throw new Exception("body is null, internal service malfunctioning");

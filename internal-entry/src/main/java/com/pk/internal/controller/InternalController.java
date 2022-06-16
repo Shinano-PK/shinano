@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -167,6 +168,31 @@ public class InternalController {
     return restockSupply.getBody();
   }
 
+  @PutMapping("/flightcontrol")
+  public FlightControlRequest updateFlight(@RequestBody FlightControlRequest flightControlRequest) throws Exception {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<String> entity;
+    ResponseEntity<FlightControlRequest> restockSupply;
+    try {
+      entity = new HttpEntity<>(objectMapper.writeValueAsString(flightControlRequest), headers);
+      restockSupply =
+          restTemplate.exchange(
+              "http://flight-schedule-service/flight",
+              HttpMethod.PUT,
+              entity,
+              FlightControlRequest.class);
+    } catch (JsonProcessingException e) {
+      log.error("Json processing error", e);
+      throw new Exception("Invalid json");
+    } catch (RestClientException e) {
+      log.error("getForEntity exception, e:", e);
+      throw new Exception("Communication error");
+    }
+    log.debug("Supply service response: {}", restockSupply.getBody());
+    return restockSupply.getBody();
+  } 
+
   @PostMapping("/flightcontrol")
   public FlightControlRequest addFlight(@RequestBody FlightControlRequest flightControlRequest) throws Exception {
     HttpHeaders headers = new HttpHeaders();
@@ -177,7 +203,7 @@ public class InternalController {
       entity = new HttpEntity<>(objectMapper.writeValueAsString(flightControlRequest), headers);
       restockSupply =
           restTemplate.exchange(
-              "http://logistics-service/restockSupply",
+              "http://flight-schedule-service/flight",
               HttpMethod.POST,
               entity,
               FlightControlRequest.class);
