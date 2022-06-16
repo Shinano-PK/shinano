@@ -228,12 +228,12 @@ public class FrontController {
       e.printStackTrace();
       throw new Exception("restockSupply data is malformed");
     }
-    ResponseEntity<AuthResp> response =
+    ResponseEntity<List<RestockSupply>> response =
         restTemplate.exchange(
             "http://internal-entry-service/logistics/restockSupply",
             HttpMethod.POST,
             entity,
-            AuthResp.class);
+            new ParameterizedTypeReference<List<RestockSupply>>() {});
     if (response.getBody() == null) {
       throw new Exception("body is null, internal service malfunctioning");
     }
