@@ -35,7 +35,7 @@ public class UserManagementController {
 
   @GetMapping("/allUsers")
   public List<User> getAllUsers() {
-    return Collections.emptyList();
+    return userManagementService.getAllUsers();
   }
 
   // TODO add param validation

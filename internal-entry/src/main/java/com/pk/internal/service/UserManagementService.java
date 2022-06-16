@@ -6,6 +6,8 @@ import com.pk.internal.model.ErrMsg;
 import com.pk.internal.model.User;
 import java.util.Collections;
 import java.util.List;
+
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.core.ParameterizedTypeReference;
@@ -20,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Service
+@AllArgsConstructor
 public class UserManagementService {
   ObjectMapper objectMapper;
   RestTemplate restTemplate;
