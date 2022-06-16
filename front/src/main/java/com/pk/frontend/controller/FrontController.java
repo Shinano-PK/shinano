@@ -327,7 +327,7 @@ public class FrontController {
     }
   }
 
-  @PostMapping
+  @PostMapping("/flight-creator")
   public void createFlight(@RequestBody Flight flight) {
 
   }
