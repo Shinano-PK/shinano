@@ -45,27 +45,32 @@
         <div id="supplies">
             <table>
                 <tr>
+                    <th>ID</th>
                     <th>E-mail</th>
-                    <th>Imię i nazwisko</th>
+                    <th>Nazwa użytkownika</th>
                     <th>Rola</th>
+                    <th>Hasło</th>
+                    <th>Data utworzenia</th>
                     <th>Akcja</th>
                 </tr>
                 <tr th:each="user : ${users}">
-                    <td th:text="${user.email}"><input class="userId" type="hidden" name="userId" th:value="${user.email}"></td>
-                    <td th:text="${user.username}"></td>
-                    <td th:text="${user.authority}"></td>
+                    <td th:text="${user.userId}" class="userId"></td>
+                    <td th:text="${user.email}" class="email"></td>
+                    <td th:text="${user.username}" class="username"></td>
+                    <td th:text="${user.authority}" class="authority"></td>
+                    <td th:text="${user.password}" class="password"></td>
+                    <td th:text="${user.created}" class="created"></td>
                     <td>
-                        <select class="action" name="action">
-                            <option value="" selected></option>
-                            <option value="ban">Zablokuj</option>
-                            <option value="unban">Odblokuj</option>
-                            <option value="delete">Usuń</option>
+                        <select class="enabled" name="enabled">
+                            <option th:text="${user.enabled}" selected></option>
+                            <option value="0">Zablokuj</option>
+                            <option value="1">Odblokuj</option>
                         </select>
                     </td>
                 </tr>
             </table>
         </div>
-        <button type="submit">Zapisz</button>
+        <input type="submit" value="Zapisz">
     </form>
     <div id="themeInformation">
         <p>Wiadomości</p>

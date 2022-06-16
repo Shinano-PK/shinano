@@ -28,13 +28,14 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            headers: {'Access-Control-Allow-Origin': '*'},
-            url: "http://localhost:8080/logistics/restockSupply",
+            headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+            url: "/restock-supply",
             data: JSON.stringify(formData),
-            dataType: "json",
+            dataType: "application/json",
             encode: true,
-        }).done(function (data) {
-            console.log(data);
+        }).done(function (result) {
+            console.log(result);
+            document.location.href = '/restock-supply';
         });
 
         event.preventDefault();

@@ -23,7 +23,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/flightManager",
+            url: "/flight-control",
             data: formData,
             dataType: "json",
             encode: true,

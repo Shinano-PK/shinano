@@ -1,19 +1,40 @@
 $(document).ready(function () {
     $("#manageUsers").submit(function (event) {
-        var valuesUserId = $.map($(".userId"), function (elem) {
+        var valuesUsername = $.map($(".username"), function (elem) {
+            return $(elem).text();
+        });
+        console.log("username.length=" + valuesUsername.length);
+        var valuesEmail = $.map($(".email"), function (elem) {
+            return $(elem).text();
+        });
+        var valuesPassword = $.map($(".password"), function (elem) {
+            return $(elem).text();
+        });
+        var valuesEnabled = $.map($(".enabled"), function (elem) {
             return $(elem).val();
         });
-        var valuesAction = $.map($(".action"), function (elem) {
-            return $(elem).val();
+        var valuesCreated = $.map($(".created"), function (elem) {
+            return $(elem).text();
+        });
+        var valuesAuthority = $.map($(".authority"), function (elem) {
+            return $(elem).text();
+        });
+        var valuesUserId = $.map($(".userId"), function (elem) {
+            return $(elem).text();
         });
 
         var formData = [];
         var user = {};
 
-        for (let i = 0; i < valuesUserId.length; i++) {
+        for (let i = 0; i < valuesUsername.length; i++) {
             user = {
-                itemId: valuesUserId[i],
-                quantity: valuesAction[i]
+                username: valuesUsername[i],
+                email: valuesEmail[i],
+                password: valuesPassword[i],
+                enabled: valuesEnabled[i],
+                created: valuesCreated[i],
+                authority: valuesAuthority[i],
+                userId: valuesUserId[i]
             };
             formData[i] = user;
             console.log(formData);
@@ -22,13 +43,16 @@ $(document).ready(function () {
 
 
         $.ajax({
-            type: "POST",
-            url: "/manageUsers",
-            data: formData,
+            type: "PUT",
+            headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+            url: "/users-management",
+            data: JSON.stringify(formData),
             dataType: "json",
             encode: true,
-        }).done(function (data) {
-            console.log(data);
+            success: function (result) {
+                console.log(result);
+                location.reload();
+            }
         });
 
         event.preventDefault();
