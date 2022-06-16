@@ -26,9 +26,6 @@ public class PersistentUserRepository implements UserRepository {
               (rs, rowNum) ->
                   new User(
                       rs.getInt("user_id"),
-                      rs.getString("name"),
-                      rs.getString("surname"),
-                      rs.getDate("birth_date"),
                       rs.getInt("enabled"),
                       rs.getDate("creation_date"),
                       rs.getString("email"),
@@ -58,9 +55,6 @@ public class PersistentUserRepository implements UserRepository {
           (rs, rowNum) ->
               new User(
                   rs.getInt("user_id"),
-                  rs.getString("name"),
-                  rs.getString("surname"),
-                  rs.getDate("birth_date"),
                   rs.getInt("enabled"),
                   rs.getDate("creation_date"),
                   rs.getString("email"),
@@ -84,9 +78,6 @@ public class PersistentUserRepository implements UserRepository {
               (rs, rowNum) ->
                   new User(
                       rs.getInt("user_id"),
-                      rs.getString("name"),
-                      rs.getString("surname"),
-                      rs.getDate("birth_date"),
                       rs.getInt("enabled"),
                       rs.getDate("creation_date"),
                       rs.getString("email"),
@@ -117,9 +108,6 @@ public class PersistentUserRepository implements UserRepository {
               (rs, rowNum) ->
                   new User(
                       rs.getInt("user_id"),
-                      rs.getString("name"),
-                      rs.getString("surname"),
-                      rs.getDate("birth_date"),
                       rs.getInt("enabled"),
                       rs.getDate("creation_date"),
                       rs.getString("email"),
@@ -131,6 +119,9 @@ public class PersistentUserRepository implements UserRepository {
       if (users.size() > 1) {
         log.error("Find by username failed, more than 1 user with same id (???)");
         throw new Exception("Database tolerates duplicate id");
+      }
+      if (users.isEmpty()) {
+        return null;
       }
       return users.get(0);
     } catch (Exception e) {
@@ -147,18 +138,15 @@ public class PersistentUserRepository implements UserRepository {
           connection -> {
             PreparedStatement ps =
                 connection.prepareStatement(
-                    "insert into \"user\" (name, surname, birth_date, enabled, creation_date,"
-                        + " email, username, password, role) values(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    "insert into \"user\" (enabled, creation_date,"
+                        + " email, username, password, role) values(?, ?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getSurname());
-            ps.setDate(3, user.getBirthDate());
-            ps.setInt(4, user.getEnabled());
-            ps.setDate(5, user.getCreated());
-            ps.setString(6, user.getEmail());
-            ps.setString(7, user.getUsername());
-            ps.setString(8, user.getPassword());
-            ps.setString(9, user.getAuthority());
+            ps.setInt(1, user.getEnabled());
+            ps.setDate(2, user.getCreated());
+            ps.setString(3, user.getEmail());
+            ps.setString(4, user.getUsername());
+            ps.setString(5, user.getPassword());
+            ps.setString(6, user.getAuthority());
             return ps;
           },
           keyHolder);
@@ -176,21 +164,34 @@ public class PersistentUserRepository implements UserRepository {
   @Override
   public Boolean update(User user) {
     try {
-      return (jdbcTemplate.update(
-              "update \"user\" set name = ?, surname = ?, birth_date = ?, enabled = ?,"
-                  + " creation_date = ?, username = ?, password = ?, role = ?, token = ? where"
-                  + " user_id = ?",
-              user.getName(),
-              user.getSurname(),
-              user.getBirthDate(),
-              user.getEnabled(),
-              user.getCreated(),
-              user.getUsername(),
-              user.getPassword(),
-              user.getAuthority(),
-              user.getToken(),
-              user.getUserId())
-          > 0);
+      if (user.getToken() == null || user.getToken().isEmpty()) {
+        return (jdbcTemplate.update(
+                "update \"user\" set enabled = ?,"
+                    + " creation_date = ?, username = ?, email = ?, password = ?, role = ? where"
+                    + " user_id = ?",
+                user.getEnabled(),
+                user.getCreated(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getAuthority(),
+                user.getUserId())
+            > 0);
+      } else {
+        return (jdbcTemplate.update(
+                "update \"user\" set enabled = ?,"
+                    + " creation_date = ?, username = ?, email = ?, password = ?, role = ?, token = ? where"
+                    + " user_id = ?",
+                user.getEnabled(),
+                user.getCreated(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getAuthority(),
+                user.getToken(),
+                user.getUserId())
+            > 0);
+      }
     } catch (Exception e) {
       log.warn("Exception: " + e.getMessage());
       return false;

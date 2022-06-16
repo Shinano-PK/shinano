@@ -8,6 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
+
 import javax.sql.DataSource;
 import com.pk.users.model.User;
 import org.junit.jupiter.api.AfterEach;
@@ -59,7 +61,7 @@ public class PersistentUserRepositoryTest {
 
   @Test
   public void testSave() {
-    User user = new User(0, "test", "test", Date.valueOf(LocalDate.of(2022, 10, 11)), 1, Date.valueOf(LocalDate.of(2022, 10, 11)), "test@test.test", "test", "test", "testAuth", "");
+    User user = new User(0, 1, Date.valueOf(LocalDate.of(2022, 10, 11)), "test@test.test", "test", "test", "testAuth", "");
     assertNotEquals(0, userRepository.save(user));
     assertNotEquals(null, userRepository.getByEmail("test@test.test"));
   }
@@ -68,9 +70,10 @@ public class PersistentUserRepositoryTest {
   public void testUpdate() {
     User user = userRepository.getByEmail("test2@t.t");
     assertNotNull(user);
-    user.setName("testName");
+    user.setEmail("testName@t.t");
     assertTrue(userRepository.update(user));
-    assertEquals("testName", userRepository.getByEmail("test2@t.t").getName());
+    List<User> users = userRepository.getAllUsers();
+    assertEquals("testName@t.t", userRepository.getByEmail("testName@t.t").getEmail());
   }
 
   @Test

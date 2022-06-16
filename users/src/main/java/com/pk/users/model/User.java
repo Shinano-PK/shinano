@@ -9,9 +9,6 @@ import lombok.Data;
 @AllArgsConstructor
 public class User {
   Integer userId;
-  @NotNull String name;
-  @NotNull String surname;
-  @NotNull Date birthDate;
   Integer enabled;
   Date created;
   @NotNull String email;
