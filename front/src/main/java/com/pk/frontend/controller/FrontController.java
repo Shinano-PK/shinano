@@ -1,12 +1,13 @@
 package com.pk.frontend.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pk.frontend.model.*;
-
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -24,6 +25,7 @@ import org.springframework.web.client.RestTemplate;
 @AllArgsConstructor
 public class FrontController {
   RestTemplate restTemplate;
+  ObjectMapper objectMapper;
 
   @GetMapping("/schedule")
   public String loadSchedule(Model model) {
@@ -61,17 +63,17 @@ public class FrontController {
     headers.setContentType(MediaType.APPLICATION_JSON);
     try {
       ResponseEntity<List<FlightControlRequest>> arrivals =
-              restTemplate.exchange(
-                      "http://internal-entry-service/flightSchedule/arrival",
-                      HttpMethod.GET,
-                      null,
-                      new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+          restTemplate.exchange(
+              "http://internal-entry-service/flightSchedule/arrival",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<FlightControlRequest>>() {});
       ResponseEntity<List<FlightControlRequest>> departures =
-              restTemplate.exchange(
-                      "http://internal-entry-service/flightSchedule/departure",
-                      HttpMethod.GET,
-                      null,
-                      new ParameterizedTypeReference<List<FlightControlRequest>>() {});
+          restTemplate.exchange(
+              "http://internal-entry-service/flightSchedule/departure",
+              HttpMethod.GET,
+              null,
+              new ParameterizedTypeReference<List<FlightControlRequest>>() {});
       log.debug("Flight service response: {}", arrivals.getBody());
       log.debug("Flight service response: {}", departures.getBody());
       model.addAttribute("arrivals", arrivals.getBody());
@@ -216,27 +218,70 @@ public class FrontController {
   }
 
   @PostMapping("/restockSupply")
-  public void updateRestockSupply(@RequestBody List<RestockSupply> restockSupply){
-
-  }
+  public void updateRestockSupply(@RequestBody List<RestockSupply> restockSupply) {}
 
   @PostMapping("/flightControl")
-  public void updateFlightControl(@RequestBody List<FlightControlRequest> flightControlRequest){
-
-  }
+  public void updateFlightControl(@RequestBody List<FlightControlRequest> flightControlRequest) {}
 
   @PostMapping("/login")
-  public AuthResp login(@RequestBody LoginData loginData){
-
+  public AuthResp login(@RequestBody LoginData loginData) throws Exception {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<String> entity;
+    try {
+      entity = new HttpEntity<>(objectMapper.writeValueAsString(loginData), headers);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+      throw new Exception("Login data is malformed");
+    }
+    ResponseEntity<AuthResp> response =
+        restTemplate.exchange(
+            "http://internal-entry-service/new/login", HttpMethod.POST, entity, AuthResp.class);
+    if (response.getBody() == null) {
+      throw new Exception("body is null, internal service malfunctioning");
+    }
+    return response.getBody();
   }
 
   @PostMapping("/register")
-  public ErrMsg updateRestockSupply(@RequestBody User user){
-
+  public ErrMsg register(@RequestBody User user) throws Exception {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<String> entity;
+    try {
+      entity = new HttpEntity<>(objectMapper.writeValueAsString(user), headers);
+    } catch (JsonProcessingException e) {
+      e.printStackTrace();
+      throw new Exception("User is malformed");
+    }
+    ResponseEntity<ErrMsg> response =
+        restTemplate.exchange(
+            "http://internal-entry-service/new/register", HttpMethod.POST, entity, ErrMsg.class);
+    if (response.getBody() == null) {
+      throw new Exception("body is null, internal service malfunctioning");
+    }
+    return response.getBody();
   }
 
   @PostMapping("/users-management")
-  public void updateUsers(@RequestBody List<User> users) {
-
+  public void updateUsers(@RequestBody List<User> users) throws Exception {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+    HttpEntity<String> entity;
+    for (User user : users) {
+      try {
+        entity = new HttpEntity<>(objectMapper.writeValueAsString(user), headers);
+      } catch (JsonProcessingException e) {
+        e.printStackTrace();
+        throw new Exception("Updated users are malformed");
+      }
+      ResponseEntity<User> response =
+          restTemplate.exchange(
+              "http://internal-entry-service/management/resetPassword", HttpMethod.POST, entity, User.class);
+      log.info("Got response: {}", response.getBody());
+      if (response.getBody() == null) {
+        throw new Exception("body is null, internal service malfunctioning");
+      }
+    }
   }
 }
