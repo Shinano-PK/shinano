@@ -1,11 +1,11 @@
 package com.pk.frontend.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class AuthResp {
-  private String jwt;
-  private String role;
+  public String jwt;
+  public String role;
 }

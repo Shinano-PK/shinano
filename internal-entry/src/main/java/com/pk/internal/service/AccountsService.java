@@ -83,14 +83,13 @@ public class AccountsService {
     try {
       entity = new HttpEntity<>(objectMapper.writeValueAsString(user), headers);
     } catch (JsonProcessingException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
       // Rewrap it to another exception
       throw new Exception("Login data is malformed");
     }
     ResponseEntity<ErrMsg> response =
         restTemplate.exchange(
-            "http://users-service/register", HttpMethod.POST, entity, ErrMsg.class);
+            "http://users-service/new/user", HttpMethod.POST, entity, ErrMsg.class);
     if (response.getBody() == null) {
       throw new Exception("body is null, user service malfunctioning");
     }

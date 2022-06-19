@@ -92,21 +92,21 @@ public class NewUsersService {
     if (usersRepository.save(user) == 0) {
       throw new Exception("Cannot add new user");
     }
-
-    // send email
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    Email email = new Email(SRC_EMAIL, user.getEmail(), SUBJECT_NEW_ACC, LINK_NEW_ACC + user.getToken(), "newAcc");
-    HttpEntity<String> entity = new HttpEntity<>(objectMapper.writeValueAsString(email), headers);
-    log.debug("Email entity: {}", entity.getBody());
-    ResponseEntity<ErrMsg> response = restTemplate.exchange("http://email-service/email", HttpMethod.POST, entity, ErrMsg.class);
-    log.debug("Email service response: {}", response.getBody());
-    if (response.getBody() == null || response.getBody().getMessage() == null) {
-      throw new Exception("body is null, email service malfunctioning");
-    }
-    if (response.getBody().getMessage().equalsIgnoreCase("err")) {
-      throw new Exception("email service returned error message");
-    }
+    // FIXME google cut off posibilisty to login via password, so atm has to be commented out
+    // // send email
+    // HttpHeaders headers = new HttpHeaders();
+    // headers.setContentType(MediaType.APPLICATION_JSON);
+    // Email email = new Email(SRC_EMAIL, user.getEmail(), SUBJECT_NEW_ACC, LINK_NEW_ACC + user.getToken(), "newAcc");
+    // HttpEntity<String> entity = new HttpEntity<>(objectMapper.writeValueAsString(email), headers);
+    // log.debug("Email entity: {}", entity.getBody());
+    // ResponseEntity<ErrMsg> response = restTemplate.exchange("http://email-service/email", HttpMethod.POST, entity, ErrMsg.class);
+    // log.debug("Email service response: {}", response.getBody());
+    // if (response.getBody() == null || response.getBody().getMessage() == null) {
+    //   throw new Exception("body is null, email service malfunctioning");
+    // }
+    // if (response.getBody().getMessage().equalsIgnoreCase("err")) {
+    //   throw new Exception("email service returned error message");
+    // }
     return user;
   }
 
