@@ -50,8 +50,8 @@
           <th>Status</th>
         </tr>
         <tr th:each="item : ${supplies}">
-          <td th:text="${item.id}"><input class="itemId" type="hidden" name="itemId" th:value="${item.id}"></td>
-          <td th:text="${item.name}"></td>
+          <td class="itemId" th:text="${item.id}"></td>
+          <td class="names" th:text="${item.name}"></td>
           <td th:text="${item.amount}"></td>
           <td><input class="quantity" type="text" name="quantity"></td>
           <td>

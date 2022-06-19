@@ -2,25 +2,25 @@ $(document).ready(function () {
     $("#addFlight").submit(function (event) {
 
         var formData = {
-            flightNumber: $("#flightNumber").val(),
-            from: $("#from").val(),
-            destination: $("#destination").val(),
-            startTime: $("#startTime").val(),
-            startDate: $("#startDate").val(),
-            endTime: $("#endTime").val(),
-            endDate: $("#endDate").val(),
-            status: $("#status").val()
+            idPlane: $("#idPlane").val(),
+            idFlightSchedule: $("#idFlightSchedule").val(),
+            delay: $("#delay").val(),
+            status: $("#status").val(),
+            runway: $("#runway").val()
         };
+
+        console.log(formData);
 
 
         $.ajax({
             type: "POST",
-            url: "/addFlight",
-            data: formData,
-            dataType: "json",
+            url: "/flight-creator",
+            headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+            data: JSON.stringify(formData),
             encode: true,
-        }).done(function (data) {
-            console.log(data);
+            success: function () {
+                location.reload();
+            },
         });
 
         event.preventDefault();

@@ -31,11 +31,10 @@ $(document).ready(function () {
             headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
             url: "/restock-supply",
             data: JSON.stringify(formData),
-            dataType: "application/json",
             encode: true,
-        }).done(function (result) {
-            console.log(result);
-            document.location.href = '/restock-supply';
+            success: function () {
+                location.reload();
+            },
         });
 
         event.preventDefault();

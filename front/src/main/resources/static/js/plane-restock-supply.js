@@ -6,14 +6,20 @@ $(document).ready(function () {
         var valuesQuantity = $.map($(".quantity"), function (elem) {
             return $(elem).val();
         });
+        var valuesNames = $.map($(".names"), function (elem) {
+            return $(elem).text();
+        });
 
         var formData = [];
         var item = {};
 
         for (let i = 0; i < valuesItemId.length; i++) {
             item = {
-                itemId: valuesItemId[i],
-                quantity: valuesQuantity[i],
+                id: valuesItemId[i],
+                name: valuesNames[i],
+                description: "",
+                amount: parseInt(valuesQuantity[i]),
+                request: 0
             };
             formData[i] = item;
             console.log(formData);
@@ -23,12 +29,13 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/managePlaneSupplies",
-            data: formData,
-            dataType: "json",
+            headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+            url: "/restock-supply",
+            data: JSON.stringify(formData),
             encode: true,
-        }).done(function (data) {
-            console.log(data);
+            success: function () {
+                location.reload();
+            },
         });
 
         event.preventDefault();

@@ -42,10 +42,10 @@ $(document).ready(function () {
             headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
             url: "/flight-control",
             data: JSON.stringify(formData),
-            dataType: "application/json",
             encode: true,
-        }).done(function (data) {
-            console.log(data);
+            success: function () {
+                location.reload();
+            },
         });
 
         event.preventDefault();

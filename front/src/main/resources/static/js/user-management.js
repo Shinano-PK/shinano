@@ -47,12 +47,10 @@ $(document).ready(function () {
             headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
             url: "/users-management",
             data: JSON.stringify(formData),
-            dataType: "json",
             encode: true,
-            success: function (result) {
-                console.log(result);
+            success: function () {
                 location.reload();
-            }
+            },
         });
 
         event.preventDefault();

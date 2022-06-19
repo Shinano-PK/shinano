@@ -51,8 +51,8 @@
                     <th colspan="3">Status</th>
                 </tr>
                 <tr th:each="supply : ${supplies}">
-                    <td th:text="${supply.id}"><input class="itemId" type="hidden" name="itemId" th:value="${supply.id}"></td>
-                    <td th:text="${supply.name}"></td>
+                    <td th:text="${supply.id}" class="itemId"></td>
+                    <td th:text="${supply.name}" class="names"></td>
                     <td th:text="${supply.amount}"></td>
                     <td>
                         <input class="quantity" type="text" name="quantity" placeholder="Ilość">
@@ -61,7 +61,7 @@
                         <input class="date" type="date" name="date">
                     </td>
                     <td>
-                        <button type="submit">Uzupełnij zapasy</button>
+                        <button>Uzupełnij zapasy</button>
                     </td>
                 </tr>
             </table>

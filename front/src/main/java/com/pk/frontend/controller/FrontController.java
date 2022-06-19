@@ -328,7 +328,7 @@ public class FrontController {
   }
 
   @PostMapping("/flight-creator")
-  public void createFlight(@RequestBody Flight flight) throws Exception {
+  public void createFlight(@RequestBody FlightInput flight) throws Exception {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<String> entity;

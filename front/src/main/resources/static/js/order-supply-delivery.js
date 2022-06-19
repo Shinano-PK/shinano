@@ -6,8 +6,8 @@ $(document).ready(function () {
         var valuesQuantity = $.map($(".quantity"), function (elem) {
             return $(elem).val();
         });
-        var valuesDate = $.map($(".date"), function (elem) {
-            return $(elem).val();
+        var valuesNames = $.map($(".names"), function (elem) {
+            return $(elem).text();
         });
 
         var formData = [];
@@ -15,9 +15,11 @@ $(document).ready(function () {
 
         for (let i = 0; i < valuesItemId.length; i++) {
             item = {
-                itemId: valuesItemId[i],
-                quantity: valuesQuantity[i],
-                date: valuesDate[i]
+                id: valuesItemId[i],
+                name: valuesNames[i],
+                description: "",
+                amount: parseInt(valuesQuantity[i]),
+                request: 0
             };
             formData[i] = item;
             console.log(formData);
@@ -27,12 +29,13 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "/orderSupplies",
-            data: formData,
-            dataType: "json",
+            headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+            url: "/restock-supply",
+            data: JSON.stringify(formData),
             encode: true,
-        }).done(function (data) {
-            console.log(data);
+            success: function () {
+                location.reload();
+            },
         });
 
         event.preventDefault();
