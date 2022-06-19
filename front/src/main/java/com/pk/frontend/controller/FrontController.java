@@ -253,12 +253,9 @@ public class FrontController {
         e.printStackTrace();
         throw new Exception("flightControlRequest data is malformed");
       }
-      ResponseEntity<AuthResp> response =
+      ResponseEntity<Flight> response =
           restTemplate.exchange(
-              "http://internal-entry-service/flightcontrol",
-              HttpMethod.PUT,
-              entity,
-              AuthResp.class);
+              "http://internal-entry-service/flightcontrol", HttpMethod.PUT, entity, Flight.class);
       if (response.getBody() == null) {
         throw new Exception("body is null, internal service malfunctioning");
       }

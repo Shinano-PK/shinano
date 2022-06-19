@@ -1,10 +1,13 @@
 package com.pk.frontend.model;
 
-import lombok.Value;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Flight {
   @NotNull Integer id;
   @NotNull String idPlane;

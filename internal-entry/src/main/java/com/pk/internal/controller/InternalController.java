@@ -175,12 +175,12 @@ public class InternalController {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<String> entity;
-    ResponseEntity<Flight> flightResp;
+    ResponseEntity<Boolean> flightResp;
     try {
       entity = new HttpEntity<>(objectMapper.writeValueAsString(flight), headers);
       flightResp =
           restTemplate.exchange(
-              "http://flight-schedule-service/flight", HttpMethod.PUT, entity, Flight.class);
+              "http://flight-schedule-service/flight", HttpMethod.PUT, entity, Boolean.class);
     } catch (JsonProcessingException e) {
       log.error("Json processing error", e);
       throw new Exception("Invalid json");
@@ -189,7 +189,7 @@ public class InternalController {
       throw new Exception("Communication error");
     }
     log.debug("Supply service response: {}", flightResp.getBody());
-    return flightResp.getBody();
+    return flight;
   }
 
   @PostMapping("/flightcontrol")
@@ -197,7 +197,7 @@ public class InternalController {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<String> entity;
-    ResponseEntity<FlightControlRequest> flightResp;
+    ResponseEntity<Integer> flightResp;
     try {
       entity = new HttpEntity<>(objectMapper.writeValueAsString(flight), headers);
       flightResp =
@@ -205,7 +205,7 @@ public class InternalController {
               "http://flight-schedule-service/flight",
               HttpMethod.POST,
               entity,
-              FlightControlRequest.class);
+              Integer.class);
     } catch (JsonProcessingException e) {
       log.error("Json processing error", e);
       throw new Exception("Invalid json");
@@ -214,7 +214,7 @@ public class InternalController {
       throw new Exception("Communication error");
     }
     log.debug("Supply service response: {}", flightResp.getBody());
-    return flightResp.getBody();
+    return flight;
   }
 
   @PostMapping("/flight")

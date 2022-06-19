@@ -4,11 +4,9 @@ import com.pk.flightschedule.models.Flight;
 import com.pk.flightschedule.models.FlightControlRequest;
 import com.pk.flightschedule.models.FlightInput;
 import com.pk.flightschedule.services.FlightService;
-
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
-
 import javax.validation.Valid;
 import javax.validation.ValidationException;
 import lombok.AllArgsConstructor;
@@ -19,8 +17,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -35,8 +33,10 @@ public class FlightController {
   }
 
   @GetMapping("/flight/control/departure")
-  public List<FlightControlRequest> getDeparture(@RequestBody FlightControlRequest input) {
-    return flightService.getPlaneControlDeparture(Date.valueOf(LocalDate.now()));
+  // FIXME //And this input is doing what?
+  public List<FlightControlRequest> getDeparture(/* @RequestBody FlightControlRequest input*/) {
+    // return flightService.getPlaneControlDeparture(Date.valueOf(LocalDate.now()));
+    return flightService.getPlaneControlDeparture(Date.valueOf(LocalDate.parse("2021-10-28")));
   }
 
   @GetMapping("/flight/control/arrival")
