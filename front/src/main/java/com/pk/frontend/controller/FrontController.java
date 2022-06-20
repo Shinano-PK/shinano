@@ -248,7 +248,8 @@ public class FrontController {
     HttpEntity<String> entity;
     for (FlightControlRequest req : flightControlRequest) {
       try {
-        entity = new HttpEntity<>(objectMapper.writeValueAsString(req), headers);
+        Flight newFlight = new Flight(req.idFlight, null, null, null, null, req.runway);
+        entity = new HttpEntity<>(objectMapper.writeValueAsString(newFlight), headers);
       } catch (JsonProcessingException e) {
         e.printStackTrace();
         throw new Exception("flightControlRequest data is malformed");
