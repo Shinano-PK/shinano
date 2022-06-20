@@ -1,5 +1,10 @@
 $(document).ready(function () {
+    $('#raportSent').hide();
+
     $("#reportMalfunction").submit(function (event) {
+
+        $('#report').hide();
+        $('#raportSent').show();
 
         var formData = {
             message: $("#message").val(),

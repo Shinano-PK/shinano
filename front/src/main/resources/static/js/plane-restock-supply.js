@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $("#managePlaneSupplies").submit(function (event) {
         var valuesItemId = $.map($(".itemId"), function (elem) {
-            return $(elem).val();
+            return $(elem).text();
         });
         var valuesQuantity = $.map($(".quantity"), function (elem) {
             return $(elem).val();

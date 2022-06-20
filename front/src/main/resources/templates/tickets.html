@@ -13,7 +13,7 @@
     <img src="/images/airplane-logo.png" alt="logo"/>
     <div id="side-menu">
         <ol>
-            <li><a href="#">Imie Nazwisko</a>
+            <li><a href="#">Menu</a>
                 <ul>
                     <li><a href="/flight-control">Kontrola lotów</a></li>
                     <li><a href="/flight-creator">Dodawanie lotów</a></li>
@@ -46,7 +46,7 @@
                 <th>Data i godzina</th>
                 <th>Imię</th>
                 <th>Nazwisko</th>
-                <th>Status</th>
+                <th>Klasa</th>
             </tr>
             <tr th:each="ticket : ${tickets}">
                 <td th:text="${ticket.ticketId}"></td>
@@ -57,9 +57,7 @@
             </tr>
         </table>
     </div>
-    <div id="themeInformation">
-        <p>Wiadomości</p>
-    </div>
+
 </div>
 </body>
 </html>

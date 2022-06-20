@@ -263,8 +263,8 @@ public class FrontController {
     }
   }
 
-  @PostMapping("/login")
-  public AuthResp login(@RequestBody LoginData loginData) throws Exception {
+  @PostMapping("/login-page")
+  public ResponseEntity<AuthResp> login(@RequestBody LoginData loginData) throws Exception {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<String> entity;
@@ -280,10 +280,10 @@ public class FrontController {
     if (response.getBody() == null) {
       throw new Exception("body is null, internal service malfunctioning");
     }
-    return response.getBody();
+    return response;
   }
 
-  @PostMapping("/register")
+  @PostMapping("/register-page")
   public ErrMsg register(@RequestBody User user) throws Exception {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);

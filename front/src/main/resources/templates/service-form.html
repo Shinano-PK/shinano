@@ -15,7 +15,7 @@
     <img src="/images/airplane-logo.png" alt="logo"/>
     <div id="side-menu">
         <ol>
-            <li><a href="#">Imie Nazwisko</a>
+            <li><a href="#">Menu</a>
                 <ul>
                     <li><a href="/flight-control">Kontrola lotów</a></li>
                     <li><a href="/flight-creator">Dodawanie lotów</a></li>
@@ -48,12 +48,11 @@
             <input id="planeId" type="text" name="planeId" placeholder="Podaj ID samolotu">
             <br>
             <!--<input type="hidden" th:value="">-->
-            <button type="submit">Wyślij zgłoszenie</button>
+            <button id="sendReport" type="submit">Wyślij zgłoszenie</button>
         </div>
+        <h1 id="raportSent">Wysłano zgłoszenie!</h1>
     </form>
-    <div id="themeInformation">
-        <p>Wiadomości</p>
-    </div>
+
 </div>
 </body>
 </html>
