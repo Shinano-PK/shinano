@@ -225,7 +225,7 @@ INSERT INTO FLIGHT (
   RUNWAY
 ) VALUES (
   'PLANE1',
-  2,
+  4,
   0,
   'FLYING',
   'A2'
@@ -238,7 +238,7 @@ INSERT INTO FLIGHT (
   RUNWAY
 ) VALUES (
   'PLANE2',
-  3,
+  5,
   0,
   'LANDING',
   'B13'
@@ -251,7 +251,7 @@ INSERT INTO FLIGHT (
   RUNWAY
 ) VALUES (
   'PLANE1',
-  2,
+  4,
   0,
   'FLYING',
   'A2'
@@ -264,7 +264,7 @@ INSERT INTO FLIGHT (
   RUNWAY
 ) VALUES (
   'PLANE2',
-  3,
+  5,
   0,
   'LANDING',
   'B13'
