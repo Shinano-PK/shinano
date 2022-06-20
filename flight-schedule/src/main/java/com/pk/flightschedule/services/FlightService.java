@@ -66,8 +66,35 @@ public class FlightService {
     return list;
   }
 
-  public Boolean updateFlight(Flight input) {
-    return flightRepository.update(input);
+  public Boolean updateFlight(Flight input) throws Exception {
+    Flight real = getFlightById(input.getId());
+    Boolean result;
+    if (real == null) {
+      throw new Exception("No flight to be updated");
+    }
+    if (!input.getId().equals(real.getId())) {
+      throw new Exception("You cannot change ID");
+    }
+    if (input.getIdFlightSchedule() != null) {
+      real.setIdFlightSchedule(input.getIdFlightSchedule());
+    }
+    if (input.getIdPlane() != null) {
+      real.setIdPlane(input.getIdPlane());
+    }
+    if (input.getDelay() != null) {
+      real.setDelay(input.getDelay());
+    }
+    if (input.getStatus() != null) {
+      real.setStatus(input.getStatus());
+    }
+    if (input.getRunway() != null) {
+      real.setRunway(input.getRunway());
+    }
+    if (Boolean.FALSE.equals(flightRepository.update(real))) {
+      throw new Exception("Update failed");
+    }
+
+    return true;
   }
 
   public Integer saveFlight(FlightInput input) {

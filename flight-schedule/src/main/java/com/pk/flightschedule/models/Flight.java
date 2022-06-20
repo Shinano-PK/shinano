@@ -1,9 +1,11 @@
 package com.pk.flightschedule.models;
 
 import javax.validation.constraints.NotNull;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Value
+@Data
+@AllArgsConstructor
 public class Flight {
   @NotNull Integer id;
   @NotNull String idPlane;

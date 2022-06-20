@@ -34,7 +34,7 @@ public class FlightController {
 
   @GetMapping("/flight/control/departure")
   // FIXME //And this input is doing what?
-  public List<FlightControlRequest> getDeparture(/* @RequestBody FlightControlRequest input*/) {
+  public List<FlightControlRequest> getDeparture(/* @RequestBody FlightControlRequest input*/ ) {
     // return flightService.getPlaneControlDeparture(Date.valueOf(LocalDate.now()));
     return flightService.getPlaneControlDeparture(Date.valueOf(LocalDate.parse("2021-10-28")));
   }
@@ -56,7 +56,8 @@ public class FlightController {
   }
 
   @PutMapping("/flight")
-  public Boolean updateFlight(@Valid @RequestBody Flight input, BindingResult bindingResult) {
+  public Boolean updateFlight(@Valid @RequestBody Flight input, BindingResult bindingResult)
+      throws Exception {
     validateInput(bindingResult);
     return flightService.updateFlight(input);
   }
