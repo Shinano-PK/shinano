@@ -114,11 +114,13 @@ public class FlightPersistent implements FlightRepository {
   public Boolean update(Flight input) {
     try {
       return (jdbcTemplate.update(
-              "UPDATE FLIGHT SET ID_PLANE = ?, ID_FLIGHT_SCHEDULE = ?, DELAY = ? WHERE ID_FLIGHT ="
+              "UPDATE FLIGHT SET ID_PLANE = ?, ID_FLIGHT_SCHEDULE = ?, DELAY = ?, STATUS = ?, RUNWAY = ? WHERE ID_FLIGHT ="
                   + " ?",
               input.getIdPlane(),
               input.getIdFlightSchedule(),
               input.getDelay(),
+              input.getStatus(),
+              input.getRunway(),
               input.getId())
           > 0);
     } catch (Exception e) {
