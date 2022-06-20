@@ -42,6 +42,72 @@ VALUES (
     'danzig',
     'passenger'
   );
+INSERT INTO FLIGHT_SCHEDULE (
+    START_WEEKDAY,
+    END_WEEKDAY,
+    START_TIME,
+    END_TIME,
+    SCHEDULE_START_DATE,
+    SCHEDULE_END_DATE,
+    DESTINATION,
+    "FROM",
+    KIND
+  )
+VALUES (
+    1,
+    5,
+    '05:05:10',
+    '20:10:20',
+    '2021-05-25',
+    '2022-10-28',
+    'tokyo',
+    'moscow',
+    'passenger'
+  );
+INSERT INTO FLIGHT_SCHEDULE (
+    START_WEEKDAY,
+    END_WEEKDAY,
+    START_TIME,
+    END_TIME,
+    SCHEDULE_START_DATE,
+    SCHEDULE_END_DATE,
+    DESTINATION,
+    "FROM",
+    KIND
+  )
+VALUES (
+    1,
+    5,
+    '12:22:12',
+    '21:10:20',
+    '2021-05-25',
+    '2021-10-28',
+    'boston',
+    'helsinki',
+    'passenger'
+  );
+INSERT INTO FLIGHT_SCHEDULE (
+    START_WEEKDAY,
+    END_WEEKDAY,
+    START_TIME,
+    END_TIME,
+    SCHEDULE_START_DATE,
+    SCHEDULE_END_DATE,
+    DESTINATION,
+    "FROM",
+    KIND
+  )
+VALUES (
+    1,
+    5,
+    '18:50:10',
+    '20:10:20',
+    '2021-09-25',
+    '2021-12-28',
+    'ulm',
+    'berlin',
+    'passenger'
+  );
 INSERT INTO PLANE (
   ID_PLANE,
   FIRST_CLASS_CAPACITY,
@@ -79,6 +145,34 @@ INSERT INTO PLANE (
 )
 VALUES (
   'PLANE',
+  12,
+  15,
+  20,
+  'PEEPO BLUSH'
+);
+INSERT INTO PLANE (
+  ID_PLANE,
+  FIRST_CLASS_CAPACITY,
+  SECOND_CLASS_CAPACITY,
+  CARRYING_CAPACITY,
+  OWNER
+)
+VALUES (
+  'PLANE1',
+  12,
+  15,
+  20,
+  'PEEPO BLUSH'
+);
+INSERT INTO PLANE (
+  ID_PLANE,
+  FIRST_CLASS_CAPACITY,
+  SECOND_CLASS_CAPACITY,
+  CARRYING_CAPACITY,
+  OWNER
+)
+VALUES (
+  'PLANE2',
   12,
   15,
   20,
@@ -122,4 +216,56 @@ INSERT INTO FLIGHT (
   0,
   'TEMP',
   'TEMP'
+);
+INSERT INTO FLIGHT (
+  ID_PLANE,
+  ID_FLIGHT_SCHEDULE,
+  DELAY,
+  STATUS,
+  RUNWAY
+) VALUES (
+  'PLANE1',
+  2,
+  0,
+  'FLYING',
+  'A2'
+);
+INSERT INTO FLIGHT (
+  ID_PLANE,
+  ID_FLIGHT_SCHEDULE,
+  DELAY,
+  STATUS,
+  RUNWAY
+) VALUES (
+  'PLANE2',
+  3,
+  0,
+  'LANDING',
+  'B13'
+);
+INSERT INTO FLIGHT (
+  ID_PLANE,
+  ID_FLIGHT_SCHEDULE,
+  DELAY,
+  STATUS,
+  RUNWAY
+) VALUES (
+  'PLANE1',
+  2,
+  0,
+  'FLYING',
+  'A2'
+);
+INSERT INTO FLIGHT (
+  ID_PLANE,
+  ID_FLIGHT_SCHEDULE,
+  DELAY,
+  STATUS,
+  RUNWAY
+) VALUES (
+  'PLANE2',
+  3,
+  0,
+  'LANDING',
+  'B13'
 );
