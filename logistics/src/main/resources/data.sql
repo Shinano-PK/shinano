@@ -48,6 +48,78 @@ INSERT INTO PRODUCT (
     TYPE
   )
 VALUES (
+    'PAPIER TOALETOWY',
+    'FOXY',
+    '1234',
+    'SERVES YOU TO THE LAST DROP',
+    15.40,
+    'KG',
+    'SOLID'
+  );
+INSERT INTO PRODUCT (
+    NAME,
+    PRODUCER,
+    OUTSIDE_ID,
+    DESCRIPTION,
+    PRICE,
+    UNIT,
+    TYPE
+  )
+VALUES (
+    'CHLEB',
+    'BAKERY',
+    '8283',
+    'THING YOU EAT THE MOST',
+    5.0,
+    'KG',
+    'SOLID'
+  );
+INSERT INTO PRODUCT (
+    NAME,
+    PRODUCER,
+    OUTSIDE_ID,
+    DESCRIPTION,
+    PRICE,
+    UNIT,
+    TYPE
+  )
+VALUES (
+    'SOAP',
+    'SOAPER',
+    '2929',
+    'FOR THE SWARM',
+    5.40,
+    'KG',
+    'SOLID'
+  );
+INSERT INTO PRODUCT (
+    NAME,
+    PRODUCER,
+    OUTSIDE_ID,
+    DESCRIPTION,
+    PRICE,
+    UNIT,
+    TYPE
+  )
+VALUES (
+    'FORKLIFT TRUCK',
+    'TRUCKER',
+    '32828',
+    'WILL LIFT YOUR SPIRIT',
+    10002.40,
+    'PIECE',
+    'SOLID'
+  );
+INSERT INTO PRODUCT (
+    NAME,
+    PRODUCER,
+    OUTSIDE_ID,
+    DESCRIPTION,
+    PRICE,
+    UNIT,
+    TYPE
+  )
+VALUES (
     'DUMMY',
     'DUMMY',
     'DUMMY',
@@ -73,6 +145,46 @@ INSERT INTO RESOURCE (
   )
 VALUES (
     2,
+    1,
+    20
+  );
+INSERT INTO RESOURCE (
+    ID_PRODUCT,
+    ID_STORAGE,
+    QUANTITY
+  )
+VALUES (
+    3,
+    1,
+    20
+  );
+INSERT INTO RESOURCE (
+    ID_PRODUCT,
+    ID_STORAGE,
+    QUANTITY
+  )
+VALUES (
+    4,
+    1,
+    20
+  );
+INSERT INTO RESOURCE (
+    ID_PRODUCT,
+    ID_STORAGE,
+    QUANTITY
+  )
+VALUES (
+    5,
+    1,
+    20
+  );
+INSERT INTO RESOURCE (
+    ID_PRODUCT,
+    ID_STORAGE,
+    QUANTITY
+  )
+VALUES (
+    6,
     1,
     20
   );
