@@ -102,6 +102,7 @@ public class FlightService {
     if (result.getId() < 1) {
       throw new Exception("Cannot add flight");
     }
+    result.setIdPlane(input.getIdPlane().toUpperCase());
     return result;
   }
 
