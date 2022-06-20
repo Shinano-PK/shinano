@@ -1,16 +1,13 @@
 package com.pk.flightschedule.services;
 
-import java.util.Collections;
-import java.util.List;
-
 import com.pk.flightschedule.models.FlightSchedule;
 import com.pk.flightschedule.models.FlightScheduleInput;
 import com.pk.flightschedule.models.FlightScheduleRequest;
 import com.pk.flightschedule.repository.FlightScheduleRepository;
-
-import org.springframework.stereotype.Service;
-
+import java.util.Collections;
+import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
@@ -30,15 +27,31 @@ public class FlightScheduleService {
       return Collections.emptyList();
     }
 
-    return flightScheduleRepository.getPeriod(request.getScheduleStartDate(), request.getScheduleEndDate());
+    return flightScheduleRepository.getPeriod(
+        request.getScheduleStartDate(), request.getScheduleEndDate());
   }
 
   public Boolean updateFlightSchedule(FlightSchedule input) {
     return flightScheduleRepository.update(input);
   }
 
-  public Integer saveFlightSchedule(FlightScheduleInput input) {
-    return flightScheduleRepository.save(input);
+  public FlightSchedule saveFlightSchedule(FlightScheduleInput input) throws Exception {
+    FlightSchedule flightSchedule =
+        new FlightSchedule(
+            flightScheduleRepository.save(input),
+            input.getStartWeekday(),
+            input.getEndWeekday(),
+            input.getStartTime(),
+            input.getEndTime(),
+            input.getScheduleStartDate(),
+            input.getScheduleEndDate(),
+            input.getDestination(),
+            input.getFrom(),
+            input.getKind());
+    if (flightSchedule.getId() < 1) {
+      throw new Exception("Could not add new flight schedule");
+    }
+    return flightSchedule;
   }
 
   public Boolean deleteFlightSchedule(Integer input) {

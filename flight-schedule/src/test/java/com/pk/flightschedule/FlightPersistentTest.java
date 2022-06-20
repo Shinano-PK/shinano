@@ -3,7 +3,6 @@ package com.pk.flightschedule;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.pk.flightschedule.models.Flight;
-import com.pk.flightschedule.models.FlightInput;
 import com.pk.flightschedule.repository.FlightPersistent;
 import com.pk.flightschedule.repository.FlightRepository;
 import javax.sql.DataSource;
@@ -38,7 +37,7 @@ class FlightPersistentTest {
 
   @Test
   void save() {
-    FlightInput flight = new FlightInput("PLANE", 1, 10, "NOT READY", "A2");
+    Flight flight = new Flight(null, "PLANE", 1, 10, "NOT READY", "A2");
     Integer id = repository.save(flight);
     assertEquals(
         repository.get(id),

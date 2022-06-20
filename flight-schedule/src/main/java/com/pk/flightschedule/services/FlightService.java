@@ -2,7 +2,6 @@ package com.pk.flightschedule.services;
 
 import com.pk.flightschedule.models.Flight;
 import com.pk.flightschedule.models.FlightControlRequest;
-import com.pk.flightschedule.models.FlightInput;
 import com.pk.flightschedule.models.FlightSchedule;
 import com.pk.flightschedule.repository.FlightRepository;
 import com.pk.flightschedule.repository.FlightScheduleRepository;
@@ -97,8 +96,13 @@ public class FlightService {
     return true;
   }
 
-  public Integer saveFlight(FlightInput input) {
-    return flightRepository.save(input);
+  public Flight saveFlight(Flight input) throws Exception {
+    Flight result = input;
+    result.setId(flightRepository.save(input));
+    if (result.getId() < 1) {
+      throw new Exception("Cannot add flight");
+    }
+    return result;
   }
 
   public Boolean deleteFlight(Integer input) {

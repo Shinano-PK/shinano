@@ -3,7 +3,6 @@ package com.pk.flightschedule.repository;
 import java.util.List;
 
 import com.pk.flightschedule.models.Flight;
-import com.pk.flightschedule.models.FlightInput;
 
 public interface FlightRepository {
 
@@ -13,7 +12,7 @@ public interface FlightRepository {
 
   List<Flight> getByFlightSchedule(Integer id);
 
-  Integer save(FlightInput input);
+  Integer save(Flight input);
 
   Boolean update(Flight input);
 

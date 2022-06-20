@@ -2,7 +2,6 @@ package com.pk.flightschedule.controllers;
 
 import com.pk.flightschedule.models.Flight;
 import com.pk.flightschedule.models.FlightControlRequest;
-import com.pk.flightschedule.models.FlightInput;
 import com.pk.flightschedule.services.FlightService;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -50,7 +49,7 @@ public class FlightController {
   }
 
   @PostMapping("/flight")
-  public Integer saveFlight(@Valid @RequestBody FlightInput input, BindingResult bindingResult) {
+  public Flight saveFlight(@Valid @RequestBody Flight input, BindingResult bindingResult) throws Exception {
     validateInput(bindingResult);
     return flightService.saveFlight(input);
   }

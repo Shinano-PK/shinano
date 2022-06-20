@@ -39,7 +39,7 @@ public class PlaneController {
   }
 
   @PutMapping("/plane")
-  public Boolean updatePlane(@Valid @RequestBody Plane input, BindingResult bindingResult) {
+  public Boolean updatePlane(@Valid @RequestBody Plane input, BindingResult bindingResult) throws Exception {
     validateInput(bindingResult);
     return planeService.updatePlane(input);
   }

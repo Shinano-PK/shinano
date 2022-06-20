@@ -1,7 +1,6 @@
 package com.pk.flightschedule.repository;
 
 import com.pk.flightschedule.models.Flight;
-import com.pk.flightschedule.models.FlightInput;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.Collections;
@@ -81,7 +80,7 @@ public class FlightPersistent implements FlightRepository {
   }
 
   @Override
-  public Integer save(FlightInput input) {
+  public Integer save(Flight input) {
     try {
       KeyHolder keyHolder = new GeneratedKeyHolder();
       jdbcTemplate.update(

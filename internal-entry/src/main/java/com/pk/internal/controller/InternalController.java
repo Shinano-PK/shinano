@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pk.internal.model.Flight;
 import com.pk.internal.model.FlightControlRequest;
-import com.pk.internal.model.FlightInput;
 import com.pk.internal.model.RestockSupply;
 import com.pk.internal.model.Root;
 import com.pk.internal.service.InternalService;
@@ -218,14 +217,15 @@ public class InternalController {
   }
 
   @PostMapping("/flight")
-  public FlightInput addFlight(@RequestBody Flight flight) throws Exception {
+  public Flight addFlight(@RequestBody Flight flight) throws Exception {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<String> entity;
-    ResponseEntity<FlightInput> flightResp;
+    ResponseEntity<Flight> flightResp;
 
-    FlightInput flightInput =
-        new FlightInput(
+    Flight flightInput =
+        new Flight(
+            null,
             flight.getIdPlane(),
             flight.getIdFlightSchedule(),
             flight.getDelay(),
@@ -236,7 +236,7 @@ public class InternalController {
       entity = new HttpEntity<>(objectMapper.writeValueAsString(flightInput), headers);
       flightResp =
           restTemplate.exchange(
-              "http://flight-schedule-service/flight", HttpMethod.POST, entity, FlightInput.class);
+              "http://flight-schedule-service/flight", HttpMethod.POST, entity, Flight.class);
     } catch (JsonProcessingException e) {
       log.error("Json processing error", e);
       throw new Exception("Invalid json");

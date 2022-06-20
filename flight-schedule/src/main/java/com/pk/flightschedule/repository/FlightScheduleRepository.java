@@ -1,10 +1,9 @@
 package com.pk.flightschedule.repository;
 
-import java.sql.Date;
-import java.util.List;
-
 import com.pk.flightschedule.models.FlightSchedule;
 import com.pk.flightschedule.models.FlightScheduleInput;
+import java.sql.Date;
+import java.util.List;
 
 public interface FlightScheduleRepository {
 

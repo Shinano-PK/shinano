@@ -13,9 +13,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -35,13 +35,15 @@ public class FlightScheduleController {
   }
 
   @PostMapping("/flightSchedule")
-  public Integer saveFlightSchedule(@Valid @RequestBody FlightScheduleInput input, BindingResult bindingResult) {
+  public FlightSchedule saveFlightSchedule(
+      @Valid @RequestBody FlightScheduleInput input, BindingResult bindingResult) throws Exception {
     validateInput(bindingResult);
     return flightScheduleService.saveFlightSchedule(input);
   }
 
   @PutMapping("/flightSchedule")
-  public Boolean updateFlightSchedule(@Valid @RequestBody FlightSchedule input, BindingResult bindingResult) {
+  public Boolean updateFlightSchedule(
+      @Valid @RequestBody FlightSchedule input, BindingResult bindingResult) {
     validateInput(bindingResult);
     return flightScheduleService.updateFlightSchedule(input);
   }
